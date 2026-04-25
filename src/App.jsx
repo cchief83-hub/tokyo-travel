@@ -91,14 +91,6 @@ const CHECKLIST_GROUPS = [
   { title: "전자기기", color: "#a07ac8", items: ["스마트폰 충전기 (4개)","보조배터리","멀티어댑터 (일본 110V A타입)","이어폰"] },
 ];
 
-const WEATHER = [
-  { date: "5/15", day: "금", icon: "⛅", high: 23, low: 17, desc: "흐림" },
-  { date: "5/16", day: "토", icon: "☀", high: 25, low: 18, desc: "맑음" },
-  { date: "5/17", day: "일", icon: "☀", high: 26, low: 19, desc: "맑음" },
-  { date: "5/18", day: "월", icon: "🌦", high: 22, low: 17, desc: "일부 비" },
-  { date: "5/19", day: "화", icon: "⛅", high: 21, low: 16, desc: "흐림" },
-];
-
 const PLACES = {
   식당: [
     { name: "후쿠다 天ぷら", area: "아사쿠사", note: "런치 세트 1,800엔 · 뎀뿌라 맛집", mapQ: "天ぷら福田 浅草" },
@@ -148,6 +140,69 @@ export default function TokyoApp() {
   const [expandedDay, setExpandedDay] = useState(0);
   const [placeTab, setPlaceTab] = useState("식당");
   const [phraseOpen, setPhraseOpen] = useState({ 0: true, 1: true, 2: true });
+  const [weatherData, setWeatherData] = useState({});
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [weatherCity, setWeatherCity] = useState("tokyo");
+
+  const WEATHER_CITIES = [
+    { id: "tokyo", label: "도쿄", query: "Tokyo,JP", icon: "🗼" },
+    { id: "kamakura", label: "가마쿠라", query: "Kamakura,JP", icon: "⛩" },
+    { id: "kawaguchiko", label: "카와구치코", query: "Fujikawaguchiko,JP", icon: "🗻" },
+  ];
+
+  const API_KEY = "309c87e14189378b05a0e9573ebbdddd";
+
+  async function fetchWeather(cityQuery) {
+    try {
+      const res = await fetch(
+        "https://api.openweathermap.org/data/2.5/forecast?q=" + cityQuery + "&appid=" + API_KEY + "&units=metric&lang=kr&cnt=40"
+      );
+      const data = await res.json();
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function loadWeather(cityId) {
+    if (weatherData[cityId]) return;
+    setWeatherLoading(true);
+    const city = WEATHER_CITIES.find(c => c.id === cityId);
+    const data = await fetchWeather(city.query);
+    if (data && data.list) {
+      const days = {};
+      data.list.forEach(item => {
+        const date = item.dt_txt.split(" ")[0];
+        if (!days[date]) days[date] = [];
+        days[date].push(item);
+      });
+      const result = Object.entries(days).slice(0, 5).map(([date, items]) => {
+        const temps = items.map(i => i.main.temp);
+        const high = Math.round(Math.max(...temps));
+        const low = Math.round(Math.min(...temps));
+        const noon = items.find(i => i.dt_txt.includes("12:00")) || items[0];
+        const desc = noon.weather[0].description;
+        const id = noon.weather[0].id;
+        let icon = "⛅";
+        if (id >= 200 && id < 300) icon = "⛈";
+        else if (id >= 300 && id < 400) icon = "🌦";
+        else if (id >= 500 && id < 600) icon = "🌧";
+        else if (id >= 600 && id < 700) icon = "❄";
+        else if (id >= 700 && id < 800) icon = "🌫";
+        else if (id === 800) icon = "☀";
+        else if (id > 800) icon = "⛅";
+        const d = new Date(date);
+        const days2 = ["일","월","화","수","목","금","토"];
+        return {
+          date: (d.getMonth()+1) + "/" + d.getDate(),
+          day: days2[d.getDay()],
+          high, low, desc, icon
+        };
+      });
+      setWeatherData(prev => ({ ...prev, [cityId]: result }));
+    }
+    setWeatherLoading(false);
+  }
 
   const toggleCheck = (gi, ii) => {
     const key = gi + "-" + ii;
@@ -509,27 +564,80 @@ export default function TokyoApp() {
   }
 
   function renderWeather() {
+    const city = WEATHER_CITIES.find(c => c.id === weatherCity);
+    const data = weatherData[weatherCity];
+
+    // 탭 클릭 시 날씨 로드
+    function handleCityClick(id) {
+      setWeatherCity(id);
+      loadWeather(id);
+    }
+
+    // 첫 진입 시 자동 로드
+    if (!data && !weatherLoading) {
+      loadWeather(weatherCity);
+    }
+
     return (
       <div>
-        <div className="section-title">도쿄 예상 날씨</div>
+        <div className="section-title">실시간 날씨</div>
+
+        {/* 도시 선택 탭 */}
+        <div style={{ display: "flex", gap: 6, marginBottom: 16 }}>
+          {WEATHER_CITIES.map(c => (
+            <button key={c.id}
+              onClick={() => handleCityClick(c.id)}
+              style={{
+                padding: "7px 16px", borderRadius: 20, border: "1px solid",
+                borderColor: weatherCity === c.id ? "#1a1612" : "rgba(26,22,18,0.15)",
+                background: weatherCity === c.id ? "#1a1612" : "transparent",
+                color: weatherCity === c.id ? "#fff" : "rgba(26,22,18,0.5)",
+                fontSize: 12, fontWeight: 500, cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif",
+              }}>
+              {c.icon} {c.label}
+            </button>
+          ))}
+        </div>
+
+        {/* 날씨 카드 */}
         <Card>
-          <div className="w-grid">
-            {WEATHER.map((w, i) => (
-              <div key={i} className="w-card" style={{ background: (i === 1 || i === 2) ? "#fffbf7" : "#fafafa", borderColor: (i === 1 || i === 2) ? "rgba(200,133,90,0.25)" : "rgba(26,22,18,0.08)" }}>
-                <div className="w-date">{w.date}<br />{w.day}</div>
-                <div className="w-icon">{w.icon}</div>
-                <div className="w-temp">{w.high}° / {w.low}°</div>
-                <div className="w-desc">{w.desc}</div>
-              </div>
-            ))}
+          <div className="card-label" style={{ marginBottom: 14 }}>
+            {city.icon} {city.label} · 5일 예보
           </div>
+          {weatherLoading ? (
+            <div style={{ textAlign: "center", padding: "30px 0", color: "rgba(26,22,18,0.4)", fontSize: 13 }}>
+              날씨 불러오는 중...
+            </div>
+          ) : data ? (
+            <div className="w-grid">
+              {data.map((w, i) => (
+                <div key={i} className="w-card" style={{
+                  background: i === 0 ? "#fffbf7" : "#fafafa",
+                  borderColor: i === 0 ? "rgba(200,133,90,0.3)" : "rgba(26,22,18,0.08)"
+                }}>
+                  <div className="w-date">{w.date}<br />{w.day}</div>
+                  <div className="w-icon">{w.icon}</div>
+                  <div className="w-temp">{w.high}° / {w.low}°</div>
+                  <div className="w-desc" style={{ fontSize: 10, marginTop: 3 }}>{w.desc}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ textAlign: "center", padding: "30px 0", color: "rgba(26,22,18,0.4)", fontSize: 13 }}>
+              날씨를 불러올 수 없어요
+            </div>
+          )}
         </Card>
+
+        {/* 날씨 팁 */}
         <Card>
-          <div className="card-label">5월 도쿄 날씨 특징</div>
-          <Row l="평균 기온" v="낮 22~26°C / 밤 15~18°C" />
-          <Row l="강수 가능성" v="비교적 낮음 (우기 전)" />
+          <div className="card-label">5월 날씨 준비물</div>
+          <Row l="기온" v="낮 22~26°C / 밤 15~18°C" />
+          <Row l="후지산 5합목" v="도쿄보다 10°C 이상 낮아요 · 바람막이 필수" />
+          <Row l="강수" v="비교적 낮음 (우기 전)" />
+          <Row l="자외선" v="강함 — 선크림 SPF50+ 필수" />
           <Row l="준비물" v="얇은 겉옷 · 접이식 우산" />
-          <Row l="자외선" v="강함 — 선크림 필수" />
         </Card>
       </div>
     );
