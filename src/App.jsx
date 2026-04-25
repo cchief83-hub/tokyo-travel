@@ -13,63 +13,71 @@ const TABS = [
   { id: "toilet", label: "화장실", icon: "🚻" },
 ];
 
+// 구글맵 길찾기 URL 생성
+function mapDir(dest) {
+  return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest) + "&travelmode=driving";
+}
+function mapSearch(q) {
+  return "https://www.google.com/maps/search/" + encodeURIComponent(q);
+}
+
 const SCHEDULE = [
   {
     date: "5/15", day: "금", theme: "도착 · 가마쿠라 · 후지카와구치코",
     color: "#c8855a",
     items: [
       { time: "07:50", place: "부산 김해공항 출발", note: "에어부산 BX112 · 탑승 2시간 전 도착 권장" },
-      { time: "10:00", place: "나리타 공항 도착 (T1)", note: "입국심사 · 짐 수령" },
+      { time: "10:00", place: "나리타 공항 도착 (T1)", note: "입국심사 · 짐 수령", map: mapSearch("成田国際空港 第1ターミナル") },
       { time: "10:30", place: "리무진버스 탑승 → 도쿄역", note: "T1 1층 버스 카운터 · 약 1시간 30분 · 어른 3,100엔" },
-      { time: "12:00", place: "IX렌탈 픽업 (아사쿠사바시역)", note: "토요타 알파드 · 국제운전면허증 + 여권 필수" },
-      { time: "13:30", place: "가마쿠라 도착 · 관광", note: "대불 · 고마치도리 · 에노덴" },
-      { time: "17:30", place: "가마쿠라 저녁식사", note: "스키야키 · 이자카야" },
-      { time: "19:00", place: "후지카와구치코 출발", note: "렌트카로 약 1시간 30~2시간" },
-      { time: "21:00", place: "더 가든 체크인", note: "늦은 도착 · 숙소 사전 연락 필요" },
+      { time: "12:00", place: "IX렌탈 픽업 (아사쿠사바시역)", note: "토요타 알파드 · 국제운전면허증 + 여권 필수", map: mapDir("1-16-3 Yanagibashi, Taito-ku, Tokyo") },
+      { time: "13:30", place: "가마쿠라 도착 · 관광", note: "대불 · 고마치도리 · 에노덴", map: mapDir("鎌倉大仏 高徳院") },
+      { time: "17:30", place: "가마쿠라 저녁식사", note: "스키야키 · 이자카야", map: mapSearch("鎌倉 小町通り レストラン") },
+      { time: "19:00", place: "후지카와구치코 출발", note: "렌트카로 약 1시간 30~2시간", map: mapDir("Funatsu 3554, Fujikawaguchiko, Yamanashi") },
+      { time: "21:00", place: "더 가든 체크인", note: "늦은 도착 · 숙소 사전 연락 필요", map: mapDir("Funatsu 3554, Fujikawaguchiko, Yamanashi") },
     ],
   },
   {
     date: "5/16", day: "토", theme: "후지산 관광",
     color: "#5a8fc8",
     items: [
-      { time: "09:00", place: "후지산 5합목", note: "렌트카로 이동 · 맑은 날 정상 조망" },
-      { time: "11:00", place: "오시노 핫카이 (忍野八海)", note: "후지산 용수 연못 · 세계문화유산" },
-      { time: "13:00", place: "점심식사", note: "카와구치코 호수 주변 식당" },
-      { time: "15:00", place: "가와구치코 유람선", note: "호수에서 후지산 조망 · 약 20분" },
-      { time: "17:00", place: "온센 거리 산책 · 쇼핑", note: "카와구치코 기념품" },
-      { time: "19:00", place: "저녁식사", note: "숙소 또는 근처 식당" },
+      { time: "09:00", place: "후지산 5합목", note: "렌트카로 이동 · 맑은 날 정상 조망", map: mapDir("富士山五合目 富士スバルライン") },
+      { time: "11:00", place: "오시노 핫카이 (忍野八海)", note: "후지산 용수 연못 · 세계문화유산", map: mapDir("忍野八海") },
+      { time: "13:00", place: "점심식사", note: "카와구치코 호수 주변 식당", map: mapSearch("河口湖 ランチ") },
+      { time: "15:00", place: "가와구치코 유람선", note: "호수에서 후지산 조망 · 약 20분", map: mapDir("河口湖遊覧船 天晴") },
+      { time: "17:00", place: "온센 거리 산책 · 쇼핑", note: "카와구치코 기념품", map: mapSearch("河口湖 温泉街") },
+      { time: "19:00", place: "저녁식사", note: "숙소 또는 근처 식당", map: mapSearch("富士河口湖 夕食 レストラン") },
     ],
   },
   {
     date: "5/17", day: "일", theme: "후지산 → 도쿄 이동",
     color: "#7a5ac8",
     items: [
-      { time: "09:00", place: "더 가든 체크아웃", note: "짐 정리 · 렌트카 출발 준비" },
-      { time: "09:30", place: "가와구치코 호수 산책", note: "마지막 후지산 조망" },
+      { time: "09:00", place: "더 가든 체크아웃", note: "짐 정리 · 렌트카 출발 준비", map: mapSearch("Funatsu 3554, Fujikawaguchiko") },
+      { time: "09:30", place: "가와구치코 호수 산책", note: "마지막 후지산 조망", map: mapDir("河口湖") },
       { time: "11:00", place: "도쿄 방면 출발", note: "아사쿠사바시역 방면 · 약 2시간" },
-      { time: "13:00", place: "IX렌탈 반납 (아사쿠사바시역)", note: "동일 지점 반납" },
-      { time: "13:30", place: "지하철로 긴시쵸역 이동", note: "JR 소부선 · 약 10분 · 230엔" },
-      { time: "14:00", place: "롯데 시티 호텔 체크인", note: "짐 맡기고 도쿄 관광 시작!" },
-      { time: "15:00", place: "도쿄 관광", note: "아사쿠사 · 스카이트리 · 우에노" },
-      { time: "19:00", place: "저녁식사", note: "아사쿠사 이자카야" },
+      { time: "13:00", place: "IX렌탈 반납 (아사쿠사바시역)", note: "동일 지점 반납", map: mapDir("1-16-3 Yanagibashi, Taito-ku, Tokyo") },
+      { time: "13:30", place: "지하철로 긴시쵸역 이동", note: "JR 소부선 · 약 10분 · 230엔", map: mapDir("錦糸町駅") },
+      { time: "14:00", place: "롯데 시티 호텔 체크인", note: "짐 맡기고 도쿄 관광 시작!", map: mapDir("4-6-1 Kinshi, Sumida-ku, Tokyo") },
+      { time: "15:00", place: "도쿄 관광", note: "아사쿠사 · 스카이트리 · 우에노", map: mapDir("浅草寺") },
+      { time: "19:00", place: "저녁식사", note: "아사쿠사 이자카야", map: mapSearch("浅草 居酒屋") },
     ],
   },
   {
     date: "5/18", day: "월", theme: "오다이바 · 긴자",
     color: "#5ac88a",
     items: [
-      { time: "10:00", place: "오다이바 해변공원", note: "자유의 여신상 · 레인보우브리지 산책" },
-      { time: "13:00", place: "다이버시티 도쿄", note: "쇼핑 · 점심식사" },
-      { time: "16:00", place: "긴자 산책", note: "백화점 면세 쇼핑 · 마지막 기념품" },
-      { time: "19:00", place: "도쿄역 주변 야경", note: "마루노우치 일루미네이션" },
+      { time: "10:00", place: "오다이바 해변공원", note: "자유의 여신상 · 레인보우브리지 산책", map: mapDir("お台場海浜公園") },
+      { time: "13:00", place: "다이버시티 도쿄", note: "쇼핑 · 점심식사", map: mapDir("ダイバーシティ東京プラザ") },
+      { time: "16:00", place: "긴자 산책", note: "백화점 면세 쇼핑 · 마지막 기념품", map: mapDir("銀座") },
+      { time: "19:00", place: "도쿄역 주변 야경", note: "마루노우치 일루미네이션", map: mapDir("東京駅 丸の内") },
     ],
   },
   {
     date: "5/19", day: "화", theme: "귀국일",
     color: "#c8855a",
     items: [
-      { time: "07:30", place: "롯데 시티 호텔 체크아웃", note: "짐 챙기기" },
-      { time: "08:00", place: "나리타 공항 이동", note: "리무진버스 약 70~90분 · 여유있게 출발" },
+      { time: "07:30", place: "롯데 시티 호텔 체크아웃", note: "짐 챙기기", map: mapDir("4-6-1 Kinshi, Sumida-ku, Tokyo") },
+      { time: "08:00", place: "나리타 공항 이동", note: "리무진버스 약 70~90분 · 여유있게 출발", map: mapDir("成田国際空港") },
       { time: "10:55", place: "나리타 공항 출발 (T1)", note: "에어부산 BX111" },
       { time: "13:15", place: "부산 김해공항 도착", note: "입국 후 귀가" },
     ],
@@ -258,8 +266,8 @@ export default function TokyoApp() {
   }
 
   function LinkBtn({ href, color, children }) {
-    var bg = color === "green" ? "#eef7f2" : color === "blue" ? "#eef3fb" : color === "warm" ? "#fdf3ec" : "#fdf3ec";
-    var tc = color === "green" ? "#3a8a5a" : color === "blue" ? "#3a6aaa" : "#b06030";
+    var bg = color === "green" ? "#e8f4ea" : color === "blue" ? "#eef3fb" : color === "warm" ? "#fdf3ec" : "#fdf3ec";
+    var tc = color === "green" ? "#2e7d32" : color === "blue" ? "#3a6aaa" : "#b06030";
     return (
       <a href={href} target="_blank" rel="noreferrer" className="link-btn" style={{ background: bg, color: tc }}>
         {children}
@@ -291,8 +299,16 @@ export default function TokyoApp() {
                   <div key={ii} className="tl-item">
                     <span className="tl-time">{item.time}</span>
                     <div className="tl-dot" style={{ background: day.color }} />
-                    <div>
-                      <div className="tl-place">{item.place}</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+                        <div className="tl-place">{item.place}</div>
+                        {item.map && (
+                          <a href={item.map} target="_blank" rel="noreferrer"
+                            style={{ flexShrink: 0, fontSize: 10, padding: "3px 8px", borderRadius: 12, background: "#e8f4ea", color: "#2e7d32", textDecoration: "none", fontWeight: 600, whiteSpace: "nowrap" }}>
+                            🗺 길찾기
+                          </a>
+                        )}
+                      </div>
                       {item.note && <div className="tl-note">{item.note}</div>}
                     </div>
                   </div>
@@ -321,7 +337,10 @@ export default function TokyoApp() {
           <Row l="객실" v="Deluxe Mountain View Room" />
           <Row l="결제" v="전액 사전결제 완료" />
           <Row l="취소 정책" v="5/14 이전 무료취소 가능" />
-          <LinkBtn href="https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk" color="blue">예약확인서 (Voucher) 보기</LinkBtn>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <LinkBtn href="https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk" color="blue">📄 예약확인서 보기</LinkBtn>
+            <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=Funatsu+3554+Fujikawaguchiko+Yamanashi&travelmode=driving" color="green">🗺 길찾기</LinkBtn>
+          </div>
         </Card>
         <Card>
           <div className="card-label" style={{ color: "#c8855a" }}>롯데 시티 호텔 킨시쵸 도쿄</div>
@@ -335,7 +354,10 @@ export default function TokyoApp() {
           <Row l="가까운 역" v="긴시초역 5번 출구 바로 연결" />
           <Row l="부대시설" v="2F Bulks Gym 무료 (24시간)" />
           <Row l="결제" v="전액 사전결제 (환불 불가)" />
-          <LinkBtn href="https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk" color="warm">예약확인서 (Voucher) 보기</LinkBtn>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <LinkBtn href="https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk" color="warm">📄 예약확인서 보기</LinkBtn>
+            <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=4-6-1+Kinshi+Sumida-ku+Tokyo&travelmode=driving" color="green">🗺 길찾기</LinkBtn>
+          </div>
         </Card>
         <div className="info-card">
           <div className="card-label" style={{ marginBottom: 8 }}>체크인 공통 안내</div>
@@ -418,7 +440,10 @@ export default function TokyoApp() {
           <Row l="대여→반납" v="동일 지점 (편도 수수료 없음)" />
           <Row l="영업시간" v="08:00~20:00 무료 / 20:01~21:00 +3,000엔" />
           <Row l="오시는 길" v="동쪽 출구 → 50m → 우회전 → 150m" />
-          <LinkBtn href="https://maps.app.goo.gl/iJ9aTQE9UvKXZUfDA" color="blue">구글 지도로 보기</LinkBtn>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <LinkBtn href="https://maps.app.goo.gl/iJ9aTQE9UvKXZUfDA" color="blue">📍 위치 보기</LinkBtn>
+            <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=1-16-3+Yanagibashi+Taito-ku+Tokyo&travelmode=transit" color="green">🗺 길찾기</LinkBtn>
+          </div>
         </Card>
         <Card>
           <div className="card-label">픽업 시 필수 지참</div>
