@@ -10,7 +10,7 @@ const TABS = [
   { id: "places", label: "장소메모", icon: "📍" },
   { id: "phrase", label: "일본어", icon: "🗣" },
   { id: "docs", label: "중요서류", icon: "📄" },
-  { id: "toilet", label: "화장실", icon: "🚻" },
+  { id: "tips", label: "여행팁", icon: "💡" },
 ];
 
 // 구글맵 길찾기 URL 생성
@@ -138,16 +138,6 @@ const PHRASES = [
     { jp: "写真を撮ってもいいですか？", roma: "샤신오 톳테모 이이데스카?", kr: "사진 찍어도 되나요?" },
     { jp: "助けてください！", roma: "타스케테 구다사이!", kr: "도와주세요!" },
   ]},
-];
-
-const TOILETS = [
-  { place: "가마쿠라 고마치도리", note: "거리 곳곳 · 가마쿠라역 화장실" },
-  { place: "센소지 · 나카미세", note: "산문 우측 · 거리 중간 여러 곳" },
-  { place: "우에노 공원", note: "공원 내 10곳 이상 · 박물관 내부" },
-  { place: "신주쿠 교엔", note: "각 출입구 근처 · 온실 옆" },
-  { place: "신주쿠역 / 루미네", note: "역 내부 · 백화점 각 층" },
-  { place: "오다이바 다이버시티", note: "비너스 포트 · 각 층" },
-  { place: "긴자 마로니에 공원", note: "공원 내 공중화장실 · 미츠코시 백화점" },
 ];
 
 const GF = "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap";
@@ -665,37 +655,73 @@ export default function TokyoApp() {
     );
   }
 
-  function renderToilet() {
+  function renderTips() {
+    var tips = [
+      {
+        area: "가마쿠라", color: "#c8855a", icon: "⛩",
+        items: [
+          { title: "대불 마감 주의", desc: "고토쿠인 대불이 오후 5시 마감이에요. 도착하자마자 바로 가세요." },
+          { title: "에노덴은 시간 봐서 결정", desc: "5/15 오후 2시 도착이라 에노덴은 시간이 빠듯할 수 있어요. 당일 상황에 맞게 선택하세요." },
+          { title: "고마치도리 상점 일찍 닫아요", desc: "오후 5~6시면 문 닫는 가게가 많아요. 쇼핑은 대불 관람 전에 하세요." },
+          { title: "주차장 미리 확인", desc: "가마쿠라역 근처 주차장이 협소하고 비싸요. 도착 전 구글맵으로 미리 확인 추천해요." },
+        ],
+      },
+      {
+        area: "후지산", color: "#5a8fc8", icon: "🗻",
+        items: [
+          { title: "오전이 날씨 확률 높아요", desc: "5합목에서 후지산 정상을 보려면 맑아야 해요. 오전 9시 이전 출발하면 확률이 높아요." },
+          { title: "방한 준비 필수", desc: "5합목은 도쿄보다 기온이 10도 이상 낮아요. 얇은 패딩이나 바람막이를 꼭 챙기세요." },
+          { title: "오시노 핫카이 추천", desc: "주차장도 있고 여유롭게 산책할 수 있어요. 부모님 모시기 딱 좋은 곳이에요." },
+          { title: "후지큐 하이랜드는 선택", desc: "놀이공원이라 체력과 시간 고려해서 결정하세요. 외관 구경만 해도 충분해요." },
+        ],
+      },
+      {
+        area: "도쿄", color: "#5ac88a", icon: "🗼",
+        items: [
+          { title: "숙소에서 아사쿠사·스카이트리 가까워요", desc: "롯데 시티 호텔에서 아사쿠사까지 지하철 5분 거리예요. 5/17 오후 체크인 후 바로 가기 딱 좋아요." },
+          { title: "오다이바 이동 방법", desc: "유리카모메 또는 린카이선 탑승. 구글맵에서 검색하면 바로 나와요." },
+          { title: "긴자 면세 쇼핑 시 여권 필수", desc: "백화점 면세 카운터 이용 시 여권 제시해야 해요. 미쓰코시·마츠야 백화점 추천." },
+          { title: "도보 거리 조절하세요", desc: "부모님 체력 고려해서 하루 1만 5천 보 이내로 일정 짜는 게 좋아요." },
+        ],
+      },
+      {
+        area: "공통 팁", color: "#a07ac8", icon: "💴",
+        items: [
+          { title: "현금을 넉넉히 준비하세요", desc: "일본은 아직 현금 위주 가게가 많아요. 1인당 3~5만 엔 환전 추천해요." },
+          { title: "편의점 ATM 활용", desc: "세븐일레븐·로손 ATM에서 해외 카드로 엔화 출금 가능해요. 수수료가 저렴해요." },
+          { title: "화장실은 구글맵 검색", desc: "구글맵에서 'トイレ' 검색하면 주변 공중화장실이 바로 나와요. 편의점도 대부분 이용 가능해요." },
+          { title: "구글맵 하나면 충분해요", desc: "도보·대중교통·자동차 내비 모두 한국어로 안내돼요. 역 출구 번호까지 세세하게 알려줘요." },
+        ],
+      },
+    ];
+
     return (
       <div>
-        <div className="section-title">화장실 위치 안내</div>
-        <Card>
-          <div className="card-label">관광지별 화장실</div>
-          {TOILETS.map((t, i) => (
-            <div key={i} className="toilet-item">
-              <div className="toilet-num">{i + 1}</div>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#1a1612" }}>{t.place}</div>
-                <div style={{ fontSize: 11, color: "rgba(26,22,18,0.45)", marginTop: 3 }}>{t.note}</div>
-              </div>
+        <div className="section-title">여행 꿀팁</div>
+        {tips.map((section, si) => (
+          <Card key={si}>
+            <div className="card-label" style={{ color: section.color, marginBottom: 16 }}>
+              {section.icon} {section.area}
             </div>
-          ))}
-        </Card>
-        <Card>
-          <div className="card-label">편의점 화장실 팁</div>
-          <Row l="세븐일레븐" v="대부분 이용 가능" />
-          <Row l="로손 / 패밀리마트" v="가게에 따라 다름" />
-          <Row l="일본어 표현" v="トイレを使えますか？" />
-        </Card>
-        <div className="info-card">
-          <div className="card-label" style={{ color: "#3a6aaa", marginBottom: 6 }}>도쿄 공중화장실 앱</div>
-          <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.8 }}>도쿄도 공식 「Tokyo Toilet」 앱 또는 구글 맵에서 「トイレ」 검색 시 주변 화장실 확인 가능합니다.</div>
-        </div>
+            {section.items.map((item, ii) => (
+              <div key={ii} style={{
+                padding: "12px 0",
+                borderBottom: ii < section.items.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none",
+              }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 4 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: section.color, flexShrink: 0, marginTop: 5 }} />
+                  <div style={{ fontSize: 13, fontWeight: 600, color: "#1a1612" }}>{item.title}</div>
+                </div>
+                <div style={{ fontSize: 12, color: "rgba(26,22,18,0.55)", lineHeight: 1.7, paddingLeft: 14 }}>{item.desc}</div>
+              </div>
+            ))}
+          </Card>
+        ))}
       </div>
     );
   }
 
-  var RENDERERS = { schedule: renderSchedule, hotel: renderHotel, checklist: renderChecklist, rental: renderRental, transport: renderTransport, weather: renderWeather, places: renderPlaces, phrase: renderPhrase, docs: renderDocs, toilet: renderToilet };
+  var RENDERERS = { schedule: renderSchedule, hotel: renderHotel, checklist: renderChecklist, rental: renderRental, transport: renderTransport, weather: renderWeather, places: renderPlaces, phrase: renderPhrase, docs: renderDocs, tips: renderTips };
 
   return (
     <div className="app">
