@@ -176,29 +176,38 @@ export default function TokyoApp() {
         if (!days[date]) days[date] = [];
         days[date].push(item);
       });
-      const result = Object.entries(days).slice(0, 5).map(([date, items]) => {
-        const temps = items.map(i => i.main.temp);
-        const high = Math.round(Math.max(...temps));
-        const low = Math.round(Math.min(...temps));
-        const noon = items.find(i => i.dt_txt.includes("12:00")) || items[0];
-        const desc = noon.weather[0].description;
-        const id = noon.weather[0].id;
-        let icon = "⛅";
-        if (id >= 200 && id < 300) icon = "⛈";
-        else if (id >= 300 && id < 400) icon = "🌦";
-        else if (id >= 500 && id < 600) icon = "🌧";
-        else if (id >= 600 && id < 700) icon = "❄";
-        else if (id >= 700 && id < 800) icon = "🌫";
-        else if (id === 800) icon = "☀";
-        else if (id > 800) icon = "⛅";
-        const d = new Date(date);
-        const days2 = ["일","월","화","수","목","금","토"];
-        return {
-          date: (d.getMonth()+1) + "/" + d.getDate(),
-          day: days2[d.getDay()],
-          high, low, desc, icon
-        };
-      });
+        const result = Object.entries(days).slice(0, 5).map(([date, items]) => {
+          const temps = items.map(i => i.main.temp);
+          const high = Math.round(Math.max(...temps));
+          const low = Math.round(Math.min(...temps));
+          const noon = items.find(i => i.dt_txt.includes("12:00")) || items[0];
+          const desc = noon.weather[0].description;
+          const id = noon.weather[0].id;
+          const wind = Math.round(noon.wind.speed * 10) / 10;
+          const windDeg = noon.wind.deg;
+          const dirs = ["북","북동","동","남동","남","남서","서","북서"];
+          const windDir = dirs[Math.round(windDeg / 45) % 8];
+          let icon = "⛅";
+          if (id >= 200 && id < 300) icon = "⛈";
+          else if (id >= 300 && id < 400) icon = "🌦";
+          else if (id >= 500 && id < 600) icon = "🌧";
+          else if (id >= 600 && id < 700) icon = "❄";
+          else if (id >= 700 && id < 800) icon = "🌫";
+          else if (id === 800) icon = "☀";
+          else if (id > 800) icon = "⛅";
+          let windLevel = "";
+          if (wind < 3) windLevel = "약풍";
+          else if (wind < 7) windLevel = "보통";
+          else if (wind < 11) windLevel = "강풍";
+          else windLevel = "매우 강함";
+          const d = new Date(date);
+          const days2 = ["일","월","화","수","목","금","토"];
+          return {
+            date: (d.getMonth()+1) + "/" + d.getDate(),
+            day: days2[d.getDay()],
+            high, low, desc, icon, wind, windDir, windLevel
+          };
+        });
       setWeatherData(prev => ({ ...prev, [cityId]: result }));
     }
     setWeatherLoading(false);
@@ -610,18 +619,36 @@ export default function TokyoApp() {
               날씨 불러오는 중...
             </div>
           ) : data ? (
-            <div className="w-grid">
-              {data.map((w, i) => (
-                <div key={i} className="w-card" style={{
-                  background: i === 0 ? "#fffbf7" : "#fafafa",
-                  borderColor: i === 0 ? "rgba(200,133,90,0.3)" : "rgba(26,22,18,0.08)"
-                }}>
-                  <div className="w-date">{w.date}<br />{w.day}</div>
-                  <div className="w-icon">{w.icon}</div>
-                  <div className="w-temp">{w.high}° / {w.low}°</div>
-                  <div className="w-desc" style={{ fontSize: 10, marginTop: 3 }}>{w.desc}</div>
+            <div>
+              <div className="w-grid">
+                {data.map((w, i) => (
+                  <div key={i} className="w-card" style={{
+                    background: i === 0 ? "#fffbf7" : "#fafafa",
+                    borderColor: i === 0 ? "rgba(200,133,90,0.3)" : "rgba(26,22,18,0.08)"
+                  }}>
+                    <div className="w-date">{w.date}<br />{w.day}</div>
+                    <div className="w-icon">{w.icon}</div>
+                    <div className="w-temp">{w.high}° / {w.low}°</div>
+                    <div className="w-desc">{w.desc}</div>
+                  </div>
+                ))}
+              </div>
+              {/* 바람 정보 행 */}
+              <div style={{ marginTop: 14, borderTop: "1px solid rgba(26,22,18,0.06)", paddingTop: 12 }}>
+                <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(26,22,18,0.35)", marginBottom: 10 }}>
+                  💨 바람 (낮 12시 기준)
                 </div>
-              ))}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 8 }}>
+                  {data.map((w, i) => (
+                    <div key={i} style={{ textAlign: "center" }}>
+                      <div style={{ fontSize: 10, color: "rgba(26,22,18,0.4)", fontFamily: "'DM Mono',monospace", marginBottom: 4 }}>{w.date}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: w.wind >= 7 ? "#c8855a" : "#1a1612" }}>{w.wind}<span style={{ fontSize: 9, fontWeight: 400, marginLeft: 1 }}>m/s</span></div>
+                      <div style={{ fontSize: 10, color: "rgba(26,22,18,0.45)", marginTop: 2 }}>{w.windDir}풍</div>
+                      <div style={{ fontSize: 9, marginTop: 2, padding: "2px 4px", borderRadius: 4, background: w.wind >= 7 ? "#fdf3ec" : "#f5f5f5", color: w.wind >= 7 ? "#b06030" : "rgba(26,22,18,0.4)" }}>{w.windLevel}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           ) : (
             <div style={{ textAlign: "center", padding: "30px 0", color: "rgba(26,22,18,0.4)", fontSize: 13 }}>
