@@ -93,21 +93,60 @@ const CHECKLIST_GROUPS = [
 
 const PLACES = {
   식당: [
-    { name: "후쿠다 天ぷら", area: "아사쿠사", note: "런치 세트 1,800엔 · 뎀뿌라 맛집", mapQ: "天ぷら福田 浅草" },
-    { name: "이치란 라멘 一蘭", area: "신주쿠", note: "24시간 · 칸막이 좌석", mapQ: "一蘭 新宿" },
-    { name: "츠키지 식당가", area: "츠키지", note: "해산물 · 아침식사 추천", mapQ: "築地場外市場" },
-    { name: "긴자 스시", area: "긴자", note: "런치 오마카세 · 예약 권장", mapQ: "銀座 寿司 おまかせ" },
+    { name: "후쿠다 天ぷら", area: "아사쿠사", note: "런치 세트 1,800엔 · 뎀뿌라 맛집", mapQ: "天ぷら福田 浅草", mapUrl: "https://www.google.com/maps/search/天ぷら福田+浅草" },
+    { name: "이치란 라멘 一蘭", area: "신주쿠", note: "24시간 · 칸막이 좌석", mapQ: "一蘭 新宿", mapUrl: "https://www.google.com/maps/search/一蘭+新宿" },
+    { name: "츠키지 식당가", area: "츠키지", note: "해산물 · 아침식사 추천", mapQ: "築地場外市場", mapUrl: "https://www.google.com/maps/search/築地場外市場" },
+    { name: "긴자 스시", area: "긴자", note: "런치 오마카세 · 예약 권장", mapQ: "銀座 寿司 おまかせ", mapUrl: "https://www.google.com/maps/search/銀座+寿司+おまかせ" },
+  ],
+  후지산: [
+    { name: "후지요시다 시청 앞 보행로", area: "후지요시다", note: "전봇대+후지산 압도적 구도 · SNS 바이럴 스팟 · 새벽~아침 시간대 추천 · 후지큐 하이랜드 도보 10분", mapQ: "富士吉田市役所 富士山 撮影スポット", mapUrl: "https://maps.google.com/?cid=10710673484613427011", photoUrl: "https://drive.google.com/file/d/14tpss_nfnnQke4CK2POwaVI-TvwrU563/view?usp=drivesdk" },
+    { name: "후지큐 하이랜드 대관람차", area: "후지요시다", note: "관람차+후지산 한 프레임 포토스팟 · 더 가든에서 차로 20분 · 입장 무료 (놀이기구별 요금)", mapQ: "富士急ハイランド", mapUrl: "https://maps.google.com/?cid=14420058890310148144", photoUrl: "https://drive.google.com/file/d/1KtKDpuD9-t6DWKRCojwo52G8g9Ufh-2X/view?usp=drivesdk" },
+    { name: "후지산 5합목", area: "후지산", note: "렌트카로 이동 · 맑은 날 정상 조망 · 오전이 확률 높음", mapQ: "富士山五合目 富士スバルライン", mapUrl: "https://www.google.com/maps/search/富士山五合目+富士スバルライン" },
+    { name: "오시노 핫카이 忍野八海", area: "오시노", note: "후지산 용수 연못 · 세계문화유산 · 부모님 산책 최적", mapQ: "忍野八海", mapUrl: "https://www.google.com/maps/search/忍野八海" },
+    { name: "가와구치코 유람선", area: "가와구치코", note: "호수에서 후지산 조망 · 약 20분", mapQ: "河口湖遊覧船", mapUrl: "https://www.google.com/maps/search/河口湖遊覧船" },
+    { name: "오이시 공원 大石公園", area: "가와구치코", note: "라벤더+후지산 · 5월 꽃밭 시즌 · 무료입장", mapQ: "大石公園 河口湖", mapUrl: "https://www.google.com/maps/search/大石公園+河口湖" },
+  ],
+  시부야: [
+    { name: "시부야 스크램블 교차로", area: "시부야", note: "세계에서 가장 바쁜 횡단보도 · 맞은편 스타벅스 2층 뷰포인트", mapQ: "渋谷スクランブル交差点", mapUrl: "https://maps.google.com/?cid=10518167498657889568" },
+    { name: "시부야 스카이 Shibuya Sky", area: "시부야", note: "360° 옥상 전망대 · 스크램블 교차로 조감 · 사전예매 필수 · 화요일 휴무", mapQ: "渋谷スカイ", mapUrl: "https://maps.google.com/?cid=8019591697534218844" },
+    { name: "시부야 스크램블 스퀘어", area: "시부야", note: "시부야 스카이 입점 건물 · 쇼핑 · 레스토랑", mapQ: "渋谷スクランブルスクエア", mapUrl: "https://maps.google.com/?cid=13329726600088760943" },
+  ],
+  하라주쿠: [
+    { name: "다케시타도리 竹下通り", area: "하라주쿠", note: "일본 최고 크레이프 · 팝 패션 · 하라주쿠역 도보 1분", mapQ: "竹下通り 原宿", mapUrl: "https://maps.google.com/?cid=14534979862793551001" },
+    { name: "메이지 신궁 明治神宮", area: "하라주쿠", note: "도쿄 최대 신사 · 울창한 숲길 · 무료입장 · 다케시타도리 바로 옆", mapQ: "明治神宮", mapUrl: "https://maps.google.com/?cid=10557131434248978590" },
+    { name: "오모테산도 表参道", area: "오모테산도", note: "명품 거리 · 카페 · 건축 감상 · 메이지 신궁에서 도보 10분", mapQ: "表参道 東京", mapUrl: "https://www.google.com/maps/search/表参道+東京" },
+  ],
+  신주쿠: [
+    { name: "오모이데 요코초 思い出横丁", area: "신주쿠", note: "추억의 골목 · 이자카야 야키토리 · 야경 감성 · 신주쿠역 서쪽 출구 도보 1분", mapQ: "思い出横丁 新宿", mapUrl: "https://maps.google.com/?cid=11209413547498426191" },
+    { name: "신주쿠 교엔 新宿御苑", area: "신주쿠", note: "입장료 500엔 · 일·영·프 정원 · 부모님 산책 최적 · 월요일 휴무", mapQ: "新宿御苑", mapUrl: "https://maps.google.com/?cid=14439497453018948607" },
+    { name: "도쿄 도청 전망대", area: "신주쿠", note: "무료 · 202m · 후지산 조망 가능 · 남북 두 동 운영", mapQ: "東京都庁展望台", mapUrl: "https://www.google.com/maps/search/東京都庁展望台" },
+    { name: "가부키초 歌舞伎町", area: "신주쿠", note: "네온사인 야경 · 가부키초 타워 · 이자카야 밀집 · 저녁 추천", mapQ: "歌舞伎町 新宿", mapUrl: "https://www.google.com/maps/search/歌舞伎町+新宿" },
   ],
   관광지: [
-    { name: "센소지 浅草寺", area: "아사쿠사", note: "무료 입장 · 이른 아침 추천", mapQ: "浅草寺" },
-    { name: "신주쿠 교엔 新宿御苑", area: "신주쿠", note: "입장료 500엔 · 산책 최적", mapQ: "新宿御苑" },
-    { name: "도쿄 도청 전망대", area: "신주쿠", note: "무료 · 202m · 후지산 조망", mapQ: "東京都庁展望台" },
-    { name: "오다이바 해변공원", area: "오다이바", note: "레인보우브리지 야경 필수", mapQ: "お台場海浜公園" },
+    { name: "센소지 浅草寺", area: "아사쿠사", note: "무료 입장 · 이른 아침 추천", mapQ: "浅草寺", mapUrl: "https://www.google.com/maps/search/浅草寺" },
+    { name: "신주쿠 교엔 新宿御苑", area: "신주쿠", note: "입장료 500엔 · 산책 최적", mapQ: "新宿御苑", mapUrl: "https://www.google.com/maps/search/新宿御苑" },
+    { name: "도쿄 도청 전망대", area: "신주쿠", note: "무료 · 202m · 후지산 조망", mapQ: "東京都庁展望台", mapUrl: "https://www.google.com/maps/search/東京都庁展望台" },
+    { name: "오다이바 해변공원", area: "오다이바", note: "레인보우브리지 야경 필수", mapQ: "お台場海浜公園", mapUrl: "https://www.google.com/maps/search/お台場海浜公園" },
+    { name: "시바 공원 芝公園", area: "다이몬", note: "잔디밭에 앉아 도쿄타워 올려다보는 포토스팟 · 무료 · 24시간 · 조조지 절 도보 2분", mapQ: "芝公園 東京タワー", mapUrl: "https://maps.google.com/?cid=11312766523862247942", photoUrl: "https://drive.google.com/file/d/1zgyczU96mPgF0PH1lM08CH1u9oZzpIfh/view?usp=drivesdk" },
+    { name: "조조지 절 増上寺", area: "다이몬", note: "도쿄타워+절 한 프레임 최고 포토스팟 · 무료입장 · 시바공원 도보 2분", mapQ: "増上寺 東京タワー", mapUrl: "https://maps.google.com/?cid=9846179875119807780" },
+    { name: "도쿄타워 외관", area: "다이몬", note: "주차장 코너 셀카 삼각대 포토존 · 무료 · 해질녘~야경 추천", mapQ: "東京タワー", mapUrl: "https://maps.google.com/?cid=5195627782660688349" },
+    { name: "아자부다이힐스 麻布台ヒルズ", area: "롯폰기", note: "2023년 오픈 도쿄 최신 랜드마크 · 크림색 건물 포토스팟 · 도쿄타워 뷰 · 팀랩 보더리스", mapQ: "麻布台ヒルズ", mapUrl: "https://maps.google.com/?cid=4557431226793109441" },
+    { name: "롯폰기 힐즈 六本木ヒルズ", area: "롯폰기", note: "도쿄타워 야경 뷰포인트 · 저녁식사 · 거미 조형물 포토스팟", mapQ: "六本木ヒルズ", mapUrl: "https://maps.google.com/?cid=6628738211295053826" },
   ],
   쇼핑: [
     { name: "마츠모토키요시", area: "아사쿠사", note: "드럭스토어 · 면세 가능", mapQ: "マツモトキヨシ 浅草" },
     { name: "돈키호테 ドン・キホーテ", area: "신주쿠", note: "24시간 · 기념품 저렴", mapQ: "ドン・キホーテ 新宿" },
     { name: "아메요코 시장 アメ横", area: "우에노", note: "건어물 · 과자 · 화장품", mapQ: "アメ横" },
+  ],
+  가마쿠라: [
+    { name: "시치리가하마 해변 七里ヶ浜", area: "시치리가하마", note: "후지산+바다 조망 · 일몰 명소 · 에노덴역 도보 5분", mapQ: "七里ヶ浜海岸 鎌倉", mapUrl: "https://maps.google.com/?cid=11344940212826062752", photoUrl: "https://drive.google.com/file/d/1bJos7bdBh_JFvJ_xi4keOQ4eMQ_ZjuhK/view?usp=drivesdk" },
+    { name: "가마쿠라코코마에역 건널목", area: "가마쿠라코코마에", note: "슬램덩크 배경지 · 에노덴+바다 한 프레임 · 포토스팟", mapQ: "鎌倉高校前駅 踏切", mapUrl: "https://maps.google.com/?cid=1819797686801071229", photoUrl: "https://drive.google.com/file/d/1BkKHGece8qrkVxFF0-x6outDtpNSyxGz/view?usp=drivesdk" },
+    { name: "TANAKA Barber Shop", area: "하세", note: "이사랑통역되나요 촬영지 · 하세역 도보 2분 · ⚠ 사진 전 주인께 양해 필수", mapQ: "TANAKA Barber Shop Hase Kamakura", mapUrl: "https://maps.google.com/?cid=15869312336643053071", photoUrl: "https://drive.google.com/file/d/1S9M6abVDcxsRL6N8_tQLc2P8m0V_jN6w/view?usp=drivesdk" },
+    { name: "시치리가하마 고등학교 앞 건널목", area: "시치리가하마", note: "에노덴+바다+하늘 포토스팟 · 드라마틱한 구도", mapQ: "七里ヶ浜高校 踏切 鎌倉", mapUrl: "https://maps.google.com/?cid=422530369093211191", photoUrl: "https://drive.google.com/file/d/17upNDDb2ZuUunVAZs5O6GHE5l-cfczz1/view?usp=drivesdk" },
+    { name: "시치리가하마역 수로 포토스팟", area: "시치리가하마", note: "수로 끝으로 바다가 보이는 인스타 감성 스팟 · 역 바로 옆", mapQ: "七里ヶ浜駅 水路 鎌倉", mapUrl: "https://maps.google.com/?cid=12702870331904269387", photoUrl: "https://drive.google.com/file/d/1DFVxMk6rWIZRo9gHZepXx5YCATj0mqGu/view?usp=drivesdk" },
+    { name: "가마쿠라 대불 高徳院", area: "하세", note: "오후 5시 마감 · 입장료 300엔 · 1순위 방문 추천", mapQ: "鎌倉大仏 高徳院", mapUrl: "https://www.google.com/maps/search/高徳院+鎌倉大仏" },
+    { name: "고마치도리 小町通り", area: "가마쿠라역", note: "쇼핑 · 길거리 음식 · 오후 5~6시 조기 마감", mapQ: "小町通り 鎌倉", mapUrl: "https://www.google.com/maps/search/小町通り+鎌倉" },
+    { name: "고쿠라쿠지역 極楽寺駅", area: "고쿠라쿠지", note: "이사랑통역되나요 촬영지 · 고즈넉한 에노덴 역", mapQ: "極楽寺駅", mapUrl: "https://www.google.com/maps/search/極楽寺駅+鎌倉" },
   ],
 };
 
@@ -671,7 +710,14 @@ export default function TokyoApp() {
   }
 
   function renderPlaces() {
-    function openMap(q) { window.open("https://www.google.com/maps/search/" + encodeURIComponent(q), "_blank"); }
+    function openMap(p) {
+      const url = p.mapUrl || "https://www.google.com/maps/search/" + encodeURIComponent(p.mapQ);
+      window.open(url, "_blank");
+    }
+    function openPhoto(e, p) {
+      e.stopPropagation();
+      window.open(p.photoUrl, "_blank");
+    }
     return (
       <div>
         <div className="section-title">가고 싶은 장소</div>
@@ -682,19 +728,33 @@ export default function TokyoApp() {
         </div>
         <Card>
           {PLACES[placeTab].map((p, i) => (
-            <div key={i} className="place-item" onClick={() => openMap(p.mapQ)}>
-              <div>
+            <div key={i} className="place-item" onClick={() => openMap(p)}>
+              <div style={{ flex: 1 }}>
                 <div className="place-name">{p.name}</div>
                 <div className="place-note">{p.note}</div>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0, marginLeft: 12 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6, flexShrink: 0, marginLeft: 12 }}>
                 <span className="tag" style={{ background: "#eef3fb", color: "#3a6aaa" }}>{p.area}</span>
-                <span className="place-map">지도 →</span>
+                <div style={{ display: "flex", gap: 6 }}>
+                  {p.photoUrl && (
+                    <button onClick={(e) => openPhoto(e, p)} style={{
+                      fontSize: 11, padding: "3px 8px", borderRadius: 6,
+                      background: "#fff3e0", border: "1px solid rgba(200,133,90,0.4)",
+                      color: "#c8855a", cursor: "pointer", fontWeight: 600,
+                      fontFamily: "'DM Sans', sans-serif",
+                    }}>📷 사진</button>
+                  )}
+                  <span className="place-map" style={{ color: p.mapUrl ? "#c8855a" : "rgba(26,22,18,0.3)", alignSelf: "center" }}>
+                    {p.mapUrl ? "📍→" : "지도 →"}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
         </Card>
-        <p style={{ fontSize: 11, color: "rgba(26,22,18,0.3)", textAlign: "center", marginTop: 8 }}>장소를 탭하면 구글 지도가 열립니다</p>
+        <p style={{ fontSize: 11, color: "rgba(26,22,18,0.3)", textAlign: "center", marginTop: 8 }}>
+          장소 탭 → 구글 지도 · 📷 버튼 → 참고 사진
+        </p>
       </div>
     );
   }
