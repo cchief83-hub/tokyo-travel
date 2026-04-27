@@ -304,7 +304,7 @@ export default function TokyoApp() {
     .app { font-family: 'DM Sans', sans-serif; background: #f5f2ed; min-height: 100vh; color: #1a1612; max-width: 680px; margin: 0 auto; }
     .hero { background: #1a1612; padding: 36px 24px 28px; position: relative; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(200,133,90,0.25) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(90,143,200,0.2) 0%, transparent 50%); pointer-events: none; }
-    .hero-jp { font-family: 'Noto Serif JP', serif; font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.35); margin-bottom: 10px; text-transform: uppercase; }
+    .hero-jp { font-family: 'Noto Serif JP', serif; font-size: 13px; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
     .hero-title { font-family: 'Noto Serif JP', serif; font-size: 36px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 6px; }
     .hero-sub { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5); margin-bottom: 20px; letter-spacing: 0.05em; }
     .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -409,7 +409,7 @@ export default function TokyoApp() {
   function renderSchedule() {
     return (
       <div>
-        <div className="section-title">여행 일정 — 5박 5일</div>
+        <div className="section-title">여행 일정 — 4박 5일</div>
         {SCHEDULE.map((day, di) => (
           <Card key={di}>
             <button className="day-btn" onClick={() => setExpandedDay(expandedDay === di ? -1 : di)}>
@@ -971,13 +971,13 @@ export default function TokyoApp() {
       <style>{css}</style>
       <div className="hero">
         <div className="hero-bg" />
-        <div className="hero-jp">Tokyo / Fuji / Kamakura — 2026</div>
+        <div className="hero-jp">우리들의 행복한 칠순여행 🎊</div>
         <div className="hero-title">도쿄 여행</div>
-        <div className="hero-sub">가족 여행 · 5박 5일</div>
+        <div className="hero-sub">가족 여행 · 4박 5일</div>
         <div className="pill-row">
           <span className="pill">✈ 5/15 — 5/19</span>
           <span className="pill">4명</span>
-          <span className="pill">도쿄 · 후지산 · 가마쿠라</span>
+          <span className="pill">도쿄 · 후지산 · 가마쿠라 · 후지카와구치코 · 시즈오카</span>
         </div>
       </div>
       <div className="tab-grid">
