@@ -150,26 +150,64 @@ const PLACES = {
   ],
 };
 
-const PHRASES = [
-  { cat: "기본 인사", items: [
+const PHRASES = {
+  "기본 인사": [
     { jp: "ありがとうございます", roma: "아리가또 고자이마스", kr: "감사합니다" },
     { jp: "すみません", roma: "스미마셍", kr: "저기요 / 실례합니다" },
     { jp: "はい / いいえ", roma: "하이 / 이이에", kr: "네 / 아니요" },
     { jp: "わかりません", roma: "와카리마셍", kr: "모르겠습니다" },
-  ]},
-  { cat: "식당에서", items: [
+    { jp: "もう一度お願いします", roma: "모이치도 오네가이시마스", kr: "다시 한번 말씀해 주세요" },
+    { jp: "ゆっくり話してください", roma: "윳쿠리 하나시테 구다사이", kr: "천천히 말해주세요" },
+  ],
+  "식당에서": [
+    { jp: "一人です / 二人です", roma: "히토리데스 / 후타리데스", kr: "1명이요 / 2명이요" },
     { jp: "これをください", roma: "고레오 구다사이", kr: "이것 주세요" },
+    { jp: "おすすめは何ですか？", roma: "오스스메와 난데스카?", kr: "추천 메뉴는 뭔가요?" },
     { jp: "おいしい！", roma: "오이시이!", kr: "맛있어요!" },
     { jp: "お会計をお願いします", roma: "오카이케이오 오네가이시마스", kr: "계산해 주세요" },
     { jp: "カードで払えますか？", roma: "카도데 하라에마스카?", kr: "카드 결제 되나요?" },
-  ]},
-  { cat: "길찾기 · 긴급", items: [
+    { jp: "領収書をください", roma: "료슈쇼오 구다사이", kr: "영수증 주세요" },
+    { jp: "辛くないものはありますか？", roma: "카라쿠나이 모노와 아리마스카?", kr: "안 매운 음식 있나요?" },
+  ],
+  "쇼핑할때": [
+    { jp: "これはいくらですか？", roma: "고레와 이쿠라데스카?", kr: "이거 얼마예요?" },
+    { jp: "試着できますか？", roma: "시챠쿠 데키마스카?", kr: "입어봐도 되나요?" },
+    { jp: "もう少し安くなりますか？", roma: "모우 스코시 야스쿠 나리마스카?", kr: "좀 깎아줄 수 있나요?" },
+    { jp: "免税できますか？", roma: "멘제이 데키마스카?", kr: "면세 되나요?" },
+    { jp: "袋をください", roma: "후쿠로오 구다사이", kr: "봉투 주세요" },
+    { jp: "別々に包んでください", roma: "베츠베츠니 쯔츤데 구다사이", kr: "따로따로 포장해 주세요" },
+    { jp: "大きいサイズはありますか？", roma: "오키이 사이즈와 아리마스카?", kr: "큰 사이즈 있나요?" },
+  ],
+  "교통·길찾기": [
+    { jp: "～はどこですか？", roma: "~와 도코데스카?", kr: "~은 어디인가요?" },
     { jp: "トイレはどこですか？", roma: "토이레와 도코데스카?", kr: "화장실 어디인가요?" },
     { jp: "～まで行きたいです", roma: "~마데 이키타이데스", kr: "~까지 가고 싶어요" },
-    { jp: "写真を撮ってもいいですか？", roma: "샤신오 톳테모 이이데스카?", kr: "사진 찍어도 되나요?" },
+    { jp: "この電車は～に止まりますか？", roma: "고노 덴샤와 ~니 토마리마스카?", kr: "이 전철은 ~에 서나요?" },
+    { jp: "～番出口はどこですか？", roma: "~반 데구치와 도코데스카?", kr: "~번 출구 어디인가요?" },
+    { jp: "タクシーを呼んでください", roma: "타쿠시오 욘데 구다사이", kr: "택시 불러 주세요" },
+  ],
+  "공항에서": [
+    { jp: "搭乗口はどこですか？", roma: "토죠구치와 도코데스카?", kr: "탑승구 어디인가요?" },
+    { jp: "荷物を預けたいです", roma: "니모츠오 아즈케타이데스", kr: "짐을 맡기고 싶어요" },
+    { jp: "両替所はどこですか？", roma: "료가에쇼와 도코데스카?", kr: "환전소 어디인가요?" },
+    { jp: "SIMカードはどこで買えますか？", roma: "심카도와 도코데 카에마스카?", kr: "유심카드 어디서 살 수 있나요?" },
+    { jp: "バスはどこから乗りますか？", roma: "바스와 도코카라 노리마스카?", kr: "버스 어디서 타나요?" },
+  ],
+  "긴급상황": [
     { jp: "助けてください！", roma: "타스케테 구다사이!", kr: "도와주세요!" },
-  ]},
-];
+    { jp: "救急車を呼んでください", roma: "큐큐샤오 욘데 구다사이", kr: "구급차 불러 주세요" },
+    { jp: "警察を呼んでください", roma: "케이사츠오 욘데 구다사이", kr: "경찰 불러 주세요" },
+    { jp: "財布を盗まれました", roma: "사이후오 누스마레마시타", kr: "지갑을 도난당했어요" },
+    { jp: "病院はどこですか？", roma: "뵤인와 도코데스카?", kr: "병원 어디인가요?" },
+    { jp: "韓国語が話せる方はいますか？", roma: "칸코쿠고가 하나세루 카타와 이마스카?", kr: "한국어 하시는 분 있나요?" },
+  ],
+  "사진촬영": [
+    { jp: "写真を撮ってもいいですか？", roma: "샤신오 톳테모 이이데스카?", kr: "사진 찍어도 되나요?" },
+    { jp: "写真を撮ってもらえますか？", roma: "샤신오 톳테 모라에마스카?", kr: "사진 찍어 주실 수 있나요?" },
+    { jp: "一緒に写真を撮ってもいいですか？", roma: "잇쇼니 샤신오 톳테모 이이데스카?", kr: "같이 사진 찍어도 될까요?" },
+    { jp: "もう一枚お願いします", roma: "모이치마이 오네가이시마스", kr: "한 장 더 부탁해요" },
+  ],
+};
 
 const GF = "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap";
 
@@ -178,7 +216,7 @@ export default function TokyoApp() {
   const [checks, setChecks] = useState({});
   const [expandedDay, setExpandedDay] = useState(0);
   const [placeTab, setPlaceTab] = useState("식당");
-  const [phraseOpen, setPhraseOpen] = useState({ 0: true, 1: true, 2: true });
+  const [phraseTab, setPhraseTab] = useState("기본 인사");
   const [weatherData, setWeatherData] = useState({});
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherCity, setWeatherCity] = useState("tokyo");
@@ -314,8 +352,8 @@ export default function TokyoApp() {
     .w-icon { font-size: 22px; margin-bottom: 6px; }
     .w-temp { font-size: 12px; font-weight: 600; color: #1a1612; }
     .w-desc { font-size: 10px; color: rgba(26,22,18,0.4); margin-top: 3px; }
-    .place-tab-row { display: flex; gap: 6px; margin-bottom: 16px; }
-    .place-tab-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(26,22,18,0.15); background: transparent; color: rgba(26,22,18,0.5); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .place-tab-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+    .place-tab-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(26,22,18,0.15); background: transparent; color: rgba(26,22,18,0.5); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
     .place-tab-btn.active { background: #1a1612; color: #fff; border-color: #1a1612; }
     .place-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(26,22,18,0.06); cursor: pointer; transition: opacity 0.15s; }
     .place-item:last-child { border-bottom: none; }
@@ -760,27 +798,37 @@ export default function TokyoApp() {
   }
 
   function renderPhrase() {
+    const items = PHRASES[phraseTab] || [];
     return (
       <div>
         <div className="section-title">자주 쓰는 일본어</div>
-        {PHRASES.map((group, gi) => {
-          var open = phraseOpen[gi] !== false;
-          return (
-            <Card key={gi}>
-              <div className="phrase-cat" onClick={() => setPhraseOpen(p => ({ ...p, [gi]: !open }))}>
-                <span>{group.cat}</span>
-                <span style={{ fontSize: 10 }}>{open ? "▲" : "▼"}</span>
-              </div>
-              {open && group.items.map((item, ii, a) => (
-                <div key={ii} className="phrase-item" style={{ paddingTop: ii === 0 ? 0 : 12, borderTop: ii === 0 ? "none" : "1px solid rgba(26,22,18,0.06)", borderBottom: "none" }}>
-                  <div className="phrase-jp">{item.jp}</div>
-                  <div className="phrase-roma">{item.roma}</div>
-                  <div className="phrase-kr">{item.kr}</div>
-                </div>
-              ))}
-            </Card>
-          );
-        })}
+        {/* 카테고리 탭 - flex wrap */}
+        <div className="place-tab-row">
+          {Object.keys(PHRASES).map(k => (
+            <button key={k}
+              className={"place-tab-btn" + (phraseTab === k ? " active" : "")}
+              onClick={() => setPhraseTab(k)}>
+              {k}
+            </button>
+          ))}
+        </div>
+        <Card>
+          <div className="card-label" style={{ marginBottom: 14 }}>{phraseTab}</div>
+          {items.map((item, ii) => (
+            <div key={ii} className="phrase-item" style={{
+              paddingTop: ii === 0 ? 0 : 12,
+              borderTop: ii === 0 ? "none" : "1px solid rgba(26,22,18,0.06)",
+              borderBottom: "none",
+            }}>
+              <div className="phrase-jp">{item.jp}</div>
+              <div className="phrase-roma">{item.roma}</div>
+              <div className="phrase-kr">{item.kr}</div>
+            </div>
+          ))}
+        </Card>
+        <p style={{ fontSize: 11, color: "rgba(26,22,18,0.3)", textAlign: "center", marginTop: 8 }}>
+          탭을 선택하면 상황별 표현이 나와요
+        </p>
       </div>
     );
   }
