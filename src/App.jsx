@@ -358,10 +358,9 @@ export default function TokyoApp() {
     .w-icon { font-size: 22px; margin-bottom: 6px; }
     .w-temp { font-size: 12px; font-weight: 600; color: #1a1612; }
     .w-desc { font-size: 10px; color: rgba(26,22,18,0.4); margin-top: 3px; }
-    .inner-tab-row { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid rgba(26,22,18,0.08); overflow-x: auto; scrollbar-width: none; }
-    .inner-tab-row::-webkit-scrollbar { display: none; }
-    .inner-tab { padding: 8px 14px; border: none; background: none; font-size: 12px; font-weight: 600; color: rgba(26,22,18,0.35); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -2px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
-    .inner-tab.active { color: #1a1612; border-bottom-color: #1a1612; }
+    .inner-tab-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 20px; }
+    .inner-tab { padding: 10px 8px; border: 1px solid rgba(26,22,18,0.12); border-radius: 8px; background: #fafafa; font-size: 12px; font-weight: 600; color: rgba(26,22,18,0.4); cursor: pointer; white-space: nowrap; text-align: center; font-family: 'DM Sans', sans-serif; transition: all 0.15s; overflow: hidden; text-overflow: ellipsis; }
+    .inner-tab.active { background: #1a1612; color: #fff; border-color: #1a1612; }
     .place-tab-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(26,22,18,0.15); background: transparent; color: rgba(26,22,18,0.5); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
     .place-tab-btn.active { background: #1a1612; color: #fff; border-color: #1a1612; }
     .place-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(26,22,18,0.06); cursor: pointer; transition: opacity 0.15s; }
@@ -423,8 +422,7 @@ export default function TokyoApp() {
         <div className="inner-tab-row">
           {SCHEDULE.map((d, di) => (
             <button key={di} className={"inner-tab" + (scheduleTab === di ? " active" : "")}
-              onClick={() => setScheduleTab(di)}
-              style={{ color: scheduleTab === di ? day.color : undefined, borderBottomColor: scheduleTab === di ? day.color : undefined }}>
+              onClick={() => setScheduleTab(di)}>
               {d.date} {d.day}
             </button>
           ))}
@@ -1037,8 +1035,7 @@ export default function TokyoApp() {
         <div className="inner-tab-row">
           {tips.map((t, i) => (
             <button key={i} className={"inner-tab" + (tipsTab === i ? " active" : "")}
-              onClick={() => setTipsTab(i)}
-              style={{ color: tipsTab === i ? t.color : undefined, borderBottomColor: tipsTab === i ? t.color : undefined }}>
+              onClick={() => setTipsTab(i)}>
               {t.icon} {t.area}
             </button>
           ))}
