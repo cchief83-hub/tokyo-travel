@@ -213,6 +213,12 @@ const GF = "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;
 
 export default function TokyoApp() {
   const [activeTab, setActiveTab] = useState("schedule");
+  const [scheduleTab, setScheduleTab] = useState(0);
+  const [hotelTab, setHotelTab] = useState(0);
+  const [transportTab, setTransportTab] = useState(0);
+  const [docsTab, setDocsTab] = useState(0);
+  const [tipsTab, setTipsTab] = useState(0);
+  const [rentalTab, setRentalTab] = useState(0);
   const [checks, setChecks] = useState({});
   const [expandedDay, setExpandedDay] = useState(0);
   const [placeTab, setPlaceTab] = useState("식당");
@@ -352,7 +358,10 @@ export default function TokyoApp() {
     .w-icon { font-size: 22px; margin-bottom: 6px; }
     .w-temp { font-size: 12px; font-weight: 600; color: #1a1612; }
     .w-desc { font-size: 10px; color: rgba(26,22,18,0.4); margin-top: 3px; }
-    .place-tab-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+    .inner-tab-row { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid rgba(26,22,18,0.08); overflow-x: auto; scrollbar-width: none; }
+    .inner-tab-row::-webkit-scrollbar { display: none; }
+    .inner-tab { padding: 8px 14px; border: none; background: none; font-size: 12px; font-weight: 600; color: rgba(26,22,18,0.35); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -2px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+    .inner-tab.active { color: #1a1612; border-bottom-color: #1a1612; }
     .place-tab-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(26,22,18,0.15); background: transparent; color: rgba(26,22,18,0.5); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
     .place-tab-btn.active { background: #1a1612; color: #fff; border-color: #1a1612; }
     .place-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(26,22,18,0.06); cursor: pointer; transition: opacity 0.15s; }
@@ -407,97 +416,110 @@ export default function TokyoApp() {
   }
 
   function renderSchedule() {
+    const day = SCHEDULE[scheduleTab];
     return (
       <div>
-        <div className="section-title">여행 일정 — 4박 5일</div>
-        {SCHEDULE.map((day, di) => (
-          <Card key={di}>
-            <button className="day-btn" onClick={() => setExpandedDay(expandedDay === di ? -1 : di)}>
-              <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                <div>
-                  <div className="day-date" style={{ color: day.color }}>{day.date} <span style={{ fontSize: 13 }}>{day.day}</span></div>
-                </div>
-                <div>
-                  <div className="card-label" style={{ marginBottom: 2 }}>DAY {di + 1}</div>
-                  <div className="day-theme">{day.theme}</div>
-                </div>
-              </div>
-              <div className={"day-arrow" + (expandedDay === di ? " open" : "")}>▼</div>
+        {/* 날짜 탭 */}
+        <div className="inner-tab-row">
+          {SCHEDULE.map((d, di) => (
+            <button key={di} className={"inner-tab" + (scheduleTab === di ? " active" : "")}
+              onClick={() => setScheduleTab(di)}
+              style={{ color: scheduleTab === di ? day.color : undefined, borderBottomColor: scheduleTab === di ? day.color : undefined }}>
+              {d.date} {d.day}
             </button>
-            {expandedDay === di && (
-              <div className="timeline">
-                {day.items.map((item, ii) => (
-                  <div key={ii} className="tl-item">
-                    <span className="tl-time">{item.time}</span>
-                    <div className="tl-dot" style={{ background: day.color }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
-                        <div className="tl-place">{item.place}</div>
-                        {item.map && (
-                          <a href={item.map} target="_blank" rel="noreferrer"
-                            style={{ flexShrink: 0, fontSize: 10, padding: "3px 8px", borderRadius: 12, background: "#e8f4ea", color: "#2e7d32", textDecoration: "none", fontWeight: 600, whiteSpace: "nowrap" }}>
-                            🗺 길찾기
-                          </a>
-                        )}
-                      </div>
-                      {item.note && <div className="tl-note">{item.note}</div>}
-                    </div>
+          ))}
+        </div>
+        {/* 선택된 날 내용 */}
+        <Card>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+            <div className="day-date" style={{ color: day.color, fontSize: 22 }}>{day.date} <span style={{ fontSize: 14 }}>{day.day}</span></div>
+            <div>
+              <div className="card-label" style={{ marginBottom: 2 }}>DAY {scheduleTab + 1}</div>
+              <div className="day-theme">{day.theme}</div>
+            </div>
+          </div>
+          <div className="timeline" style={{ display: "block", paddingTop: 0 }}>
+            {day.items.map((item, ii) => (
+              <div key={ii} className="tl-item">
+                <span className="tl-time">{item.time}</span>
+                <div className="tl-dot" style={{ background: day.color }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+                    <div className="tl-place">{item.place}</div>
+                    {item.map && (
+                      <a href={item.map} target="_blank" rel="noreferrer"
+                        style={{ flexShrink: 0, fontSize: 10, padding: "3px 8px", borderRadius: 12, background: "#e8f4ea", color: "#2e7d32", textDecoration: "none", fontWeight: 600, whiteSpace: "nowrap" }}>
+                        🗺 길찾기
+                      </a>
+                    )}
                   </div>
-                ))}
+                  {item.note && <div className="tl-note">{item.note}</div>}
+                </div>
               </div>
-            )}
-          </Card>
-        ))}
+            ))}
+          </div>
+        </Card>
       </div>
     );
   }
 
   function renderHotel() {
+    const tabs = ["더 가든", "롯데 시티 호텔", "공통 안내"];
     return (
       <div>
-        <div className="section-title">숙소 정보</div>
-        <Card>
-          <div className="card-label" style={{ color: "#5a8fc8" }}>더 가든 · THE GARDEN</div>
-          <div className="tag" style={{ background: "#eef3fb", color: "#3a6aaa", marginBottom: 14 }}>5/15 ~ 5/17 · 2박</div>
-          <Row l="예약처" v="여기어때" />
-          <Row l="공급사 예약번호" v="1691545792" />
-          <Row l="주소" v="Funatsu 3554, Fujikawaguchiko 401-0301" />
-          <Row l="전화" v="81-555-285677" />
-          <Row l="체크인" v="5/15 (금) 15:00" />
-          <Row l="체크아웃" v="5/17 (일) 11:00" />
-          <Row l="객실" v="Deluxe Mountain View Room" />
-          <Row l="결제" v="전액 사전결제 완료" />
-          <Row l="취소 정책" v="5/14 이전 무료취소 가능" />
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <LinkBtn href="https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk" color="blue">📄 예약확인서 보기</LinkBtn>
-            <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=Funatsu+3554+Fujikawaguchiko+Yamanashi&travelmode=driving" color="green">🗺 길찾기</LinkBtn>
-          </div>
-        </Card>
-        <Card>
-          <div className="card-label" style={{ color: "#c8855a" }}>롯데 시티 호텔 킨시쵸 도쿄</div>
-          <div className="tag" style={{ background: "#fdf3ec", color: "#b06030", marginBottom: 14 }}>5/17 ~ 5/19 · 2박</div>
-          <Row l="예약처" v="여기어때 (최저가보장)" />
-          <Row l="주소" v="4-6-1 Kinshi, Sumida-ku, Tokyo 130-0013" />
-          <Row l="전화" v="+81-3-5619-1066" />
-          <Row l="체크인" v="5/17 (일) 15:00" />
-          <Row l="체크아웃" v="5/19 (화) 11:00" />
-          <Row l="객실" v="Standard Deluxe Twin (금연)" />
-          <Row l="가까운 역" v="긴시초역 5번 출구 바로 연결" />
-          <Row l="부대시설" v="2F Bulks Gym 무료 (24시간)" />
-          <Row l="결제" v="전액 사전결제 (환불 불가)" />
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <LinkBtn href="https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk" color="warm">📄 예약확인서 보기</LinkBtn>
-            <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=4-6-1+Kinshi+Sumida-ku+Tokyo&travelmode=driving" color="green">🗺 길찾기</LinkBtn>
-          </div>
-        </Card>
-        <div className="info-card">
-          <div className="card-label" style={{ marginBottom: 8 }}>체크인 공통 안내</div>
-          <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.9 }}>
-            체크인 시 <strong>예약확인서(Voucher) + 여권</strong> 제시 필수<br />
-            신용카드 보증금 요청될 수 있음 (실제 청구 아님)<br />
-            여기어때 고객센터 <strong>+82-1670-6250</strong> (09:00~03:00 KST)
-          </div>
+        <div className="inner-tab-row">
+          {tabs.map((t, i) => (
+            <button key={i} className={"inner-tab" + (hotelTab === i ? " active" : "")} onClick={() => setHotelTab(i)}>{t}</button>
+          ))}
         </div>
+        {hotelTab === 0 && (
+          <Card>
+            <div className="card-label" style={{ color: "#5a8fc8" }}>더 가든 · THE GARDEN</div>
+            <div className="tag" style={{ background: "#eef3fb", color: "#3a6aaa", marginBottom: 14 }}>5/15 ~ 5/17 · 2박</div>
+            <Row l="예약처" v="여기어때" />
+            <Row l="공급사 예약번호" v="1691545792" />
+            <Row l="주소" v="Funatsu 3554, Fujikawaguchiko 401-0301" />
+            <Row l="전화" v="81-555-285677" />
+            <Row l="체크인" v="5/15 (금) 15:00" />
+            <Row l="체크아웃" v="5/17 (일) 11:00" />
+            <Row l="객실" v="Deluxe Mountain View Room" />
+            <Row l="결제" v="전액 사전결제 완료" />
+            <Row l="취소 정책" v="5/14 이전 무료취소 가능" />
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <LinkBtn href="https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk" color="blue">📄 예약확인서 보기</LinkBtn>
+              <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=Funatsu+3554+Fujikawaguchiko+Yamanashi&travelmode=driving" color="green">🗺 길찾기</LinkBtn>
+            </div>
+          </Card>
+        )}
+        {hotelTab === 1 && (
+          <Card>
+            <div className="card-label" style={{ color: "#c8855a" }}>롯데 시티 호텔 킨시쵸 도쿄</div>
+            <div className="tag" style={{ background: "#fdf3ec", color: "#b06030", marginBottom: 14 }}>5/17 ~ 5/19 · 2박</div>
+            <Row l="예약처" v="여기어때 (최저가보장)" />
+            <Row l="주소" v="4-6-1 Kinshi, Sumida-ku, Tokyo 130-0013" />
+            <Row l="전화" v="+81-3-5619-1066" />
+            <Row l="체크인" v="5/17 (일) 15:00" />
+            <Row l="체크아웃" v="5/19 (화) 11:00" />
+            <Row l="객실" v="Standard Deluxe Twin (금연)" />
+            <Row l="가까운 역" v="긴시초역 5번 출구 바로 연결" />
+            <Row l="부대시설" v="2F Bulks Gym 무료 (24시간)" />
+            <Row l="결제" v="전액 사전결제 (환불 불가)" />
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <LinkBtn href="https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk" color="warm">📄 예약확인서 보기</LinkBtn>
+              <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=4-6-1+Kinshi+Sumida-ku+Tokyo&travelmode=driving" color="green">🗺 길찾기</LinkBtn>
+            </div>
+          </Card>
+        )}
+        {hotelTab === 2 && (
+          <div className="info-card">
+            <div className="card-label" style={{ marginBottom: 8 }}>체크인 공통 안내</div>
+            <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.9 }}>
+              체크인 시 <strong>예약확인서(Voucher) + 여권</strong> 제시 필수<br />
+              신용카드 보증금 요청될 수 있음 (실제 청구 아님)<br />
+              여기어때 고객센터 <strong>+82-1670-6250</strong> (09:00~03:00 KST)
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -539,57 +561,88 @@ export default function TokyoApp() {
   }
 
   function renderRental() {
+    const tabs = ["예약 차량", "대여·반납 위치", "픽업 준비물", "운전 주의", "국제면허 안내"];
     return (
       <div>
-        <div className="section-title">렌트카 정보</div>
-        <div className="warn-card">
-          <div className="card-label" style={{ color: "#b06030", marginBottom: 6 }}>국제운전면허증 필수</div>
-          <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.8 }}>일본은 국제운전면허증(IDP) 필수. 1949년 협약 형식만 인정. 한국 면허증만으로는 운전 불가. 출발 전 반드시 발급!</div>
+        <div className="inner-tab-row">
+          {tabs.map((t, i) => (
+            <button key={i} className={"inner-tab" + (rentalTab === i ? " active" : "")}
+              onClick={() => setRentalTab(i)}>{t}</button>
+          ))}
         </div>
-        <Card>
-          <div className="card-label" style={{ color: "#3a8a5a" }}>예약 차량 — 확정</div>
-          <Row l="업체" v="IX RENTAL (아이엑스 렌탈)" />
-          <Row l="차량" v="토요타 알파드 (밴, 7인승)" />
-          <Row l="클룩 예약번호" v="UZV451629" />
-          <Row l="확정번호" v="R798425183766597" />
-          <Row l="대여" v="2026년 5월 15일 (금) 12:00" />
-          <Row l="반납" v="2026년 5월 17일 (일) 12:00" />
-          <Row l="요금" v="US$ 171.15 (전액 결제)" />
-          <Row l="운전자 추가" v="1인 무료" />
-          <Row l="주행거리" v="무제한" />
-          <Row l="연료" v="Full to Full" />
-          <Row l="무료 취소" v="5월 14일 12:00 이전" />
-          <Row l="보험" v="어드밴스드 플러스 (CDW · TPL · NOC)" />
-          <Row l="업체 연락처" v="+81-03-5809-3228" />
-          <Row l="카카오" v="+8108032261688" />
-          <LinkBtn href="https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk" color="green">렌트카 바우처 보기</LinkBtn>
-        </Card>
-        <Card>
-          <div className="card-label">대여 · 반납 위치</div>
-          <Row l="장소" v="IX렌탈 아사쿠사바시역점" />
-          <Row l="주소" v="1-16-3 Yanagibashi, Taito-ku, Tokyo 111-0053" />
-          <Row l="대여→반납" v="동일 지점 (편도 수수료 없음)" />
-          <Row l="영업시간" v="08:00~20:00 무료 / 20:01~21:00 +3,000엔" />
-          <Row l="오시는 길" v="동쪽 출구 → 50m → 우회전 → 150m" />
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <LinkBtn href="https://maps.app.goo.gl/iJ9aTQE9UvKXZUfDA" color="blue">📍 위치 보기</LinkBtn>
-            <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=1-16-3+Yanagibashi+Taito-ku+Tokyo&travelmode=transit" color="green">🗺 길찾기</LinkBtn>
+
+        {rentalTab === 0 && (
+          <div>
+            <Card>
+              <div className="card-label" style={{ color: "#3a8a5a", marginBottom: 14 }}>예약 차량 — 확정</div>
+              <Row l="업체" v="IX RENTAL (아이엑스 렌탈)" />
+              <Row l="차량" v="토요타 알파드 (밴, 7인승)" />
+              <Row l="클룩 예약번호" v="UZV451629" />
+              <Row l="확정번호" v="R798425183766597" />
+              <Row l="대여" v="2026년 5월 15일 (금) 12:00" />
+              <Row l="반납" v="2026년 5월 17일 (일) 12:00" />
+              <Row l="요금" v="US$ 171.15 (전액 결제)" />
+              <Row l="운전자 추가" v="1인 무료" />
+              <Row l="주행거리" v="무제한" />
+              <Row l="연료" v="Full to Full" />
+              <Row l="무료 취소" v="5월 14일 12:00 이전" />
+              <Row l="보험" v="어드밴스드 플러스 (CDW · TPL · NOC)" />
+              <Row l="업체 연락처" v="+81-03-5809-3228" />
+              <Row l="카카오" v="+8108032261688" />
+              <LinkBtn href="https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk" color="green">📄 렌트카 바우처 보기</LinkBtn>
+            </Card>
           </div>
-        </Card>
-        <Card>
-          <div className="card-label">픽업 시 필수 지참</div>
-          <Row l="여권" v="픽업하는 모든 운전자 원본" />
-          <Row l="운전면허증" v="한국 운전면허증 원본" />
-          <Row l="국제운전면허증" v="1949년 협약 IDP 원본" />
-          <Row l="현장 추가" v="ETC 카드 · GPS · 카시트 구매 가능" />
-        </Card>
-        <Card>
-          <div className="card-label">일본 운전 주의사항</div>
-          <Row l="통행 방향" v="좌측통행 (한국과 반대)" />
-          <Row l="고속도로" v="ETC 카드 또는 현금" />
-          <Row l="주유" v="셀프 주유 많음 (セルフ)" />
-          <Row l="내비" v="구글맵 또는 Yahoo! カーナビ" />
-        </Card>
+        )}
+
+        {rentalTab === 1 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>대여 · 반납 위치</div>
+            <Row l="장소" v="IX렌탈 아사쿠사바시역점" />
+            <Row l="주소" v="1-16-3 Yanagibashi, Taito-ku, Tokyo 111-0053" />
+            <Row l="대여→반납" v="동일 지점 (편도 수수료 없음)" />
+            <Row l="영업시간" v="08:00~20:00 무료 / 20:01~21:00 +3,000엔" />
+            <Row l="오시는 길" v="아사쿠사바시역 동쪽 출구 → 50m → 우회전 → 150m" />
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <LinkBtn href="https://maps.app.goo.gl/iJ9aTQE9UvKXZUfDA" color="blue">📍 위치 보기</LinkBtn>
+              <LinkBtn href="https://www.google.com/maps/dir/?api=1&destination=1-16-3+Yanagibashi+Taito-ku+Tokyo&travelmode=transit" color="green">🗺 길찾기</LinkBtn>
+            </div>
+          </Card>
+        )}
+
+        {rentalTab === 2 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>픽업 시 필수 지참</div>
+            <Row l="여권" v="픽업하는 모든 운전자 원본" />
+            <Row l="운전면허증" v="한국 운전면허증 원본" />
+            <Row l="국제운전면허증" v="1949년 협약 IDP 원본" />
+            <Row l="현장 추가" v="ETC 카드 · GPS · 카시트 구매 가능" />
+          </Card>
+        )}
+
+        {rentalTab === 3 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>일본 운전 주의사항</div>
+            <Row l="통행 방향" v="좌측통행 (한국과 반대)" />
+            <Row l="고속도로" v="ETC 카드 또는 현금" />
+            <Row l="주유" v="셀프 주유 많음 (セルフ)" />
+            <Row l="내비" v="구글맵 또는 Yahoo! カーナビ" />
+          </Card>
+        )}
+
+        {rentalTab === 4 && (
+          <div className="warn-card">
+            <div className="card-label" style={{ color: "#b06030", marginBottom: 8 }}>⚠ 국제운전면허증 필수</div>
+            <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.9 }}>
+              일본은 <strong>국제운전면허증(IDP)</strong> 필수예요.<br />
+              한국 면허증만으로는 운전 불가해요.<br />
+              <strong>1949년 협약</strong> 형식만 인정돼요.<br />
+              출발 전 반드시 발급하세요!<br /><br />
+              <strong>발급 방법:</strong> 전국 운전면허시험장 또는 경찰서 민원실 방문<br />
+              <strong>준비물:</strong> 운전면허증 + 여권 + 증명사진 1매 + 수수료 8,500원<br />
+              <strong>발급 시간:</strong> 당일 즉시 발급
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -601,50 +654,65 @@ export default function TokyoApp() {
       { icon: "🚇", num: "STEP 3", title: "도쿄역 → 아사쿠사바시역", desc: "JR 소부선 · 약 10분 · 230엔" },
       { icon: "🚗", num: "STEP 4", title: "IX렌탈 픽업 (12:00)", desc: "아사쿠사바시역 동쪽 출구 도보 5분 · 국제운전면허증 + 여권 지참" },
     ];
+    const tabs = ["나리타→렌트카", "반납→호텔", "귀국 이동", "IC카드", "유용한 앱"];
     return (
       <div>
-        <div className="section-title">이동 경로 안내</div>
-        <Card>
-          <div className="card-label" style={{ color: "#c8855a" }}>나리타 → IX렌탈 아사쿠사바시 (5/15)</div>
-          {steps.map((step, i) => (
-            <div key={i} className="step-item">
-              <div className="step-icon">{step.icon}</div>
-              <div>
-                <div className="step-num" style={{ color: "#c8855a" }}>{step.num}</div>
-                <div className="step-title">{step.title}</div>
-                <div className="step-desc">{step.desc}</div>
-              </div>
-            </div>
+        <div className="inner-tab-row">
+          {tabs.map((t, i) => (
+            <button key={i} className={"inner-tab" + (transportTab === i ? " active" : "")} onClick={() => setTransportTab(i)}>{t}</button>
           ))}
-        </Card>
-        <Card>
-          <div className="card-label" style={{ color: "#5a8fc8" }}>렌트카 반납 → 롯데 시티 호텔 (5/17)</div>
-          <Row l="반납" v="IX렌탈 아사쿠사바시역점" />
-          <Row l="이동" v="JR 소부선 탑승" />
-          <Row l="도착" v="긴시쵸역 약 10분 · 230엔" />
-          <Row l="숙소까지" v="긴시쵸역 5번 출구 → 롯데 시티 호텔 도보 1분" />
-        </Card>
-        <Card>
-          <div className="card-label">귀국일 나리타 이동 (5/19)</div>
-          <Row l="출발지" v="롯데 시티 호텔 킨시쵸" />
-          <Row l="이동" v="리무진버스 (도쿄역 경유)" />
-          <Row l="소요시간" v="약 70~90분" />
-          <Row l="출발 권장" v="BX111 10:55 기준 → 08:00 이전" />
-        </Card>
-        <Card>
-          <div className="card-label">IC 카드 (스이카 / 파스모)</div>
-          <Row l="구입" v="공항 · 역 자동판매기" />
-          <Row l="초기 충전 권장" v="1인당 3,000~5,000엔" />
-          <Row l="보증금" v="500엔 (귀국 시 환불)" />
-          <Row l="사용처" v="전철 · 버스 · 편의점 · 자판기" />
-        </Card>
-        <Card>
-          <div className="card-label">유용한 앱</div>
-          <Row l="Google Maps" v="대중교통 경로 · 매우 정확" />
-          <Row l="乗換案内" v="일본 전철 환승 특화" />
-          <Row l="Yahoo! カーナビ" v="렌트카 내비용" />
-          <Row l="Google 번역" v="카메라 번역 기능 유용" />
-        </Card>
+        </div>
+        {transportTab === 0 && (
+          <Card>
+            <div className="card-label" style={{ color: "#c8855a", marginBottom: 14 }}>나리타 → IX렌탈 아사쿠사바시 (5/15)</div>
+            {steps.map((step, i) => (
+              <div key={i} className="step-item">
+                <div className="step-icon">{step.icon}</div>
+                <div>
+                  <div className="step-num" style={{ color: "#c8855a" }}>{step.num}</div>
+                  <div className="step-title">{step.title}</div>
+                  <div className="step-desc">{step.desc}</div>
+                </div>
+              </div>
+            ))}
+          </Card>
+        )}
+        {transportTab === 1 && (
+          <Card>
+            <div className="card-label" style={{ color: "#5a8fc8", marginBottom: 14 }}>렌트카 반납 → 롯데 시티 호텔 (5/17)</div>
+            <Row l="반납" v="IX렌탈 아사쿠사바시역점" />
+            <Row l="이동" v="JR 소부선 탑승" />
+            <Row l="도착" v="긴시쵸역 약 10분 · 230엔" />
+            <Row l="숙소까지" v="긴시쵸역 5번 출구 → 롯데 시티 호텔 도보 1분" />
+          </Card>
+        )}
+        {transportTab === 2 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>귀국일 나리타 이동 (5/19)</div>
+            <Row l="출발지" v="롯데 시티 호텔 킨시쵸" />
+            <Row l="이동" v="리무진버스 (도쿄역 경유)" />
+            <Row l="소요시간" v="약 70~90분" />
+            <Row l="출발 권장" v="BX111 10:55 기준 → 08:00 이전" />
+          </Card>
+        )}
+        {transportTab === 3 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>IC 카드 (스이카 / 파스모)</div>
+            <Row l="구입" v="공항 · 역 자동판매기" />
+            <Row l="초기 충전 권장" v="1인당 3,000~5,000엔" />
+            <Row l="보증금" v="500엔 (귀국 시 환불)" />
+            <Row l="사용처" v="전철 · 버스 · 편의점 · 자판기" />
+          </Card>
+        )}
+        {transportTab === 4 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>유용한 앱</div>
+            <Row l="Google Maps" v="대중교통 경로 · 매우 정확" />
+            <Row l="乗換案内" v="일본 전철 환승 특화" />
+            <Row l="Yahoo! カーナビ" v="렌트카 내비용" />
+            <Row l="Google 번역" v="카메라 번역 기능 유용" />
+          </Card>
+        )}
       </div>
     );
   }
@@ -834,66 +902,81 @@ export default function TokyoApp() {
   }
 
   function renderDocs() {
+    const tabs = ["항공권", "탑승객", "바우처", "비상연락처"];
     return (
       <div>
-        <div className="section-title">중요 서류 모음</div>
-        <Card>
-          <div className="card-label" style={{ color: "#5a8fc8" }}>가는 편</div>
-          <div className="tag" style={{ background: "#eef3fb", color: "#3a6aaa", marginBottom: 14 }}>5/15 (금) · BX 112</div>
-          <Row l="항공사" v="에어부산 (Air Busan)" />
-          <Row l="출발" v="부산 김해 (PUS) 07:50" />
-          <Row l="도착" v="나리타 (NRT) T1 10:00" />
-          <Row l="예약번호 (항공사)" v="KDELAW" />
-          <Row l="예약번호 (여행사)" v="EESHHV" />
-          <Row l="클래스" v="일반석 (D)" />
-        </Card>
-        <Card>
-          <div className="card-label" style={{ color: "#c8855a" }}>오는 편</div>
-          <div className="tag" style={{ background: "#fdf3ec", color: "#b06030", marginBottom: 14 }}>5/19 (화) · BX 111</div>
-          <Row l="항공사" v="에어부산 (Air Busan)" />
-          <Row l="출발" v="나리타 (NRT) T1 10:55" />
-          <Row l="도착" v="부산 김해 (PUS) 13:15" />
-          <Row l="예약번호 (항공사)" v="KDSLAW" />
-          <Row l="예약번호 (여행사)" v="EESHHV" />
-        </Card>
-        <Card>
-          <div className="card-label">탑승객 4명 — 이티켓</div>
-          {[
-            ["KIM / YOUNGDEOK MR", "https://drive.google.com/file/d/13A5LBjiUUtxEr0CxKY1WOx9Xb_XZBm6B/view?usp=drivesdk"],
-            ["KIM / HONGGWON MR", "https://drive.google.com/file/d/1PNT8JPpSNm6SlP2VD4AcTi-uzQWlTC-E/view?usp=drivesdk"],
-            ["CHOI / JUNGLIM MS", "https://drive.google.com/file/d/120IOzF53Hcm3E5kyITcm7GEau1RI5Rie/view?usp=drivesdk"],
-            ["KIM / SIEUN MISS CHD", "https://drive.google.com/file/d/1o3yzX010C0qXRAiZMS8i-nvlQeTzL0Qu/view?usp=drivesdk"],
-          ].map((r, i, a) => (
-            <div key={i} className="doc-ticket">
-              <span style={{ fontSize: 13, fontWeight: 500, color: "#1a1612" }}>{r[0]}</span>
-              <a href={r[1]} target="_blank" rel="noreferrer" className="tag" style={{ background: "#fdf3ec", color: "#b06030", textDecoration: "none", flexShrink: 0 }}>티켓 보기</a>
-            </div>
+        <div className="inner-tab-row">
+          {tabs.map((t, i) => (
+            <button key={i} className={"inner-tab" + (docsTab === i ? " active" : "")} onClick={() => setDocsTab(i)}>{t}</button>
           ))}
-        </Card>
-        <Card>
-          <div className="card-label">바우처 모음</div>
-          {[
-            { name: "더 가든 — 숙소 바우처", sub: "5/15~5/17 · 2박", url: "https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
-            { name: "롯데 시티 호텔 — 숙소 바우처", sub: "5/17~5/19 · 2박", url: "https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk", color: "#b06030", bg: "#fdf3ec" },
-            { name: "IX렌탈 — 렌트카 바우처", sub: "5/15 12:00 ~ 5/17 12:00", url: "https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk", color: "#3a8a5a", bg: "#eef7f2" },
-          ].map((v, i, a) => (
-            <div key={i} className="doc-ticket" style={{ borderBottom: i < a.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none" }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: "#1a1612", marginBottom: 2 }}>{v.name}</div>
-                <div style={{ fontSize: 11, color: "rgba(26,22,18,0.4)" }}>{v.sub}</div>
+        </div>
+        {docsTab === 0 && (
+          <div>
+            <Card>
+              <div className="card-label" style={{ color: "#5a8fc8" }}>가는 편</div>
+              <div className="tag" style={{ background: "#eef3fb", color: "#3a6aaa", marginBottom: 14 }}>5/15 (금) · BX 112</div>
+              <Row l="항공사" v="에어부산 (Air Busan)" />
+              <Row l="출발" v="부산 김해 (PUS) 07:50" />
+              <Row l="도착" v="나리타 (NRT) T1 10:00" />
+              <Row l="예약번호 (항공사)" v="KDELAW" />
+              <Row l="예약번호 (여행사)" v="EESHHV" />
+              <Row l="클래스" v="일반석 (D)" />
+            </Card>
+            <Card>
+              <div className="card-label" style={{ color: "#c8855a" }}>오는 편</div>
+              <div className="tag" style={{ background: "#fdf3ec", color: "#b06030", marginBottom: 14 }}>5/19 (화) · BX 111</div>
+              <Row l="항공사" v="에어부산 (Air Busan)" />
+              <Row l="출발" v="나리타 (NRT) T1 10:55" />
+              <Row l="도착" v="부산 김해 (PUS) 13:15" />
+              <Row l="예약번호 (항공사)" v="KDSLAW" />
+              <Row l="예약번호 (여행사)" v="EESHHV" />
+            </Card>
+          </div>
+        )}
+        {docsTab === 1 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>탑승객 4명 — 이티켓</div>
+            {[
+              ["KIM / YOUNGDEOK MR", "https://drive.google.com/file/d/13A5LBjiUUtxEr0CxKY1WOx9Xb_XZBm6B/view?usp=drivesdk"],
+              ["KIM / HONGGWON MR", "https://drive.google.com/file/d/1PNT8JPpSNm6SlP2VD4AcTi-uzQWlTC-E/view?usp=drivesdk"],
+              ["CHOI / JUNGLIM MS", "https://drive.google.com/file/d/120IOzF53Hcm3E5kyITcm7GEau1RI5Rie/view?usp=drivesdk"],
+              ["KIM / SIEUN MISS CHD", "https://drive.google.com/file/d/1o3yzX010C0qXRAiZMS8i-nvlQeTzL0Qu/view?usp=drivesdk"],
+            ].map((r, i) => (
+              <div key={i} className="doc-ticket">
+                <span style={{ fontSize: 13, fontWeight: 500, color: "#1a1612" }}>{r[0]}</span>
+                <a href={r[1]} target="_blank" rel="noreferrer" className="tag" style={{ background: "#fdf3ec", color: "#b06030", textDecoration: "none", flexShrink: 0 }}>티켓 보기</a>
               </div>
-              <a href={v.url} target="_blank" rel="noreferrer" className="tag" style={{ background: v.bg, color: v.color, textDecoration: "none", flexShrink: 0 }}>보기</a>
-            </div>
-          ))}
-        </Card>
-        <Card>
-          <div className="card-label">비상 연락처</div>
-          <Row l="주일 한국 대사관" v="+81-3-3452-7611" hot />
-          <Row l="일본 구급" v="119" hot />
-          <Row l="일본 경찰" v="110" hot />
-          <Row l="여행자보험" v="—" />
-          <Row l="신용카드 분실" v="카드사 국제 전화번호" />
-        </Card>
+            ))}
+          </Card>
+        )}
+        {docsTab === 2 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>바우처 모음</div>
+            {[
+              { name: "더 가든 — 숙소 바우처", sub: "5/15~5/17 · 2박", url: "https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
+              { name: "롯데 시티 호텔 — 숙소 바우처", sub: "5/17~5/19 · 2박", url: "https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk", color: "#b06030", bg: "#fdf3ec" },
+              { name: "IX렌탈 — 렌트카 바우처", sub: "5/15 12:00 ~ 5/17 12:00", url: "https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk", color: "#3a8a5a", bg: "#eef7f2" },
+            ].map((v, i, a) => (
+              <div key={i} className="doc-ticket" style={{ borderBottom: i < a.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none" }}>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: "#1a1612", marginBottom: 2 }}>{v.name}</div>
+                  <div style={{ fontSize: 11, color: "rgba(26,22,18,0.4)" }}>{v.sub}</div>
+                </div>
+                <a href={v.url} target="_blank" rel="noreferrer" className="tag" style={{ background: v.bg, color: v.color, textDecoration: "none", flexShrink: 0 }}>보기</a>
+              </div>
+            ))}
+          </Card>
+        )}
+        {docsTab === 3 && (
+          <Card>
+            <div className="card-label" style={{ marginBottom: 14 }}>비상 연락처</div>
+            <Row l="주일 한국 대사관" v="+81-3-3452-7611" hot />
+            <Row l="일본 구급" v="119" hot />
+            <Row l="일본 경찰" v="110" hot />
+            <Row l="여행자보험" v="—" />
+            <Row l="신용카드 분실" v="카드사 국제 전화번호" />
+          </Card>
+        )}
       </div>
     );
   }
@@ -938,6 +1021,8 @@ export default function TokyoApp() {
           { title: "귀국 시 환불", desc: "한국 귀국 후 일본 방문 시 다시 사용 가능해요. 환불 원하면 나리타 JR 창구에서 잔액 + 보증금 500엔 돌려받을 수 있어요." },
         ],
       },
+      {
+        area: "공통 팁", color: "#a07ac8", icon: "💴",
         items: [
           { title: "현금을 넉넉히 준비하세요", desc: "일본은 아직 현금 위주 가게가 많아요. 1인당 3~5만 엔 환전 추천해요." },
           { title: "편의점 ATM 활용", desc: "세븐일레븐·로손 ATM에서 해외 카드로 엔화 출금 가능해요. 수수료가 저렴해요." },
@@ -946,29 +1031,35 @@ export default function TokyoApp() {
         ],
       },
     ];
-
+    const tip = tips[tipsTab];
     return (
       <div>
-        <div className="section-title">여행 꿀팁</div>
-        {tips.map((section, si) => (
-          <Card key={si}>
-            <div className="card-label" style={{ color: section.color, marginBottom: 16 }}>
-              {section.icon} {section.area}
-            </div>
-            {section.items.map((item, ii) => (
-              <div key={ii} style={{
-                padding: "12px 0",
-                borderBottom: ii < section.items.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none",
-              }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 4 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: section.color, flexShrink: 0, marginTop: 5 }} />
-                  <div style={{ fontSize: 13, fontWeight: 600, color: "#1a1612" }}>{item.title}</div>
-                </div>
-                <div style={{ fontSize: 12, color: "rgba(26,22,18,0.55)", lineHeight: 1.7, paddingLeft: 14 }}>{item.desc}</div>
+        <div className="inner-tab-row">
+          {tips.map((t, i) => (
+            <button key={i} className={"inner-tab" + (tipsTab === i ? " active" : "")}
+              onClick={() => setTipsTab(i)}
+              style={{ color: tipsTab === i ? t.color : undefined, borderBottomColor: tipsTab === i ? t.color : undefined }}>
+              {t.icon} {t.area}
+            </button>
+          ))}
+        </div>
+        <Card>
+          <div className="card-label" style={{ color: tip.color, marginBottom: 16 }}>
+            {tip.icon} {tip.area}
+          </div>
+          {tip.items.map((item, ii) => (
+            <div key={ii} style={{
+              padding: "12px 0",
+              borderBottom: ii < tip.items.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none",
+            }}>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 4 }}>
+                <div style={{ width: 6, height: 6, borderRadius: "50%", background: tip.color, flexShrink: 0, marginTop: 5 }} />
+                <div style={{ fontSize: 13, fontWeight: 600, color: "#1a1612" }}>{item.title}</div>
               </div>
-            ))}
-          </Card>
-        ))}
+              <div style={{ fontSize: 12, color: "rgba(26,22,18,0.55)", lineHeight: 1.7, paddingLeft: 14 }}>{item.desc}</div>
+            </div>
+          ))}
+        </Card>
       </div>
     );
   }
