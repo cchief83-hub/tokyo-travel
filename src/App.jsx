@@ -28,7 +28,9 @@ const SCHEDULE = [
     items: [
       { time: "07:50", place: "부산 김해공항 출발", note: "에어부산 BX112 · 탑승 2시간 전 도착 권장" },
       { time: "10:00", place: "나리타 공항 도착 (T1)", note: "입국심사 · 짐 수령", map: mapSearch("成田国際空港 第1ターミナル") },
-      { time: "10:30", place: "리무진버스 탑승 → 도쿄역", note: "T1 1층 버스 카운터 · 약 1시간 30분 · 어른 3,100엔" },
+      { time: "10:30", place: "NEX 티켓 교환 → 탑승", note: "B1 북쪽 윙 JR 동일본 여행 서비스 센터 · 여권 + 바우처 제시" },
+      { time: "11:23", place: "나리타 익스프레스 도쿄역 도착", note: "약 53분 · 환승 없이 직행", map: mapDir("東京駅") },
+      { time: "11:30", place: "도쿄역 → 아사쿠사바시역", note: "JR 소부선 1정거장 · 약 3분 · 170엔" },
       { time: "12:00", place: "IX렌탈 픽업 (아사쿠사바시역)", note: "토요타 알파드 · 국제운전면허증 + 여권 필수", map: mapDir("1-16-3 Yanagibashi, Taito-ku, Tokyo") },
       { time: "13:30", place: "가마쿠라 도착 · 관광", note: "대불 · 고마치도리 · 에노덴", map: mapDir("鎌倉大仏 高徳院") },
       { time: "17:30", place: "가마쿠라 저녁식사", note: "스키야키 · 이자카야", map: mapSearch("鎌倉 小町通り レストラン") },
@@ -647,12 +649,13 @@ export default function TokyoApp() {
 
   function renderTransport() {
     var steps = [
-      { icon: "✈", num: "STEP 1", title: "나리타 T1 도착 (10:00)", desc: "입국심사 · 짐 수령 후 1층으로 이동" },
-      { icon: "🚌", num: "STEP 2", title: "리무진버스 탑승 → 도쿄역", desc: "T1 1층 버스 카운터 · 약 1시간 30분 · 어른 3,100엔 / 어린이 1,550엔" },
-      { icon: "🚇", num: "STEP 3", title: "도쿄역 → 아사쿠사바시역", desc: "JR 소부선 · 약 10분 · 230엔" },
-      { icon: "🚗", num: "STEP 4", title: "IX렌탈 픽업 (12:00)", desc: "아사쿠사바시역 동쪽 출구 도보 5분 · 국제운전면허증 + 여권 지참" },
+      { icon: "✈", num: "STEP 1", title: "나리타 T1 도착 (10:00)", desc: "입국심사 · 짐 수령 후 B1 북쪽 윙으로 이동" },
+      { icon: "🚄", num: "STEP 2", title: "NEX 티켓 교환 (B1 북쪽 윙)", desc: "JR 동일본 여행 서비스 센터 · 여권 + 바우처 제시 · 운영 08:30~19:00" },
+      { icon: "🚆", num: "STEP 3", title: "나리타 익스프레스 탑승 → 도쿄역", desc: "약 53분 · 환승 없이 도쿄역 직행 · 짐 공간 완비" },
+      { icon: "🚇", num: "STEP 4", title: "도쿄역 → 아사쿠사바시역", desc: "JR 소부선 · 1정거장 약 3분 · 170엔" },
+      { icon: "🚗", num: "STEP 5", title: "IX렌탈 픽업 (12:00)", desc: "아사쿠사바시역 동쪽 출구 도보 5분 · 국제운전면허증 + 여권 지참" },
     ];
-    const tabs = ["나리타→렌트카", "반납→호텔", "귀국 이동", "IC카드", "유용한 앱"];
+    const tabs = ["나리타→렌트카", "반납→호텔", "귀국 이동", "NEX 예약정보", "IC카드"];
     return (
       <div>
         <div className="inner-tab-row">
@@ -661,19 +664,29 @@ export default function TokyoApp() {
           ))}
         </div>
         {transportTab === 0 && (
-          <Card>
-            <div className="card-label" style={{ color: "#c8855a", marginBottom: 14 }}>나리타 → IX렌탈 아사쿠사바시 (5/15)</div>
-            {steps.map((step, i) => (
-              <div key={i} className="step-item">
-                <div className="step-icon">{step.icon}</div>
-                <div>
-                  <div className="step-num" style={{ color: "#c8855a" }}>{step.num}</div>
-                  <div className="step-title">{step.title}</div>
-                  <div className="step-desc">{step.desc}</div>
+          <div>
+            <Card>
+              <div className="card-label" style={{ color: "#c8855a", marginBottom: 14 }}>나리타 → IX렌탈 아사쿠사바시 (5/15)</div>
+              {steps.map((step, i) => (
+                <div key={i} className="step-item">
+                  <div className="step-icon">{step.icon}</div>
+                  <div>
+                    <div className="step-num" style={{ color: "#c8855a" }}>{step.num}</div>
+                    <div className="step-title">{step.title}</div>
+                    <div className="step-desc">{step.desc}</div>
+                  </div>
                 </div>
+              ))}
+            </Card>
+            <div className="info-card">
+              <div className="card-label" style={{ color: "#3a6aaa", marginBottom: 6 }}>⚠ NEX 티켓 교환 주의</div>
+              <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.8 }}>
+                티켓 교환은 <strong>나리타 공항 터미널에서만 가능</strong>해요.<br />
+                도쿄역 등 다른 역에서는 교환 불가예요.<br />
+                여권 + 모바일 바우처 함께 제시하세요.
               </div>
-            ))}
-          </Card>
+            </div>
+          </div>
         )}
         {transportTab === 1 && (
           <Card>
@@ -685,30 +698,50 @@ export default function TokyoApp() {
           </Card>
         )}
         {transportTab === 2 && (
-          <Card>
-            <div className="card-label" style={{ marginBottom: 14 }}>귀국일 나리타 이동 (5/19)</div>
-            <Row l="출발지" v="롯데 시티 호텔 킨시쵸" />
-            <Row l="이동" v="리무진버스 (도쿄역 경유)" />
-            <Row l="소요시간" v="약 70~90분" />
-            <Row l="출발 권장" v="BX111 10:55 기준 → 08:00 이전" />
-          </Card>
+          <div>
+            <Card>
+              <div className="card-label" style={{ marginBottom: 14 }}>귀국일 나리타 이동 (5/19)</div>
+              <Row l="출발지" v="롯데 시티 호텔 킨시쵸" />
+              <Row l="이동" v="긴시쵸역 → JR 소부선 → 도쿄역" />
+              <Row l="소요" v="긴시쵸→도쿄역 약 3분" />
+              <Row l="NEX 탑승" v="도쿄역 → 나리타 T1 (53분)" />
+              <Row l="출발 권장" v="BX111 10:55 기준 → 08:00 이전 출발" />
+            </Card>
+            <div className="warn-card">
+              <div className="card-label" style={{ color: "#b06030", marginBottom: 6 }}>⚠ 귀국일 체크리스트</div>
+              <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.8 }}>
+                복편 NEX는 왕복 티켓으로 이용<br />
+                도쿄역 NEX 승강장에서 나리타행 탑승<br />
+                티켓 교환 없이 <strong>바우처 QR코드 그대로 사용</strong>
+              </div>
+            </div>
+          </div>
         )}
         {transportTab === 3 && (
+          <div>
+            <Card>
+              <div className="card-label" style={{ color: "#3a8a5a", marginBottom: 14 }}>나리타 익스프레스 예약 정보</div>
+              <Row l="예약번호" v="BQP828461" />
+              <Row l="티켓 종류" v="왕복 (나리타 공항↔도쿄)" />
+              <Row l="이용 날짜" v="2026년 5월 15일" />
+              <Row l="인원" v="성인 3명 · 아동(만 6-11세) 1명" />
+              <Row l="교환 장소" v="나리타 T1 — JR 동일본 여행 서비스 센터 B1 북쪽 윙" />
+              <Row l="교환 운영시간" v="08:30 ~ 19:00" />
+              <Row l="필요 서류" v="여권 + 모바일 바우처" />
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <LinkBtn href="https://drive.google.com/file/d/1bMbXZ85A0ZqJ1WL66twdUZX94NBKDjHZ/view?usp=drivesdk" color="green">📄 NEX 바우처 보기</LinkBtn>
+                <LinkBtn href="https://drive.google.com/file/d/1wICgiS7xEgfY3aFH9M08moUdzUq0HhsV/view?usp=drivesdk" color="blue">🎫 QR코드 보기</LinkBtn>
+              </div>
+            </Card>
+          </div>
+        )}
+        {transportTab === 4 && (
           <Card>
             <div className="card-label" style={{ marginBottom: 14 }}>IC 카드 (스이카 / 파스모)</div>
             <Row l="구입" v="공항 · 역 자동판매기" />
             <Row l="초기 충전 권장" v="1인당 3,000~5,000엔" />
             <Row l="보증금" v="500엔 (귀국 시 환불)" />
             <Row l="사용처" v="전철 · 버스 · 편의점 · 자판기" />
-          </Card>
-        )}
-        {transportTab === 4 && (
-          <Card>
-            <div className="card-label" style={{ marginBottom: 14 }}>유용한 앱</div>
-            <Row l="Google Maps" v="대중교통 경로 · 매우 정확" />
-            <Row l="乗換案内" v="일본 전철 환승 특화" />
-            <Row l="Yahoo! カーナビ" v="렌트카 내비용" />
-            <Row l="Google 번역" v="카메라 번역 기능 유용" />
           </Card>
         )}
       </div>
@@ -954,6 +987,8 @@ export default function TokyoApp() {
               { name: "더 가든 — 숙소 바우처", sub: "5/15~5/17 · 2박", url: "https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
               { name: "롯데 시티 호텔 — 숙소 바우처", sub: "5/17~5/19 · 2박", url: "https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk", color: "#b06030", bg: "#fdf3ec" },
               { name: "IX렌탈 — 렌트카 바우처", sub: "5/15 12:00 ~ 5/17 12:00", url: "https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk", color: "#3a8a5a", bg: "#eef7f2" },
+              { name: "나리타 익스프레스 — NEX 바우처", sub: "왕복 · 예약번호 BQP828461 · 5/15 & 5/19", url: "https://drive.google.com/file/d/1bMbXZ85A0ZqJ1WL66twdUZX94NBKDjHZ/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
+              { name: "나리타 익스프레스 — QR코드", sub: "지정석 자동판매기 발권용 · 예약번호 E20895", url: "https://drive.google.com/file/d/1wICgiS7xEgfY3aFH9M08moUdzUq0HhsV/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
             ].map((v, i, a) => (
               <div key={i} className="doc-ticket" style={{ borderBottom: i < a.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none" }}>
                 <div>
@@ -1018,6 +1053,7 @@ export default function TokyoApp() {
           { title: "충전 방법", desc: "역 내 자동판매기에서 언제든 충전 가능해요. 편의점(세븐일레븐 등)에서도 충전할 수 있어요." },
           { title: "귀국 시 환불", desc: "한국 귀국 후 일본 방문 시 다시 사용 가능해요. 환불 원하면 나리타 JR 창구에서 잔액 + 보증금 500엔 돌려받을 수 있어요." },
         ],
+        link: { label: "📖 스이카 구매 상세 가이드", url: "https://m.blog.naver.com/llk33/224235470148" },
       },
       {
         area: "공통 팁", color: "#a07ac8", icon: "💴",
@@ -1056,6 +1092,11 @@ export default function TokyoApp() {
               <div style={{ fontSize: 12, color: "rgba(26,22,18,0.55)", lineHeight: 1.7, paddingLeft: 14 }}>{item.desc}</div>
             </div>
           ))}
+          {tip.link && (
+            <a href={tip.link.url} target="_blank" rel="noreferrer" className="link-btn" style={{ background: "#eef3fb", color: "#3a6aaa", marginTop: 14 }}>
+              {tip.link.label}
+            </a>
+          )}
         </Card>
       </div>
     );
