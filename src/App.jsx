@@ -51,7 +51,7 @@ const SCHEDULE = [
     ],
   },
   {
-    date: "5/17", day: "일", theme: "후지산 → 도쿄 이동",
+    date: "5/17", day: "일", theme: "후지산 → 도쿄 · 아사쿠사 · 도쿄타워",
     color: "#7a5ac8",
     items: [
       { time: "09:00", place: "더 가든 체크아웃", note: "짐 정리 · 렌트카 출발 준비", map: mapSearch("Funatsu 3554, Fujikawaguchiko") },
@@ -59,19 +59,25 @@ const SCHEDULE = [
       { time: "11:00", place: "도쿄 방면 출발", note: "아사쿠사바시역 방면 · 약 2시간" },
       { time: "13:00", place: "IX렌탈 반납 (아사쿠사바시역)", note: "동일 지점 반납", map: mapDir("1-16-3 Yanagibashi, Taito-ku, Tokyo") },
       { time: "13:30", place: "지하철로 긴시쵸역 이동", note: "JR 소부선 · 약 10분 · 230엔", map: mapDir("錦糸町駅") },
-      { time: "14:00", place: "롯데 시티 호텔 체크인", note: "짐 맡기고 도쿄 관광 시작!", map: mapDir("4-6-1 Kinshi, Sumida-ku, Tokyo") },
-      { time: "15:00", place: "도쿄 관광", note: "아사쿠사 · 스카이트리 · 우에노", map: mapDir("浅草寺") },
-      { time: "19:00", place: "저녁식사", note: "아사쿠사 이자카야", map: mapSearch("浅草 居酒屋") },
+      { time: "14:00", place: "롯데 시티 호텔 체크인", note: "짐 맡기고 바로 출발!", map: mapDir("4-6-1 Kinshi, Sumida-ku, Tokyo") },
+      { time: "15:00", place: "센소지 · 아사쿠사", note: "나카미세도리 기념품 쇼핑 · 무료입장", map: mapDir("浅草寺") },
+      { time: "17:00", place: "시바공원 · 도쿄타워 외관 📸", note: "잔디밭에 앉아 도쿄타워 포토 · 해질녘 황금빛 조명 추천", map: mapDir("芝公園 東京タワー") },
+      { time: "18:30", place: "조조지 절 · 도쿄타워 야경 📸", note: "절+도쿄타워 한 프레임 포토스팟", map: mapDir("増上寺 東京タワー") },
+      { time: "19:30", place: "오모이데요코초 저녁식사", note: "신주쿠 서쪽 · 야키토리 이자카야 골목 · 야경 감성", map: mapDir("思い出横丁 新宿") },
     ],
   },
   {
-    date: "5/18", day: "월", theme: "오다이바 · 긴자",
+    date: "5/18", day: "월", theme: "신주쿠 · 하라주쿠 · 시부야",
     color: "#5ac88a",
     items: [
-      { time: "10:00", place: "오다이바 해변공원", note: "자유의 여신상 · 레인보우브리지 산책", map: mapDir("お台場海浜公園") },
-      { time: "13:00", place: "다이버시티 도쿄", note: "쇼핑 · 점심식사", map: mapDir("ダイバーシティ東京プラザ") },
-      { time: "16:00", place: "긴자 산책", note: "백화점 면세 쇼핑 · 마지막 기념품", map: mapDir("銀座") },
-      { time: "19:00", place: "도쿄역 주변 야경", note: "마루노우치 일루미네이션", map: mapDir("東京駅 丸の内") },
+      { time: "10:00", place: "신주쿠 교엔", note: "입장료 500엔 · 넓은 정원 산책 · 부모님 최적 · 월요일 휴무 없음", map: mapDir("新宿御苑") },
+      { time: "12:00", place: "오모이데요코초 점심", note: "신주쿠역 서쪽 출구 도보 1분 · 야키토리·라멘", map: mapDir("思い出横丁 新宿") },
+      { time: "13:00", place: "알펜 도쿄 — 온러닝 쇼핑 🛍", note: "신주쿠역 동쪽 도보 3분 · 면세 10% + 쿠폰 추가 할인 · 여권 지참!", map: mapDir("アルペン東京 新宿") },
+      { time: "13:30", place: "가부키초", note: "네온사인 · 가부키초 타워 외관 구경", map: mapDir("歌舞伎町 新宿") },
+      { time: "15:00", place: "하라주쿠 다케시타도리", note: "크레이프 · 팝 패션 · 구경 재미있는 곳", map: mapDir("竹下通り 原宿") },
+      { time: "16:30", place: "시부야 스크램블 교차로 📸", note: "맞은편 스타벅스 2층 뷰포인트 추천", map: mapDir("渋谷スクランブル交差点") },
+      { time: "17:30", place: "시부야 스카이 전망대", note: "360° 옥상 전망대 · 사전예매 필수!", map: mapDir("渋谷スカイ") },
+      { time: "19:30", place: "시부야 저녁식사", note: "시부야 스크램블 스퀘어 · 다양한 식당", map: mapSearch("渋谷 夕食 レストラン") },
     ],
   },
   {
@@ -136,6 +142,7 @@ const PLACES = {
     { name: "롯폰기 힐즈 六本木ヒルズ", area: "롯폰기", note: "도쿄타워 야경 뷰포인트 · 저녁식사 · 거미 조형물 포토스팟", mapQ: "六本木ヒルズ", mapUrl: "https://maps.google.com/?cid=6628738211295053826" },
   ],
   쇼핑: [
+    { name: "알펜 도쿄 (온러닝 구매 추천)", area: "신주쿠", note: "온러닝 전 라인업 · 면세 10% + 쿠폰 할인 추가 · 1층 러닝 전문관 · 발 분석 기계 보유", mapQ: "アルペン東京 新宿", mapUrl: "https://www.google.com/maps/search/アルペン東京+新宿3丁目23", couponUrl: "https://drive.google.com/file/d/1fyoHyl6447Qygq1W5QJGLYi9G7i1FPbp/view?usp=drivesdk" },
     { name: "마츠모토키요시", area: "아사쿠사", note: "드럭스토어 · 면세 가능", mapQ: "マツモトキヨシ 浅草" },
     { name: "돈키호테 ドン・キホーテ", area: "신주쿠", note: "24시간 · 기념품 저렴", mapQ: "ドン・キホーテ 新宿" },
     { name: "아메요코 시장 アメ横", area: "우에노", note: "건어물 · 과자 · 화장품", mapQ: "アメ横" },
@@ -418,6 +425,25 @@ export default function TokyoApp() {
 
   function renderSchedule() {
     const day = SCHEDULE[scheduleTab];
+
+    // 날짜별 날씨 도시 매핑
+    const scheduleCityMap = ["kamakura", "kawaguchiko", "kawaguchiko", "tokyo", "tokyo"];
+    const scheduleCityId = scheduleCityMap[scheduleTab];
+    const scheduleWeather = weatherData[scheduleCityId];
+    const scheduleCityLabel = { kamakura: "가마쿠라", kawaguchiko: "카와구치코", tokyo: "도쿄" };
+
+    // 날짜에 맞는 날씨 데이터 찾기 (5/15~5/19)
+    const targetDate = "2026-05-" + String(14 + scheduleTab + 1).padStart(2, "0");
+    const dayWeather = scheduleWeather ? scheduleWeather.find(w => {
+      const m = w.date.split("/");
+      return m[0] === "5" && m[1] === String(15 + scheduleTab);
+    }) : null;
+
+    // 날씨 아직 없으면 로드
+    if (!scheduleWeather && !weatherLoading) {
+      loadWeather(scheduleCityId);
+    }
+
     return (
       <div>
         {/* 날짜 탭 */}
@@ -429,6 +455,41 @@ export default function TokyoApp() {
             </button>
           ))}
         </div>
+
+        {/* 날씨 카드 */}
+        <div style={{
+          background: "linear-gradient(135deg, #e8f4fb 0%, #f0f8ff 100%)",
+          border: "1px solid rgba(90,143,200,0.25)",
+          borderRadius: 12, padding: "12px 16px", marginBottom: 12,
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: 28 }}>{dayWeather ? dayWeather.icon : "🌤"}</span>
+            <div>
+              <div style={{ fontSize: 11, color: "rgba(26,22,18,0.45)", marginBottom: 2 }}>
+                {scheduleCityLabel[scheduleCityId]} 날씨
+              </div>
+              {dayWeather ? (
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#1a1612" }}>
+                  {dayWeather.desc} · {dayWeather.high}°/{dayWeather.low}°C
+                </div>
+              ) : (
+                <div style={{ fontSize: 12, color: "rgba(26,22,18,0.4)" }}>
+                  {weatherLoading ? "날씨 불러오는 중..." : "날씨 정보 없음"}
+                </div>
+              )}
+            </div>
+          </div>
+          {dayWeather && (
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: 11, color: "rgba(26,22,18,0.45)" }}>바람</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "#3a6aaa" }}>
+                {dayWeather.windDir} {dayWeather.wind}m/s
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* 선택된 날 내용 */}
         <Card>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
@@ -880,6 +941,14 @@ export default function TokyoApp() {
                       color: "#c8855a", cursor: "pointer", fontWeight: 600,
                       fontFamily: "'DM Sans', sans-serif",
                     }}>📷 사진</button>
+                  )}
+                  {p.couponUrl && (
+                    <button onClick={() => window.open(p.couponUrl, "_blank")} style={{
+                      fontSize: 11, padding: "3px 8px", borderRadius: 6,
+                      background: "#e8f5e9", border: "1px solid rgba(58,138,90,0.4)",
+                      color: "#3a8a5a", cursor: "pointer", fontWeight: 600,
+                      fontFamily: "'DM Sans', sans-serif",
+                    }}>🎫 쿠폰</button>
                   )}
                   <span className="place-map" style={{ color: p.mapUrl ? "#c8855a" : "rgba(26,22,18,0.3)", alignSelf: "center" }}>
                     {p.mapUrl ? "📍→" : "지도 →"}
