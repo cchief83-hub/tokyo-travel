@@ -235,6 +235,7 @@ export default function TokyoApp() {
   const [weatherData, setWeatherData] = useState({});
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherCity, setWeatherCity] = useState("tokyo");
+  const [hoveredSpot, setHoveredSpot] = useState(null);
 
   const WEATHER_CITIES = [
     { id: "tokyo", label: "도쿄", query: "Tokyo,JP", icon: "🗼" },
@@ -760,17 +761,26 @@ export default function TokyoApp() {
   }
 
   function renderPlaces() {
-    // 가마쿠라 전체 동선 구글맵 URL (경유지 포함)
-    const kamakuraRouteUrl = "https://www.google.com/maps/dir/" + [
-      "35.3168145,139.5357442",  // ① 가마쿠라 대불
-      "35.3109549,139.5348061",  // ② TANAKA Barber Shop
-      "35.3094825,139.5290259",  // ③ 고쿠라쿠지역
-      "35.3062403,139.5101511",  // ④ 시치리가하마역 수로
-      "35.3044277,139.5135768",  // ⑤ 시치리가하마 고교 건널목
-      "35.3039166,139.5143308",  // ⑥ 시치리가하마 해변
-      "35.3067242,139.5005569",  // ⑦ 가마쿠라코코마에역 건널목
-      "35.3222668,139.5526999",  // ⑧ 고마치도리
-    ].join("/");
+    // 가마쿠라 8곳 좌표 (실제 위경도 → SVG 좌표 변환)
+    const kamakuraSpots = [
+      { num: "①", name: "가마쿠라 대불", lat: 35.3168, lng: 139.5357, url: "https://maps.google.com/?cid=2216777826481991500" },
+      { num: "②", name: "TANAKA Barber", lat: 35.3110, lng: 139.5348, url: "https://maps.google.com/?cid=15869312336643053071" },
+      { num: "③", name: "고쿠라쿠지역", lat: 35.3095, lng: 139.5290, url: "https://maps.google.com/?cid=15015373924086568088" },
+      { num: "④", name: "시치리가하마역 수로", lat: 35.3062, lng: 139.5102, url: "https://maps.google.com/?cid=12702870331904269387" },
+      { num: "⑤", name: "시치리가하마 고교 건널목", lat: 35.3044, lng: 139.5136, url: "https://maps.google.com/?cid=422530369093211191" },
+      { num: "⑥", name: "시치리가하마 해변", lat: 35.3039, lng: 139.5143, url: "https://maps.google.com/?cid=16867240316128842765" },
+      { num: "⑦", name: "가마쿠라코코마에역", lat: 35.3067, lng: 139.5006, url: "https://maps.google.com/?cid=1819797686801071229" },
+      { num: "⑧", name: "고마치도리", lat: 35.3223, lng: 139.5527, url: "https://maps.google.com/?cid=4598977894697418712" },
+    ];
+
+    // 좌표 → SVG 픽셀 변환
+    const minLat = 35.298, maxLat = 35.328, minLng = 139.495, maxLng = 139.560;
+    const W = 340, H = 180;
+    const toX = (lng) => ((lng - minLng) / (maxLng - minLng)) * W;
+    const toY = (lat) => ((maxLat - lat) / (maxLat - minLat)) * H;
+
+    // 동선 연결선 포인트
+    const linePoints = kamakuraSpots.map(s => `${toX(s.lng)},${toY(s.lat)}`).join(" ");
 
     return (
       <div>
@@ -780,16 +790,55 @@ export default function TokyoApp() {
             <button key={k} className={"place-tab-btn" + (placeTab === k ? " active" : "")} onClick={() => setPlaceTab(k)}>{k}</button>
           ))}
         </div>
+
         {placeTab === "가마쿠라" && (
-          <a href={kamakuraRouteUrl} target="_blank" rel="noreferrer"
-            style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#1a1612", borderRadius: 12, padding: "14px 18px", marginBottom: 12, textDecoration: "none" }}>
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>5/15 가마쿠라 전체 동선</div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>① 대불 → ⑧ 고마치도리 · 8곳 전체 루트</div>
+          <div style={{ background: "#fff", borderRadius: 12, padding: "14px 16px", marginBottom: 12, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+            <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(26,22,18,0.4)", marginBottom: 10 }}>📍 가마쿠라 동선 지도 · 핀 누르면 지도 열림</div>
+            <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", borderRadius: 8, background: "#f0f4f0" }}>
+              {/* 배경 — 바다 */}
+              <rect x="0" y={H * 0.72} width={W} height={H * 0.28} fill="#c8dff0" opacity="0.6" />
+              {/* 바다 레이블 */}
+              <text x={W * 0.25} y={H * 0.9} fontSize="8" fill="#5a8fc8" opacity="0.7" textAnchor="middle">相模湾 (사가미 만)</text>
+
+              {/* 동선 연결선 */}
+              <polyline points={linePoints} fill="none" stroke="#c8855a" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.7" />
+
+              {/* 핀 */}
+              {kamakuraSpots.map((s, i) => {
+                const x = toX(s.lng);
+                const y = toY(s.lat);
+                const isHovered = hoveredSpot === i;
+                return (
+                  <g key={i} style={{ cursor: "pointer" }}
+                    onClick={() => window.open(s.url, "_blank")}
+                    onMouseEnter={() => setHoveredSpot(i)}
+                    onMouseLeave={() => setHoveredSpot(null)}>
+                    {/* 호버 툴팁 */}
+                    {isHovered && (
+                      <g>
+                        <rect x={x - 40} y={y - 28} width={80} height={16} rx="4" fill="#1a1612" opacity="0.85" />
+                        <text x={x} y={y - 17} fontSize="8" fill="#fff" textAnchor="middle">{s.name}</text>
+                      </g>
+                    )}
+                    {/* 핀 원 */}
+                    <circle cx={x} cy={y} r={isHovered ? 11 : 9} fill={isHovered ? "#c8855a" : "#1a1612"} opacity="0.9" />
+                    <text x={x} y={y + 4} fontSize="8" fill="#fff" textAnchor="middle" fontWeight="bold">{s.num}</text>
+                  </g>
+                );
+              })}
+            </svg>
+            {/* 범례 */}
+            <div style={{ display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" }}>
+              {kamakuraSpots.map((s, i) => (
+                <span key={i} onClick={() => window.open(s.url, "_blank")}
+                  style={{ fontSize: 10, padding: "2px 7px", borderRadius: 20, background: "#f5f2ed", color: "#1a1612", cursor: "pointer", fontWeight: 500 }}>
+                  {s.num} {s.name}
+                </span>
+              ))}
             </div>
-            <span style={{ fontSize: 22 }}>🗺</span>
-          </a>
+          </div>
         )}
+
         <Card>
           {PLACES[placeTab].map((p, i) => (
             <div key={i} className="place-item" onClick={() => window.open(p.mapUrl || "https://www.google.com/maps/search/" + encodeURIComponent(p.mapQ), "_blank")}>
