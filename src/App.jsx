@@ -31,10 +31,17 @@ const SCHEDULE = [
       { time: "11:53", place: "나리타 익스프레스 도쿄역 도착", note: "약 53분 · 환승 없이 직행", map: mapDir("東京駅") },
       { time: "12:00", place: "도쿄역 → 아사쿠사바시역", note: "JR 소부선 1정거장 · 약 3분 · 170엔" },
       { time: "12:30", place: "IX렌탈 픽업 (아사쿠사바시역)", note: "토요타 알파드 · 국제운전면허증 + 여권 필수", map: mapDir("1-16-3 Yanagibashi, Taito-ku, Tokyo") },
-      { time: "14:00", place: "가마쿠라 도착 · 관광", note: "대불(17시 마감) 먼저! · 고마치도리 · 에노덴", map: mapDir("鎌倉大仏 高徳院") },
-      { time: "17:30", place: "가마쿠라 저녁식사", note: "스키야키 · 이자카야", map: mapSearch("鎌倉 小町通り レストラン") },
-      { time: "19:00", place: "후지카와구치코 출발", note: "렌트카로 약 1시간 30~2시간", map: mapDir("Funatsu 3554, Fujikawaguchiko, Yamanashi") },
-      { time: "21:00", place: "더 가든 체크인", note: "늦은 도착 · 숙소 사전 연락 필요", map: mapDir("Funatsu 3554, Fujikawaguchiko, Yamanashi") },
+      { time: "14:00", place: "① 가마쿠라 대불 高徳院", note: "도착하자마자 바로! · 입장료 300엔 · ⚠ 17:00 마감", map: mapDir("鎌倉大仏 高徳院") },
+      { time: "14:45", place: "② 고마치도리 小町通り", note: "기념품 · 길거리 음식 · ⚠ 17~18시 조기마감 주의", map: mapDir("小町通り 鎌倉") },
+      { time: "16:00", place: "③ TANAKA Barber Shop", note: "이사랑통역되나요 촬영지 · ⚠ 사진 전 주인께 양해 필수", map: mapDir("TANAKA Barber Shop Hase Kamakura") },
+      { time: "16:15", place: "④ 고쿠라쿠지역 極楽寺駅", note: "차로 5분 · 이사랑통역되나요 촬영지 · 고즈넉한 에노덴 역", map: mapDir("極楽寺駅 鎌倉") },
+      { time: "16:30", place: "⑤ 시치리가하마역 수로 포토스팟", note: "차로 5분 · 수로 끝으로 바다가 보이는 인스타 감성 스팟", map: "https://maps.google.com/?cid=12702870331904269387" },
+      { time: "16:45", place: "⑥ 시치리가하마 고등학교 앞 건널목", note: "바로 근처 · 에노덴+바다+하늘 포토스팟", map: "https://maps.google.com/?cid=422530369093211191" },
+      { time: "17:00", place: "⑦ 시치리가하마 해변 七里ヶ浜", note: "후지산+바다 조망 · 일몰 명소 · 산책 30분", map: "https://maps.google.com/?cid=11344940212826062752" },
+      { time: "17:30", place: "⑧ 가마쿠라코코마에역 건널목 🍽", note: "슬램덩크 배경지 · 사진 후 근처에서 저녁식사", map: "https://maps.google.com/?cid=1819797686801071229" },
+      { time: "19:00", place: "가마쿠라 저녁식사 후 출발", note: "가마쿠라코코마에역 근처 식당 · 후지카와구치코까지 약 2시간 30분", map: mapSearch("鎌倉高校前 レストラン") },
+      { time: "19:00", place: "후지카와구치코 출발", note: "렌트카로 약 2시간 30분", map: mapDir("Funatsu 3554, Fujikawaguchiko, Yamanashi") },
+      { time: "21:30", place: "더 가든 체크인", note: "늦은 도착 · 숙소 사전 연락 필요", map: mapDir("Funatsu 3554, Fujikawaguchiko, Yamanashi") },
     ],
   },
   {
@@ -78,13 +85,13 @@ const SCHEDULE = [
     color: "#5ac88a",
     items: [
       { time: "10:00", place: "신주쿠 교엔", note: "입장료 500엔 · 넓은 정원 산책 · 부모님 최적 · 월요일 휴무 없음", map: mapDir("新宿御苑") },
-      { time: "12:00", place: "오모이데요코초 점심", note: "신주쿠역 서쪽 출구 도보 1분 · 야키토리·라멘", map: mapDir("思い出横丁 新宿") },
+      { time: "12:00", place: "신주쿠 점심식사", note: "신주쿠 교엔 근처 · 이치란 라멘 또는 카이센동 추천", map: mapSearch("新宿 ランチ おすすめ") },
       { time: "13:00", place: "알펜 도쿄 — 온러닝 쇼핑 🛍", note: "신주쿠역 동쪽 도보 3분 · 면세 10% + 쿠폰 추가 할인 · 여권 지참!", map: mapDir("アルペン東京 新宿") },
-      { time: "13:30", place: "가부키초", note: "네온사인 · 가부키초 타워 외관 구경", map: mapDir("歌舞伎町 新宿") },
-      { time: "15:00", place: "하라주쿠 다케시타도리", note: "크레이프 · 팝 패션 · 구경 재미있는 곳", map: mapDir("竹下通り 原宿") },
-      { time: "16:30", place: "시부야 스크램블 교차로 📸", note: "맞은편 스타벅스 2층 뷰포인트 추천", map: mapDir("渋谷スクランブル交差点") },
-      { time: "17:30", place: "시부야 스카이 전망대", note: "360° 옥상 전망대 · 사전예매 필수!", map: mapDir("渋谷スカイ") },
-      { time: "19:30", place: "시부야 저녁식사", note: "시부야 스크램블 스퀘어 · 다양한 식당", map: mapSearch("渋谷 夕食 レストラン") },
+      { time: "14:30", place: "하라주쿠 다케시타도리", note: "크레이프 · 팝 패션 · 구경 재미있는 곳", map: mapDir("竹下通り 原宿") },
+      { time: "16:00", place: "시부야 스크램블 교차로 📸", note: "맞은편 스타벅스 2층 뷰포인트 추천", map: mapDir("渋谷スクランブル交差点") },
+      { time: "17:00", place: "시부야 스카이 전망대", note: "360° 옥상 전망대 · 사전예매 필수!", map: mapDir("渋谷スカイ") },
+      { time: "19:00", place: "시부야 저녁식사", note: "시부야 스크램블 스퀘어 · 다양한 식당", map: mapSearch("渋谷 夕食 レストラン") },
+      { time: "20:30", place: "가부키초 야경 🌃", note: "신주쿠 서쪽 · 네온사인 야경 · 가부키초 타워 · 밤에 와야 진짜 감성!", map: mapDir("歌舞伎町 新宿") },
     ],
   },
   {
@@ -692,11 +699,29 @@ export default function TokyoApp() {
           </Card>
         )}
         {transportTab === 4 && (
-          <Card>
-            <div className="card-label" style={{ marginBottom: 14 }}>IC 카드 (스이카 / 파스모)</div>
-            <Row l="구입" v="공항 · 역 자동판매기" /><Row l="초기 충전 권장" v="1인당 3,000~5,000엔" />
-            <Row l="보증금" v="500엔 (귀국 시 환불)" /><Row l="사용처" v="전철 · 버스 · 편의점 · 자판기" />
-          </Card>
+          <div>
+            <Card>
+              <div className="card-label" style={{ color: "#e06b5a", marginBottom: 14 }}>💳 나리타 공항 스이카 구매</div>
+              <Row l="구매 장소" v="JR 동일본 여행 서비스 센터 (B1 북쪽 윙)" />
+              <Row l="위치" v="1층 도착 로비 나오자마자 정면 왼쪽 · 영어·한국어 안내 가능" />
+              <Row l="운영시간" v="08:30~19:00" />
+              <Row l="초기 충전 권장" v="1인당 3,000~5,000엔 (보증금 500엔 포함)" />
+              <Row l="4명 합산" v="총 12,000~20,000엔 준비" />
+              <Row l="보증금" v="500엔 · 귀국 시 나리타 JR 창구에서 환불" />
+              <Row l="사용처" v="전철 · 버스 · 편의점 · 자판기" />
+            </Card>
+            <div className="info-card">
+              <div className="card-label" style={{ color: "#3a6aaa", marginBottom: 8 }}>자동판매기에서도 구매 가능</div>
+              <div style={{ fontSize: 13, color: "rgba(26,22,18,0.65)", lineHeight: 1.8 }}>
+                JR 개찰구 근처 초록색 자동판매기에서<br />
+                <strong>Suica 선택 → New Suica → 금액 입력</strong>으로 바로 구매 가능해요.
+              </div>
+              <a href="https://m.blog.naver.com/llk33/224235470148" target="_blank" rel="noreferrer"
+                className="link-btn" style={{ background: "#eef3fb", color: "#3a6aaa", marginTop: 10 }}>
+                📖 스이카 구매 상세 가이드
+              </a>
+            </div>
+          </div>
         )}
       </div>
     );
@@ -895,7 +920,7 @@ export default function TokyoApp() {
   }
 
   function renderDocs() {
-    const tabs = ["항공권", "탑승객", "바우처", "비상연락처"];
+    const tabs = ["항공권", "바우처 · 이티켓"];
     return (
       <div>
         <div className="inner-tab-row">
@@ -920,48 +945,40 @@ export default function TokyoApp() {
           </div>
         )}
         {docsTab === 1 && (
-          <Card>
-            <div className="card-label" style={{ marginBottom: 14 }}>탑승객 4명 — 이티켓</div>
-            {[
-              ["KIM / YOUNGDEOK MR", "https://drive.google.com/file/d/13A5LBjiUUtxEr0CxKY1WOx9Xb_XZBm6B/view?usp=drivesdk"],
-              ["KIM / HONGGWON MR", "https://drive.google.com/file/d/1PNT8JPpSNm6SlP2VD4AcTi-uzQWlTC-E/view?usp=drivesdk"],
-              ["CHOI / JUNGLIM MS", "https://drive.google.com/file/d/120IOzF53Hcm3E5kyITcm7GEau1RI5Rie/view?usp=drivesdk"],
-              ["KIM / SIEUN MISS CHD", "https://drive.google.com/file/d/1o3yzX010C0qXRAiZMS8i-nvlQeTzL0Qu/view?usp=drivesdk"],
-            ].map((r, i) => (
-              <div key={i} className="doc-ticket">
-                <span style={{ fontSize: 13, fontWeight: 500, color: "#1a1612" }}>{r[0]}</span>
-                <a href={r[1]} target="_blank" rel="noreferrer" className="tag" style={{ background: "#fdf3ec", color: "#b06030", textDecoration: "none", flexShrink: 0 }}>티켓 보기</a>
-              </div>
-            ))}
-          </Card>
-        )}
-        {docsTab === 2 && (
-          <Card>
-            <div className="card-label" style={{ marginBottom: 14 }}>바우처 모음</div>
-            {[
-              { name: "더 가든 — 숙소 바우처", sub: "5/15~5/17 · 2박", url: "https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
-              { name: "롯데 시티 호텔 — 숙소 바우처", sub: "5/17~5/19 · 2박", url: "https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk", color: "#b06030", bg: "#fdf3ec" },
-              { name: "IX렌탈 — 렌트카 바우처", sub: "5/15 12:00 ~ 5/17 12:00", url: "https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk", color: "#3a8a5a", bg: "#eef7f2" },
-              { name: "나리타 익스프레스 — NEX 바우처", sub: "왕복 · 예약번호 BQP828461 · 5/15 & 5/19", url: "https://drive.google.com/file/d/1bMbXZ85A0ZqJ1WL66twdUZX94NBKDjHZ/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
-              { name: "나리타 익스프레스 — QR코드", sub: "지정석 자동판매기 발권용 · 예약번호 E20895", url: "https://drive.google.com/file/d/1wICgiS7xEgfY3aFH9M08moUdzUq0HhsV/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
-            ].map((v, i, a) => (
-              <div key={i} className="doc-ticket" style={{ borderBottom: i < a.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none" }}>
-                <div>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: "#1a1612", marginBottom: 2 }}>{v.name}</div>
-                  <div style={{ fontSize: 11, color: "rgba(26,22,18,0.4)" }}>{v.sub}</div>
+          <div>
+            <Card>
+              <div className="card-label" style={{ marginBottom: 14 }}>✈ 이티켓 — 탑승객 4명</div>
+              {[
+                ["KIM / YOUNGDEOK MR", "https://drive.google.com/file/d/13A5LBjiUUtxEr0CxKY1WOx9Xb_XZBm6B/view?usp=drivesdk"],
+                ["KIM / HONGGWON MR", "https://drive.google.com/file/d/1PNT8JPpSNm6SlP2VD4AcTi-uzQWlTC-E/view?usp=drivesdk"],
+                ["CHOI / JUNGLIM MS", "https://drive.google.com/file/d/120IOzF53Hcm3E5kyITcm7GEau1RI5Rie/view?usp=drivesdk"],
+                ["KIM / SIEUN MISS CHD", "https://drive.google.com/file/d/1o3yzX010C0qXRAiZMS8i-nvlQeTzL0Qu/view?usp=drivesdk"],
+              ].map((r, i) => (
+                <div key={i} className="doc-ticket">
+                  <span style={{ fontSize: 13, fontWeight: 500, color: "#1a1612" }}>{r[0]}</span>
+                  <a href={r[1]} target="_blank" rel="noreferrer" className="tag" style={{ background: "#fdf3ec", color: "#b06030", textDecoration: "none", flexShrink: 0 }}>티켓 보기</a>
                 </div>
-                <a href={v.url} target="_blank" rel="noreferrer" className="tag" style={{ background: v.bg, color: v.color, textDecoration: "none", flexShrink: 0 }}>보기</a>
-              </div>
-            ))}
-          </Card>
-        )}
-        {docsTab === 3 && (
-          <Card>
-            <div className="card-label" style={{ marginBottom: 14 }}>비상 연락처</div>
-            <Row l="주일 한국 대사관" v="+81-3-3452-7611" hot />
-            <Row l="일본 구급" v="119" hot /><Row l="일본 경찰" v="110" hot />
-            <Row l="여행자보험" v="—" /><Row l="신용카드 분실" v="카드사 국제 전화번호" />
-          </Card>
+              ))}
+            </Card>
+            <Card>
+              <div className="card-label" style={{ marginBottom: 14 }}>📄 바우처 모음</div>
+              {[
+                { name: "더 가든 — 숙소 바우처", sub: "5/15~5/17 · 2박", url: "https://drive.google.com/file/d/1zFcbuZs0LEzj_0Ae_4WR_WziA65W788Q/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
+                { name: "롯데 시티 호텔 — 숙소 바우처", sub: "5/17~5/19 · 2박", url: "https://drive.google.com/file/d/1MWGAx0Nmv1fENrJnJrKajJ6-QuR8QdkN/view?usp=drivesdk", color: "#b06030", bg: "#fdf3ec" },
+                { name: "IX렌탈 — 렌트카 바우처", sub: "5/15 12:30 ~ 5/17 12:00", url: "https://drive.google.com/file/d/1Kb3NsJzCFhcYkMZRV73uq2vDeq08ZydE/view?usp=drivesdk", color: "#3a8a5a", bg: "#eef7f2" },
+                { name: "나리타 익스프레스 — NEX 바우처", sub: "왕복 · 예약번호 BQP828461 · 5/15 & 5/19", url: "https://drive.google.com/file/d/1bMbXZ85A0ZqJ1WL66twdUZX94NBKDjHZ/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
+                { name: "나리타 익스프레스 — QR코드", sub: "지정석 자동판매기 발권용 · 예약번호 E20895", url: "https://drive.google.com/file/d/1wICgiS7xEgfY3aFH9M08moUdzUq0HhsV/view?usp=drivesdk", color: "#3a6aaa", bg: "#eef3fb" },
+              ].map((v, i, a) => (
+                <div key={i} className="doc-ticket" style={{ borderBottom: i < a.length - 1 ? "1px solid rgba(26,22,18,0.06)" : "none" }}>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: "#1a1612", marginBottom: 2 }}>{v.name}</div>
+                    <div style={{ fontSize: 11, color: "rgba(26,22,18,0.4)" }}>{v.sub}</div>
+                  </div>
+                  <a href={v.url} target="_blank" rel="noreferrer" className="tag" style={{ background: v.bg, color: v.color, textDecoration: "none", flexShrink: 0 }}>보기</a>
+                </div>
+              ))}
+            </Card>
+          </div>
         )}
       </div>
     );
@@ -986,12 +1003,6 @@ export default function TokyoApp() {
         { title: "긴자 면세 쇼핑 시 여권 필수", desc: "백화점 면세 카운터 이용 시 여권 제시해야 해요." },
         { title: "도보 거리 조절하세요", desc: "부모님 체력 고려해서 하루 1만 5천 보 이내로 일정 짜는 게 좋아요." },
       ]},
-      { area: "나리타 스이카 구매", color: "#e06b5a", icon: "💳", items: [
-        { title: "구매 장소 — JR 동일본 여행 서비스 센터", desc: "1층 도착 로비 나오자마자 정면 왼쪽에 'JR EAST Travel Service Center'가 있어요. 영어·한국어 안내 가능해요." },
-        { title: "초기 구매 금액", desc: "카드 보증금 500엔 포함이에요. 1인당 3,000~5,000엔 충전 추천해요. 4명이면 총 12,000~20,000엔 준비하세요." },
-        { title: "자동판매기에서도 구매 가능", desc: "JR 개찰구 근처 초록색 자동판매기에서 'Suica' 선택 → 'New Suica' → 금액 입력으로 구매 가능해요." },
-        { title: "귀국 시 환불", desc: "나리타 JR 창구에서 잔액 + 보증금 500엔 돌려받을 수 있어요." },
-      ], link: { label: "📖 스이카 구매 상세 가이드", url: "https://m.blog.naver.com/llk33/224235470148" }},
       { area: "공통 팁", color: "#a07ac8", icon: "💴", items: [
         { title: "현금을 넉넉히 준비하세요", desc: "일본은 아직 현금 위주 가게가 많아요. 1인당 3~5만 엔 환전 추천해요." },
         { title: "편의점 ATM 활용", desc: "세븐일레븐·로손 ATM에서 해외 카드로 엔화 출금 가능해요." },
