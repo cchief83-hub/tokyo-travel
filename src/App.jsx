@@ -760,6 +760,18 @@ export default function TokyoApp() {
   }
 
   function renderPlaces() {
+    // 가마쿠라 전체 동선 구글맵 URL (경유지 포함)
+    const kamakuraRouteUrl = "https://www.google.com/maps/dir/" + [
+      "35.3168145,139.5357442",  // ① 가마쿠라 대불
+      "35.3109549,139.5348061",  // ② TANAKA Barber Shop
+      "35.3094825,139.5290259",  // ③ 고쿠라쿠지역
+      "35.3062403,139.5101511",  // ④ 시치리가하마역 수로
+      "35.3044277,139.5135768",  // ⑤ 시치리가하마 고교 건널목
+      "35.3039166,139.5143308",  // ⑥ 시치리가하마 해변
+      "35.3067242,139.5005569",  // ⑦ 가마쿠라코코마에역 건널목
+      "35.3222668,139.5526999",  // ⑧ 고마치도리
+    ].join("/");
+
     return (
       <div>
         <div className="section-title">가고 싶은 장소</div>
@@ -768,6 +780,16 @@ export default function TokyoApp() {
             <button key={k} className={"place-tab-btn" + (placeTab === k ? " active" : "")} onClick={() => setPlaceTab(k)}>{k}</button>
           ))}
         </div>
+        {placeTab === "가마쿠라" && (
+          <a href={kamakuraRouteUrl} target="_blank" rel="noreferrer"
+            style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#1a1612", borderRadius: 12, padding: "14px 18px", marginBottom: 12, textDecoration: "none" }}>
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>5/15 가마쿠라 전체 동선</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>① 대불 → ⑧ 고마치도리 · 8곳 전체 루트</div>
+            </div>
+            <span style={{ fontSize: 22 }}>🗺</span>
+          </a>
+        )}
         <Card>
           {PLACES[placeTab].map((p, i) => (
             <div key={i} className="place-item" onClick={() => window.open(p.mapUrl || "https://www.google.com/maps/search/" + encodeURIComponent(p.mapQ), "_blank")}>
