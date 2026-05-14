@@ -148,19 +148,24 @@ const RESTAURANTS = {
   ],
   "오모이데요코초": [
     { name: "오모이데요코초 노가타야 ⭐4.1", area: "신주쿠 서쪽", note: "야키토리 이자카야 · 평점 4.1 · 신주쿠역 서쪽 출구 바로. 쇼와시대 레트로 낡은 골목 분위기. 영어 가능. 테이블 차지 350엔·애피타이저 포함. 15:30~24:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJX6AgNjuNGGARdnKPVd6N7bU" },
+    { name: "석구일 夕口一 선술집", area: "오모이데요코초", note: "야키토리 선술집 · 빨간 간판 찾기! 삼겹살 꼬치 330엔 · 닭다리 꼬치 177엔 · 종류당 최소 2개 이상 주문. 자릿세 330엔. 따뜻한 정종 강추! 밤 12시 넘어서도 영업 · ⚠ 9시 넘으면 자리 없을 수 있음", mapUrl: "https://www.google.com/maps/search/1+Chome-2-7+Nishishinjuku+Shinjuku+City+Tokyo" },
     { name: "모츠야키 이자카야", area: "오모이데요코초", note: "내장 구이 모츠야키 · 소·돼지 내장 꼬치 전문. 현지인 단골이 많은 진짜 서민 이자카야 분위기.", mapUrl: "https://www.google.com/maps/search/思い出横丁+もつ焼き" },
   ],
   "가부키초": [
+    { name: "IZAKAYA AJITO ⭐4.4", area: "가부키초 2F", note: "이자카야 · 평점 4.4 · 모든 안주가 맛있는 가부키초 이자카야. 시사모 구이·계란말이 필수 주문! 생레몬 하이볼 강추. 예약 권장 · 15:00~04:30", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJoV6a-6eNGGARNnE-D0mskms" },
     { name: "이치란 라멘 신주쿠 一蘭 ⭐4.4", area: "가부키초", note: "돈코츠 라멘 · 평점 4.4 · 1인 칸막이 좌석. 면 굵기·국물 진하기 취향대로 주문. 24시간!", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJp1Kx1dmMGGARvbZ_YYRx0vQ" },
-    { name: "가부키초 타워 레스토랑", area: "가부키초", note: "다양한 장르 · 가부키초 타워 내 여러 식당. 네온사인 야경 보면서 식사. 이자카야·일식·양식.", mapUrl: "https://www.google.com/maps/search/歌舞伎町タワー+レストラン" },
+    { name: "시몬야 Shimonya ⭐4.0", area: "신주쿠 오모이데요코초 인근", note: "야키토리 · 평점 4.0 · 꼬치 한 개 110엔! 가성비 최고 야키토리 맛집. 노상 좌석에서 먹는 진짜 일본 이자카야 바이브. 닭껍질·돼지 내장 등 종류 다양. 생맥주랑 궁합 최고. 영어 메뉴 있음 · 17:00~23:30", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ1e4ZNtqMGGARyJIvtNAc25g" },
+    { name: "야키니쿠 후타고 가부키초 ⭐4.8", area: "가부키초 (2층)", note: "화로구이 야키니쿠 · 평점 4.8 · 한국어 메뉴판 있음! 흑모와규·안창살·호르몬 다양. 한 접시씩 저렴하게 주문 가능. 구워달라고 하면 구워줘요. 쌀밥 필수 주문·김치 비추! 7~8시 방문 시 예약 권장 (구글맵 예약) · 17:00~24:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJOVNqUVKNGGARpJZi69LcCjI" },
     { name: "규카츠 모토무라 본점 ⭐4.9", area: "신주쿠", note: "소고기 돈카츠 규카츠 · 평점 4.9 · 리뷰 7,836개. 레어로 튀겨서 돌판에 직접 구워먹기. 예약 강력 권장 · 11:00~22:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJPR5EUkCNGGARyhvN1EVWEc0" },
   ],
   "신주쿠": [
+    { name: "츠루동탄 신주쿠 ⭐4.0", area: "신주쿠 가부키초", note: "세숫대야 우동 · 평점 4.0 · 엄청나게 큰 그릇으로 유명. 명란크림·카레 우동 추천. 신주쿠 가부키초 지하 1층. 11:00~익일 08:00 (심야 영업!)", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJUeEGqnmLGGARBVyCtqZjegY" },
     { name: "타카마루 해산물 이자카야 ⭐4.0", area: "신주쿠", note: "해산물 이자카야 · 평점 4.0 · 리뷰 2,097개. 도요스 시장 직송 신선한 회. 사시미 플래터 유명. 영어 메뉴 있음 · 11:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJl4gGJNaMGGARYItFZimJz6s" },
     { name: "쿠로부타 돈카츠 마이센", area: "신주쿠", note: "돈카츠 · 가고시마 흑돼지(쿠로부타). 일반보다 육즙이 훨씬 풍부. 70년 노포. 런치 세트 인기!", mapUrl: "https://www.google.com/maps/search/まい泉+新宿" },
     { name: "신주쿠 스시 오마카세", area: "신주쿠", note: "스시 오마카세 · 셰프가 제철 생선으로 코스 구성. 점심 3,000엔대. 예약 권장.", mapUrl: "https://www.google.com/maps/search/新宿+寿司+おまかせ+ランチ" },
   ],
   "시부야": [
+    { name: "호루이치 야키니쿠 ⭐4.4", area: "시부야", note: "야키니쿠 · 평점 4.4 · 한국인들에게도 유명한 숯불구이 맛집. 우설·갈비살 강추! 5시 이전이면 예약 없이 가능, 7~8시엔 예약 필수. 17:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJr38qaVmLGGARFNDUlAud2CM" },
     { name: "모헤지 오코노미야키 もへじ ⭐4.8", area: "시부야 스크램블 스퀘어 12F", note: "오코노미야키·몬자야키 · 평점 4.8 · 리뷰 15,592개. 시부야 스카이 바로 그 건물 12층. 재료 신선하고 직원이 직접 구워줘요. 11:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJnzevxbaLGGARqAMBuaVbwzk" },
     { name: "이치란 라멘 시부야 一蘭 ⭐4.4", area: "시부야", note: "돈코츠 라멘 · 평점 4.4 · 시부야 저녁 마치고 야식으로 딱. 24시간.", mapUrl: "https://www.google.com/maps/search/一蘭+渋谷" },
     { name: "시부야 히카리에 레스토랑 ⭐3.7", area: "시부야 히카리에 11F", note: "다양한 장르 · 평점 3.7 · 시부야역 직결. 비·더위 상관없이 바로 들어갈 수 있어서 편해요.", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ43YiUFiLGGARlsXC9pTlrlA" },
