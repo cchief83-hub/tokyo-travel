@@ -138,34 +138,33 @@ const RESTAURANTS = {
   "시즈오카": [
     { name: "숙성 야키니쿠 10 熟成焼肉10 ⭐4.5", area: "후지노미야", note: "숙성 야키니쿠 · 평점 4.5 · 리뷰에 '이틀 연속 왔다'는 말이 있을 정도예요. 숙성육 특유의 깊은 맛이 일반 야키니쿠랑 달라요. 화요일 휴무 · 17:00~22:00 · ¥2,000~6,000", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJY-mttdnRG2ARcepgIHGnJ28" },
     { name: "아오바 오뎅 요코초 青葉おでん街 ⭐3.8", area: "시즈오카 시내", note: "시즈오카 오뎅 · 평점 3.8 · 서울 오뎅이랑 전혀 달라요. 검은 다시마 국물에 꼬치를 담가 우려낸 독특한 맛. 꼬치 하나씩 골라서 서서 먹는 분위기가 시즈오카 밤의 핵심. 수요일 휴무 · 16:30~24:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ44Y0ktZJGmAR6En61VCoo9I" },
-    { name: "사쿠라 에비 덮밥", area: "시즈오카 시내", note: "벚꽃새우 덮밥 · 스루가만 특산 벚꽃새우를 밥 위에 듬뿍. 5월이 딱 제철이에요. 생새우 또는 튀김 중 선택 가능.", mapUrl: "https://www.google.com/maps/search/桜えび丼+静岡" },
-    { name: "스타벅스 후지카와 SA ☕", area: "후지카와 SA (고속도로)", note: "커피·음료 · 고속도로 휴게소 스타벅스. 창밖으로 후지산이 정면으로 보여요. 복귀길에 잠깐 들르기 딱.", mapUrl: "https://www.google.com/maps/search/スターバックス+富士川サービスエリア" },
+    { name: "스타벅스 후지카와 SA ☕ ⭐4.3", area: "후지카와 SA (고속도로)", note: "커피·음료 · 평점 4.3 · 고속도로 휴게소 스타벅스. 창밖으로 후지산이 정면으로 보여요. 복귀길에 잠깐 들르기 딱. 07:00~22:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJp7qwHEvTG2AR8I3auI388zg" },
   ],
   "아사쿠사": [
-    { name: "아사쿠사 요코초 浅草横丁 ⭐3.8", area: "아사쿠사", note: "야키토리·스시·장어 등 · 평점 3.8 · 센소지 바로 옆 건물 4층. 7개 식당 입점. 일본 전통 축제 공연을 테이블 옆에서 볼 수 있어요. 12:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ33cDMYyPGGARfglcZj0TciQ" },
+    { name: "아사쿠사 요코초 浅草横丁 ⭐3.9", area: "아사쿠사 (라쿠텐치 빌딩 4F)", note: "야키토리·스시·장어 등 · 평점 3.9 · 센소지 바로 옆 건물 4층. 7개 식당 입점. 일본 전통 축제 공연을 테이블 옆에서 볼 수 있어요. 12:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ1S6OoRCPGGARhhb8Kr4eeyY" },
     { name: "텐뿌라 아사쿠사 사쿠라 ⭐4.8", area: "아사쿠사 카미나리몬", note: "튀김 덴뿌라 · 평점 4.8 · 기름기 없이 바삭하게 튀긴 오마카세 코스. 부모님 입맛에 잘 맞아요. 예약 권장 · 12:00~20:30", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJWUVY-DuPGGAR0KRSemNJ6rk" },
-    { name: "아사쿠사 이마한 浅草今半", area: "아사쿠사", note: "스키야키·샤부샤부 · 100년 넘은 노포. 달콤한 간장 국물에 와규 소고기를 익혀먹는 스키야키. 런치 세트 있음.", mapUrl: "https://www.google.com/maps/search/浅草今半+浅草" },
-    { name: "나카미세도리 길거리 음식", area: "나카미세도리", note: "길거리 간식 · 닌교야키(팥앙금 인형빵)·멜론빵·센베이 등 걸어다니며 먹는 재미. 시은이도 엄청 좋아할 거예요!", mapUrl: "https://www.google.com/maps/search/仲見世通り+浅草+食べ歩き" },
+    { name: "아사쿠사 이마한 浅草今半 ⭐4.0", area: "아사쿠사", note: "스키야키·샤부샤부 · 평점 4.0 · 100년 넘은 노포. 달콤한 간장 국물에 와규 소고기를 익혀먹는 스키야키. 화요일 휴무 · 11:30~14:30 / 17:00~20:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJn-uWzsaOGGARVtp2-TErB8E" },
+    { name: "나카미세도리 길거리 음식 ⭐4.3", area: "나카미세도리", note: "길거리 간식 · 평점 4.3 · 닌교야키(팥앙금 인형빵)·멜론빵·센베이 등 걸어다니며 먹는 재미. 09:00~20:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJPd37MMGOGGARvJ2hfxoiNVE" },
   ],
   "오모이데요코초": [
-    { name: "오모이데요코초 노가타야 ⭐4.1", area: "신주쿠 서쪽", note: "야키토리 이자카야 · 평점 4.1 · 신주쿠역 서쪽 출구 바로. 쇼와시대 레트로 낡은 골목 분위기. 영어 가능. 테이블 차지 350엔 포함 애피타이저 제공. 15:30~24:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJX6AgNjuNGGARdnKPVd6N7bU" },
+    { name: "오모이데요코초 노가타야 ⭐4.1", area: "신주쿠 서쪽", note: "야키토리 이자카야 · 평점 4.1 · 신주쿠역 서쪽 출구 바로. 쇼와시대 레트로 낡은 골목 분위기. 영어 가능. 테이블 차지 350엔·애피타이저 포함. 15:30~24:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJX6AgNjuNGGARdnKPVd6N7bU" },
     { name: "모츠야키 이자카야", area: "오모이데요코초", note: "내장 구이 모츠야키 · 소·돼지 내장 꼬치 전문. 현지인 단골이 많은 진짜 서민 이자카야 분위기.", mapUrl: "https://www.google.com/maps/search/思い出横丁+もつ焼き" },
   ],
   "가부키초": [
-    { name: "이치란 라멘 신주쿠 一蘭 ⭐4.4", area: "가부키초", note: "돈코츠 라멘 · 평점 4.4 · 1인 칸막이 좌석. 면 굵기·국물 진하기 취향대로 주문. 가부키초 야경 보고 야식으로 딱. 24시간!", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJp1Kx1dmMGGARvbZ_YYRx0vQ" },
+    { name: "이치란 라멘 신주쿠 一蘭 ⭐4.4", area: "가부키초", note: "돈코츠 라멘 · 평점 4.4 · 1인 칸막이 좌석. 면 굵기·국물 진하기 취향대로 주문. 24시간!", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJp1Kx1dmMGGARvbZ_YYRx0vQ" },
     { name: "가부키초 타워 레스토랑", area: "가부키초", note: "다양한 장르 · 가부키초 타워 내 여러 식당. 네온사인 야경 보면서 식사. 이자카야·일식·양식.", mapUrl: "https://www.google.com/maps/search/歌舞伎町タワー+レストラン" },
-    { name: "규카츠 모토무라 牛かつもと村 ⭐4.6", area: "신주쿠", note: "소고기 돈카츠 규카츠 · 평점 4.6 · 리뷰 6,754개. 레어로 튀겨서 돌판에 직접 구워먹기. 11:00~22:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ9Skp4tqMGGARfasPvo7nX44" },
+    { name: "규카츠 모토무라 본점 ⭐4.9", area: "신주쿠", note: "소고기 돈카츠 규카츠 · 평점 4.9 · 리뷰 7,836개. 레어로 튀겨서 돌판에 직접 구워먹기. 예약 강력 권장 · 11:00~22:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJPR5EUkCNGGARyhvN1EVWEc0" },
   ],
   "신주쿠": [
-    { name: "신주쿠 카이센동", area: "신주쿠", note: "해산물 덮밥 · 참치·연어·성게·연어알 듬뿍. 신주쿠 교엔 산책 후 점심으로 딱이에요.", mapUrl: "https://www.google.com/maps/search/新宿+海鮮丼" },
+    { name: "타카마루 해산물 이자카야 ⭐4.0", area: "신주쿠", note: "해산물 이자카야 · 평점 4.0 · 리뷰 2,097개. 도요스 시장 직송 신선한 회. 사시미 플래터 유명. 영어 메뉴 있음 · 11:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJl4gGJNaMGGARYItFZimJz6s" },
     { name: "쿠로부타 돈카츠 마이센", area: "신주쿠", note: "돈카츠 · 가고시마 흑돼지(쿠로부타). 일반보다 육즙이 훨씬 풍부. 70년 노포. 런치 세트 인기!", mapUrl: "https://www.google.com/maps/search/まい泉+新宿" },
     { name: "신주쿠 스시 오마카세", area: "신주쿠", note: "스시 오마카세 · 셰프가 제철 생선으로 코스 구성. 점심 3,000엔대. 예약 권장.", mapUrl: "https://www.google.com/maps/search/新宿+寿司+おまかせ+ランチ" },
   ],
   "시부야": [
-    { name: "시부야 스크램블 스퀘어 레스토랑", area: "시부야", note: "다양한 장르 · 시부야 스카이 바로 그 건물. 야경 내려다보며 식사. 일식·이탈리안·카페 다양.", mapUrl: "https://www.google.com/maps/search/渋谷スクランブルスクエア+レストラン" },
+    { name: "모헤지 오코노미야키 もへじ ⭐4.8", area: "시부야 스크램블 스퀘어 12F", note: "오코노미야키·몬자야키 · 평점 4.8 · 리뷰 15,592개. 시부야 스카이 바로 그 건물 12층. 재료 신선하고 직원이 직접 구워줘요. 11:00~23:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJnzevxbaLGGARqAMBuaVbwzk" },
     { name: "이치란 라멘 시부야 一蘭 ⭐4.4", area: "시부야", note: "돈코츠 라멘 · 평점 4.4 · 시부야 저녁 마치고 야식으로 딱. 24시간.", mapUrl: "https://www.google.com/maps/search/一蘭+渋谷" },
-    { name: "시부야 히카리에 레스토랑", area: "시부야", note: "다양한 장르 · 시부야역 직결 11층. 비·더위 상관없이 바로 들어갈 수 있어서 편해요.", mapUrl: "https://www.google.com/maps/search/渋谷ヒカリエ+レストラン" },
-    { name: "마구로 식당 참치 전문", area: "시부야", note: "참치 해산물 덮밥 · 뱃살(토로)·붉은살(아카미) 듬뿍. 런치·디너 모두 가능.", mapUrl: "https://www.google.com/maps/search/渋谷+まぐろ丼" },
+    { name: "시부야 히카리에 레스토랑 ⭐3.7", area: "시부야 히카리에 11F", note: "다양한 장르 · 평점 3.7 · 시부야역 직결. 비·더위 상관없이 바로 들어갈 수 있어서 편해요.", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJ43YiUFiLGGARlsXC9pTlrlA" },
+    { name: "마구로토샤리 참치 전문 ⭐4.4", area: "시부야", note: "참치 해산물 덮밥 · 평점 4.4 · 뱃살(토로)·붉은살(아카미) 듬뿍. 밥 간이 잘 되어 간장 없이도 맛있어요. 11:00~21:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJCav9NKuLGGARan9qgutXwDc" },
   ],
 };
 
