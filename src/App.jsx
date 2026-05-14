@@ -125,6 +125,7 @@ const CHECKLIST_GROUPS = [
 
 const PLACES = {
   "가마쿠라 식당": [
+    { name: "Espresso D Works ☕🍳", area: "시치리가하마", note: "오므라이스·함박스테이크 맛집 · 시치리가하마 해변 바로 앞 2F · 바다 뷰 · 08:00~20:00 · ⚠ 웨이팅 있음 · 카드 결제만 가능", mapQ: "Espresso D Works Shichirigahama Kamakura", mapUrl: "https://maps.google.com/?cid=ChIJ295VrFJPGGARTRaom8_1lXQ" },
     { name: "카이센동 나루토", area: "가마쿠라역", note: "해산물 덮밥 · 런치 추천 · 고마치도리 근처", mapQ: "なると 鎌倉 海鮮丼", mapUrl: "https://www.google.com/maps/search/なると+鎌倉+海鮮丼" },
     { name: "시라스 요리 시라스야", area: "가마쿠라역", note: "가마쿠라 명물 시라스(뱅어) 덮밥 · 런치 인기", mapQ: "しらすや 鎌倉", mapUrl: "https://www.google.com/maps/search/しらすや+鎌倉" },
     { name: "가마쿠라코코마에 해변 카페", area: "시치리가하마", note: "해변 뷰 카페 · 저녁식사 가능 · ⑧번 장소 근처", mapQ: "鎌倉高校前 カフェ レストラン", mapUrl: "https://www.google.com/maps/search/鎌倉高校前+カフェ+レストラン" },
