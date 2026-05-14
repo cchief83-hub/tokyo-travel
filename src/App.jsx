@@ -170,6 +170,7 @@ const RESTAURANTS = {
 };
 
 const PLACES = {
+  후지산: [
     { name: "후지요시다 시청 앞 보행로", area: "후지요시다", note: "전봇대+후지산 압도적 구도 · SNS 바이럴 스팟 · 새벽~아침 시간대 추천", mapUrl: "https://www.google.com/maps/search/富士吉田市役所+富士山+撮影スポット", photoUrl: "https://drive.google.com/file/d/14tpss_nfnnQke4CK2POwaVI-TvwrU563/view?usp=drivesdk" },
     { name: "후지큐 하이랜드 대관람차", area: "후지요시다", note: "관람차+후지산 한 프레임 포토스팟 · 입장 무료 (놀이기구별 요금)", mapUrl: "https://www.google.com/maps/search/富士急ハイランド", photoUrl: "https://drive.google.com/file/d/1KtKDpuD9-t6DWKRCojwo52G8g9Ufh-2X/view?usp=drivesdk" },
     { name: "후지산 5합목", area: "후지산", note: "렌트카로 이동 · 맑은 날 정상 조망 · 오전이 확률 높음", mapUrl: "https://www.google.com/maps/search/富士山五合目+富士スバルライン" },
