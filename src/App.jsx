@@ -6,7 +6,7 @@ const TABS = [
   { id: "checklist", label: "준비물", icon: "✅" },
   { id: "rental", label: "렌트카", icon: "🚗" },
   { id: "transport", label: "교통", icon: "🚃" },
-  { id: "weather", label: "날씨", icon: "🌤" },
+  { id: "restaurant", label: "식당", icon: "🍽" },
   { id: "places", label: "장소메모", icon: "📍" },
   { id: "phrase", label: "일본어", icon: "🗣" },
   { id: "docs", label: "중요서류", icon: "📄" },
@@ -123,99 +123,99 @@ const CHECKLIST_GROUPS = [
   { title: "전자기기", color: "#a07ac8", items: ["스마트폰 충전기 (4개)","보조배터리","멀티어댑터 (일본 110V A타입)","이어폰"] },
 ];
 
+const RESTAURANTS = {
+  "가마쿠라": [
+    { name: "미요시 우동 Miyoshi ⭐⭐", area: "고마치도리", note: "수제 우동 · 미슐랭 2스타 맛집. 면을 직접 뽑아서 쫄깃함이 남달라요. 찍어먹는 쯔케멘 스타일로, 새우튀김이랑 같이 먹으면 조합이 딱이에요. 고마치도리 한복판에 있어서 쇼핑하다 들르기 좋아요. 웨이팅 있으니 구글맵 예약 먼저! · 월~금 11:15~18:00 · 토~일 11:15~19:00", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJzWCs28BFGGARvEa7rlxczIY" },
+    { name: "요리도코로 yoridokoro", area: "이나무라가사키", note: "구운 생선 정식 · 에노덴 철길 바로 옆 창가 자리에 앉으면 밥 먹다가 에노덴이 코앞으로 지나가요. 고등어·전갱이 구이 정식에 달걀 흰자를 직접 거품 내서 밥에 비벼먹는 게 특이하고 맛있어요. 아침 7시부터 열어서 후지산 출발 전 들르기 좋아요. 화요일 휴무 · 예약 필수(TableCheck, 예약금 1,000엔)", mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJAQA96VlPGGAR0TqpQJDAg_A" },
+    { name: "Espresso D Works ☕🍳", area: "시치리가하마", note: "오므라이스·함박스테이크 · 시치리가하마 해변이 바로 창밖에 펼쳐지는 2층 카페예요. 오므라이스 소스가 진하고 부드러워서 뷰랑 같이 먹으면 배가 두 배로 불러요. 웨이팅이 있으니 도착하자마자 번호표 먼저 뽑으세요. 카드 결제만 가능 · 08:00~20:00", mapUrl: "https://www.google.com/maps/place/Espresso+D+Works/@35.3059027,139.5073276,17z" },
+  ],
+  "후지카와구치코": [
+    { name: "호토 후도 ほうとう不動", area: "가와구치코", note: "호토 전골 · 후지산 기슭 지역의 향토 음식이에요. 칼국수보다 넓고 납작한 면을 된장 국물에 호박·무·당근이랑 푹 끓여낸 냄비 요리예요. 추운 날씨에 딱이고, 후지산 보고 내려온 뒤 몸 녹이기 최고예요. 줄 서는 경우 많으니 여유있게 방문!", mapUrl: "https://www.google.com/maps/search/ほうとう不動+河口湖" },
+    { name: "요시다 우동 시로이야", area: "후지요시다", note: "요시다 우동 · 후지요시다 지역 명물로, 일반 우동보다 면이 훨씬 굵고 강하고 쫄깃해요. 말고기 고명을 얹어먹는 현지 스타일인데, 낯설어도 한번 도전해볼 만해요. 아침 일찍부터 열어서 16일 아라쿠라야마 가기 전에 들르기 딱이에요.", mapUrl: "https://www.google.com/maps/search/吉田うどん+しろいや+富士吉田" },
+    { name: "더 가든 숙소 식당", area: "후지카와구치코", note: "일본 가정식 정식 · 숙소 안에 있어서 늦게 돌아오는 날 편하게 이용할 수 있어요. 시즈오카 갔다가 밤 늦게 돌아오는 16일 저녁에 특히 유용해요.", mapUrl: "https://www.google.com/maps/search/The+Garden+Fujikawaguchiko" },
+  ],
+  "시즈오카": [
+    { name: "아오바 오뎅 요코초 青葉おでん街", area: "시즈오카 시내", note: "시즈오카 오뎅 · 서울 오뎅이랑 전혀 달라요. 검은 다시마 국물에 꼬치를 담가 우려낸 독특한 맛이에요. 좁은 골목에 이자카야들이 줄지어 있고, 꼬치 하나씩 골라서 서서 먹는 분위기가 시즈오카 밤의 핵심이에요. 저녁 방문 추천!", mapUrl: "https://www.google.com/maps/search/青葉おでん街+静岡" },
+    { name: "시즈오카 사쿠라 에비 맛집", area: "시즈오카 시내", note: "벚꽃새우 덮밥 · 스루가만에서만 잡히는 작고 빨간 벚꽃새우를 밥 위에 듬뿍 올린 덮밥이에요. 생새우 또는 튀김 중 선택할 수 있고, 5월이 딱 제철이라 이 시기에 먹으면 최고예요.", mapUrl: "https://www.google.com/maps/search/桜えび丼+静岡" },
+    { name: "스타벅스 후지카와 SA ☕", area: "후지카와 SA (고속도로)", note: "커피·음료 · 고속도로 휴게소 안에 있는 스타벅스인데, 창밖으로 후지산이 정면으로 보여요. 시즈오카에서 숙소로 복귀하는 길에 잠깐 들러서 커피 한잔 하며 후지산 구경하기 딱이에요.", mapUrl: "https://www.google.com/maps/search/スターバックス+富士川サービスエリア" },
+  ],
+  "아사쿠사": [
+    { name: "아사쿠사 요코초 浅草横丁", area: "아사쿠사", note: "야키토리·스시·장어 등 · 센소지 바로 옆 건물 4층 전체가 먹거리 공간이에요. 7개 식당이 입점해 있고, 일본 전통 축제 공연을 테이블 바로 옆에서 볼 수 있어요. 에도시대 감성의 분위기가 가족 여행에 딱 맞아요. 12:00~23:00", mapUrl: "https://www.google.com/maps/search/浅草横丁+東京楽天地" },
+    { name: "후쿠다 天ぷら", area: "아사쿠사", note: "튀김 덴뿌라 · 해산물과 채소를 얇고 바삭하게 튀겨내는 일본식 튀김 전문점이에요. 기름기 없이 가볍게 먹을 수 있어서 부모님 입맛에도 잘 맞아요. 런치 세트 1,800엔으로 부담 없어요.", mapUrl: "https://www.google.com/maps/search/天ぷら福田+浅草" },
+    { name: "아사쿠사 이마한 浅草今半", area: "아사쿠사", note: "스키야키·샤부샤부 · 100년 넘은 노포예요. 달콤한 간장 국물에 와규 소고기를 익혀먹는 스키야키는 일본에서 꼭 먹어봐야 할 요리 중 하나예요. 특별한 저녁 식사로 추천해요. 런치 세트 있음.", mapUrl: "https://www.google.com/maps/search/浅草今半+浅草" },
+    { name: "나카미세도리 길거리 음식", area: "나카미세도리", note: "길거리 간식 · 센소지 참배길 양쪽에 늘어선 가게들에서 닌교야키(팥앙금 인형빵), 멜론빵, 전병과자(센베이) 등을 걸어다니며 먹는 재미가 있어요. 시은이도 엄청 좋아할 거예요!", mapUrl: "https://www.google.com/maps/search/仲見世通り+浅草+食べ歩き" },
+    { name: "아사쿠사 멘야 무사시", area: "아사쿠사", note: "라멘·츠케멘 · 진한 돈코츠·간장 베이스 라멘 맛집이에요. 면을 국물에 찍어먹는 츠케멘도 인기예요. 웨이팅 있을 수 있어요.", mapUrl: "https://www.google.com/maps/search/麺屋武蔵+浅草" },
+  ],
+  "오모이데요코초": [
+    { name: "오모이데요코초 야키토리 골목", area: "신주쿠 서쪽", note: "야키토리 이자카야 골목 · 신주쿠역 서쪽 출구에서 나오면 바로 보이는 좁은 골목이에요. 쇼와시대 느낌 그대로인 낡은 간판과 연기, 야키토리 굽는 냄새가 가득해요. 일본 드라마에서 본 그 분위기예요. 저녁 추천!", mapUrl: "https://maps.google.com/?cid=11209413547498426191" },
+    { name: "야키토리 이자카야 다이치", area: "오모이데요코초", note: "야키토리 · 닭꼬치 모둠과 생맥주 조합이 진리예요. 좌석이 작고 다닥다닥 붙어있어서 옆 사람이랑 어깨 맞대고 먹는 그 좁은 분위기가 오히려 재미있어요.", mapUrl: "https://www.google.com/maps/search/思い出横丁+やきとり" },
+    { name: "모츠야키 이자카야", area: "오모이데요코초", note: "내장 구이 모츠야키 · 소·돼지 내장을 꼬치에 꿰어 구워내는 전문점이에요. 현지인 단골이 많은 진짜 서민 이자카야 분위기예요. 안 드셔봤다면 한번 도전해볼 만해요!", mapUrl: "https://www.google.com/maps/search/思い出横丁+もつ焼き" },
+  ],
+  "가부키초": [
+    { name: "이치란 라멘 신주쿠점 一蘭", area: "가부키초", note: "돈코츠 라멘 · 후쿠오카 원조 돈코츠 라멘 체인이에요. 1인 칸막이 좌석에 앉아서 면 굵기·국물 진하기·파 양 등을 본인 취향대로 주문지에 체크해서 내면 줘요. 가부키초 야경 보고 늦게 먹어도 되는 24시간 영업!", mapUrl: "https://www.google.com/maps/search/一蘭+新宿歌舞伎町" },
+    { name: "가부키초 타워 레스토랑", area: "가부키초", note: "다양한 장르 · 가부키초 타워 내 여러 식당이 입점해 있어요. 네온사인 야경이 내려다보이는 자리에서 식사할 수 있어요. 이자카야·일식·양식 다양하게 선택 가능해요.", mapUrl: "https://www.google.com/maps/search/歌舞伎町タワー+レストラン" },
+    { name: "규카츠 모토무라 牛かつ", area: "신주쿠", note: "규카츠 소고기 돈카츠 · 돼지 대신 소고기를 튀긴 거예요. 겉은 바삭하고 안은 레어로 튀겨서 작은 돌판에 직접 구워가며 먹는 방식이에요. 처음엔 낯설지만 한 번 먹으면 빠져요. 줄 서는 맛집!", mapUrl: "https://www.google.com/maps/search/牛かつもと村+新宿" },
+  ],
+  "신주쿠": [
+    { name: "신주쿠 카이센동 우오가시", area: "신주쿠", note: "해산물 덮밥 · 참치·연어·성게·이쿠라(연어알) 등 신선한 해산물을 밥 위에 듬뿍 올려주는 덮밥이에요. 신주쿠 교엔 산책 후 점심으로 딱이에요.", mapUrl: "https://www.google.com/maps/search/新宿+海鮮丼" },
+    { name: "쿠로부타 돈카츠 마이센", area: "신주쿠", note: "돈카츠 · 가고시마산 흑돼지(쿠로부타)를 두껍게 잘라 바삭하게 튀긴 돈카츠예요. 일반 돈카츠보다 육즙이 훨씬 풍부해요. 70년 된 노포라 믿고 먹을 수 있어요. 런치 세트 인기!", mapUrl: "https://www.google.com/maps/search/まい泉+新宿" },
+    { name: "신주쿠 스시 오마카세", area: "신주쿠", note: "스시 오마카세 · 셰프가 그날 가장 좋은 생선으로 코스를 짜서 한 점씩 내주는 방식이에요. 점심에는 3,000엔대로 비교적 합리적이에요. 일본에서 스시 제대로 먹어보고 싶다면 추천! 예약 권장.", mapUrl: "https://www.google.com/maps/search/新宿+寿司+おまかせ+ランチ" },
+  ],
+  "시부야": [
+    { name: "시부야 스크램블 스퀘어 레스토랑", area: "시부야", note: "다양한 장르 · 시부야 스카이 전망대가 있는 바로 그 건물이에요. 레스토랑 층에서 야경 내려다보며 먹을 수 있어요. 일식·이탈리안·카페 등 다양해서 가족 입맛에 맞게 고르기 좋아요.", mapUrl: "https://www.google.com/maps/search/渋谷スクランブルスクエア+レストラン" },
+    { name: "이치란 라멘 시부야점", area: "시부야", note: "돈코츠 라멘 · 신주쿠점이랑 같은 이치란이에요. 시부야 저녁 일정 마치고 돌아가는 길에 야식으로 먹기 딱이에요. 24시간 영업.", mapUrl: "https://www.google.com/maps/search/一蘭+渋谷" },
+    { name: "시부야 히카리에 레스토랑", area: "시부야", note: "다양한 장르 · 시부야역에서 바로 연결되는 히카리에 건물 11층이에요. 비 오거나 덥거나 추울 때 이동 없이 바로 들어가서 먹을 수 있어서 편해요.", mapUrl: "https://www.google.com/maps/search/渋谷ヒカリエ+レストラン" },
+    { name: "마구로 식당 참치 전문", area: "시부야", note: "참치 해산물 덮밥 · 참치 뱃살(토로)·붉은살(아카미)을 듬뿍 올린 마구로동이에요. 일본에서 참치를 이 가격에 이 퀄리티로 먹을 수 있는 건 흔치 않아요. 런치·디너 모두 가능.", mapUrl: "https://www.google.com/maps/search/渋谷+まぐろ丼" },
+  ],
+};
+
 const PLACES = {
-  "가마쿠라 식당": [
-    { name: "Espresso D Works ☕🍳", area: "시치리가하마", note: "오므라이스·함박스테이크 맛집 · 시치리가하마 해변 바로 앞 2F · 바다 뷰 · 08:00~20:00 · ⚠ 웨이팅 있음 · 카드 결제만 가능", mapQ: "Espresso D Works Shichirigahama Kamakura", mapUrl: "https://maps.google.com/?cid=ChIJ295VrFJPGGARTRaom8_1lXQ" },
-    { name: "카이센동 나루토", area: "가마쿠라역", note: "해산물 덮밥 · 런치 추천 · 고마치도리 근처", mapQ: "なると 鎌倉 海鮮丼", mapUrl: "https://www.google.com/maps/search/なると+鎌倉+海鮮丼" },
-    { name: "시라스 요리 시라스야", area: "가마쿠라역", note: "가마쿠라 명물 시라스(뱅어) 덮밥 · 런치 인기", mapQ: "しらすや 鎌倉", mapUrl: "https://www.google.com/maps/search/しらすや+鎌倉" },
-    { name: "가마쿠라코코마에 해변 카페", area: "시치리가하마", note: "해변 뷰 카페 · 저녁식사 가능 · ⑧번 장소 근처", mapQ: "鎌倉高校前 カフェ レストラン", mapUrl: "https://www.google.com/maps/search/鎌倉高校前+カフェ+レストラン" },
-    { name: "빌즈 시치리가하마 bills", area: "시치리가하마", note: "오션뷰 카페 · 팬케이크 유명 · 예약 권장", mapQ: "bills 七里ヶ浜", mapUrl: "https://www.google.com/maps/search/bills+七里ヶ浜" },
-  ],
-  "후지카와구치코 식당": [
-    { name: "호토 후도 ほうとう不動", area: "가와구치코", note: "후지산 지역 명물 호토(납작 면 된장 전골) · 줄서는 맛집", mapQ: "ほうとう不動 河口湖", mapUrl: "https://www.google.com/maps/search/ほうとう不動+河口湖" },
-    { name: "요시다 우동 시로이야", area: "후지요시다", note: "후지요시다 명물 · 강하고 쫄깃한 면발 · 아침부터 영업", mapQ: "吉田うどん しろいや 富士吉田", mapUrl: "https://www.google.com/maps/search/吉田うどん+しろいや+富士吉田" },
-    { name: "더 가든 숙소 식당", area: "후지카와구치코", note: "숙소 내 식당 · 늦은 저녁 귀가 시 편리", mapQ: "The Garden Fujikawaguchiko restaurant", mapUrl: "https://www.google.com/maps/search/The+Garden+Fujikawaguchiko" },
-  ],
-  "시즈오카 식당": [
-    { name: "아오바 오뎅 요코초 青葉おでん街", area: "시즈오카 시내", note: "시즈오카 명물 오뎅 골목 · 꼬치 하나씩 골라먹는 방식 · 저녁 추천", mapQ: "青葉おでん街 静岡", mapUrl: "https://www.google.com/maps/search/青葉おでん街+静岡" },
-    { name: "시즈오카 사쿠라 에비 맛집", area: "시즈오카 시내", note: "시즈오카 명물 벚꽃새우 덮밥 · 봄 시즌 (3~6월) 한정", mapQ: "桜えび丼 静岡", mapUrl: "https://www.google.com/maps/search/桜えび丼+静岡" },
-    { name: "스타벅스 후지카와 SA", area: "후지카와 SA", note: "후지산뷰 스타벅스 · 하행선 · 이동 중 커피 한잔", mapQ: "スターバックス 富士川サービスエリア", mapUrl: "https://www.google.com/maps/search/スターバックス+富士川サービスエリア" },
-  ],
-  "도쿄 센소지·아사쿠사": [
-    { name: "아사쿠사 요코초 浅草横丁", area: "아사쿠사", note: "센소지 바로 옆 도쿄 라쿠텐치 빌딩 4F · 7개 식당 입점 · 야키토리·스시·장어 · 축제 퍼포먼스 공연 · 12:00~23:00", mapQ: "浅草横丁 東京楽天地浅草ビル", mapUrl: "https://www.google.com/maps/search/浅草横丁+東京楽天地" },
-    { name: "후쿠다 天ぷら", area: "아사쿠사", note: "런치 세트 1,800엔 · 뎀뿌라 맛집", mapQ: "天ぷら福田 浅草", mapUrl: "https://www.google.com/maps/search/天ぷら福田+浅草" },
-    { name: "아사쿠사 이마한 浅草今半", area: "아사쿠사", note: "스키야키·샤부샤부 노포 · 런치 세트 있음", mapQ: "浅草今半 浅草", mapUrl: "https://www.google.com/maps/search/浅草今半+浅草" },
-    { name: "나카미세도리 길거리 음식", area: "나카미세도리", note: "닌교야키 · 멜론빵 · 센베이 · 간식 투어", mapQ: "仲見世通り 浅草 食べ歩き", mapUrl: "https://www.google.com/maps/search/仲見世通り+浅草+食べ歩き" },
-    { name: "아사쿠사 멘야 무사시", area: "아사쿠사", note: "츠케멘 · 라멘 맛집 · 웨이팅 있음", mapQ: "麺屋武蔵 浅草", mapUrl: "https://www.google.com/maps/search/麺屋武蔵+浅草" },
-  ],
-  "도쿄 오모이데요코초": [
-    { name: "오모이데요코초 야키토리 골목", area: "신주쿠 서쪽", note: "신주쿠역 서쪽 출구 도보 1분 · 골목 전체가 이자카야 · 저녁 추천", mapQ: "思い出横丁 新宿", mapUrl: "https://www.google.com/maps/search/思い出横丁+新宿" },
-    { name: "야키토리 이자카야 다이치", area: "오모이데요코초", note: "야키토리+생맥주 · 좌석 작고 붐비는 분위기", mapQ: "思い出横丁 やきとり 大地", mapUrl: "https://www.google.com/maps/search/思い出横丁+やきとり" },
-    { name: "모츠야키 이자카야", area: "오모이데요코초", note: "내장 구이 전문 · 현지인 많이 오는 곳", mapQ: "思い出横丁 もつ焼き", mapUrl: "https://www.google.com/maps/search/思い出横丁+もつ焼き" },
-  ],
-  "도쿄 가부키초": [
-    { name: "이치란 라멘 신주쿠점 一蘭", area: "가부키초", note: "24시간 · 칸막이 좌석 · 야경 보고 야식으로 딱", mapQ: "一蘭 新宿", mapUrl: "https://www.google.com/maps/search/一蘭+新宿" },
-    { name: "가부키초 타워 레스토랑", area: "가부키초", note: "가부키초 타워 내 · 야경 보면서 식사", mapQ: "歌舞伎町タワー レストラン", mapUrl: "https://www.google.com/maps/search/歌舞伎町タワー+レストラン" },
-    { name: "규카츠 모토무라 牛かつ", area: "신주쿠", note: "규카츠(소고기 돈카츠) 전문 · 줄서는 맛집", mapQ: "牛かつ もと村 新宿", mapUrl: "https://www.google.com/maps/search/牛かつもと村+新宿" },
-  ],
-  "신주쿠 식당": [
-    { name: "신주쿠 카이센동 우오가시", area: "신주쿠", note: "신선한 해산물 덮밥 · 점심 추천", mapQ: "新宿 海鮮丼 うおがし", mapUrl: "https://www.google.com/maps/search/新宿+海鮮丼" },
-    { name: "쿠로부타 샤부샤부 마이센", area: "신주쿠", note: "돈카츠 노포 · 쿠로부타 런치 세트 인기", mapQ: "まい泉 新宿", mapUrl: "https://www.google.com/maps/search/まい泉+新宿" },
-    { name: "신주쿠 스시 오마카세", area: "신주쿠", note: "점심 오마카세 3,000엔대 · 예약 권장", mapQ: "新宿 寿司 おまかせ ランチ", mapUrl: "https://www.google.com/maps/search/新宿+寿司+おまかせ+ランチ" },
-  ],
-  "시부야 식당": [
-    { name: "시부야 스크램블 스퀘어 레스토랑", area: "시부야", note: "시부야 스카이 입점 건물 · 다양한 장르 · 야경 뷰", mapQ: "渋谷スクランブルスクエア レストラン", mapUrl: "https://www.google.com/maps/search/渋谷スクランブルスクエア+レストラン" },
-    { name: "이치란 라멘 시부야점", area: "시부야", note: "24시간 · 칸막이 좌석 · 돌아오는 길 야식", mapQ: "一蘭 渋谷", mapUrl: "https://www.google.com/maps/search/一蘭+渋谷" },
-    { name: "시부야 히카리에 레스토랑", area: "시부야", note: "시부야역 직결 · 11F 레스토랑 층 · 다양한 선택지", mapQ: "渋谷ヒカリエ レストラン", mapUrl: "https://www.google.com/maps/search/渋谷ヒカリエ+レストラン" },
-    { name: "마구로 식당 (참치 전문)", area: "시부야", note: "참치 해산물 덮밥 · 런치·디너 모두 가능", mapQ: "渋谷 まぐろ丼 海鮮", mapUrl: "https://www.google.com/maps/search/渋谷+まぐろ丼" },
-  ],
-  후지산: [
-    { name: "후지요시다 시청 앞 보행로", area: "후지요시다", note: "전봇대+후지산 압도적 구도 · SNS 바이럴 스팟 · 새벽~아침 시간대 추천", mapQ: "富士吉田市役所 富士山 撮影スポット", mapUrl: "https://maps.google.com/?cid=10710673484613427011", photoUrl: "https://drive.google.com/file/d/14tpss_nfnnQke4CK2POwaVI-TvwrU563/view?usp=drivesdk" },
-    { name: "후지큐 하이랜드 대관람차", area: "후지요시다", note: "관람차+후지산 한 프레임 포토스팟 · 입장 무료 (놀이기구별 요금)", mapQ: "富士急ハイランド", mapUrl: "https://maps.google.com/?cid=14420058890310148144", photoUrl: "https://drive.google.com/file/d/1KtKDpuD9-t6DWKRCojwo52G8g9Ufh-2X/view?usp=drivesdk" },
-    { name: "후지산 5합목", area: "후지산", note: "렌트카로 이동 · 맑은 날 정상 조망 · 오전이 확률 높음", mapQ: "富士山五合目 富士スバルライン", mapUrl: "https://www.google.com/maps/search/富士山五合目+富士スバルライン" },
-    { name: "오시노 핫카이 忍野八海", area: "오시노", note: "후지산 용수 연못 · 세계문화유산 · 부모님 산책 최적", mapQ: "忍野八海", mapUrl: "https://www.google.com/maps/search/忍野八海" },
-    { name: "가와구치코 유람선", area: "가와구치코", note: "호수에서 후지산 조망 · 약 20분", mapQ: "河口湖遊覧船", mapUrl: "https://www.google.com/maps/search/河口湖遊覧船" },
-    { name: "오이시 공원 大石公園", area: "가와구치코", note: "라벤더+후지산 · 5월 꽃밭 시즌 · 무료입장", mapQ: "大石公園 河口湖", mapUrl: "https://www.google.com/maps/search/大石公園+河口湖" },
+    { name: "후지요시다 시청 앞 보행로", area: "후지요시다", note: "전봇대+후지산 압도적 구도 · SNS 바이럴 스팟 · 새벽~아침 시간대 추천", mapUrl: "https://www.google.com/maps/search/富士吉田市役所+富士山+撮影スポット", photoUrl: "https://drive.google.com/file/d/14tpss_nfnnQke4CK2POwaVI-TvwrU563/view?usp=drivesdk" },
+    { name: "후지큐 하이랜드 대관람차", area: "후지요시다", note: "관람차+후지산 한 프레임 포토스팟 · 입장 무료 (놀이기구별 요금)", mapUrl: "https://www.google.com/maps/search/富士急ハイランド", photoUrl: "https://drive.google.com/file/d/1KtKDpuD9-t6DWKRCojwo52G8g9Ufh-2X/view?usp=drivesdk" },
+    { name: "후지산 5합목", area: "후지산", note: "렌트카로 이동 · 맑은 날 정상 조망 · 오전이 확률 높음", mapUrl: "https://www.google.com/maps/search/富士山五合目+富士スバルライン" },
+    { name: "오시노 핫카이 忍野八海", area: "오시노", note: "후지산 용수 연못 · 세계문화유산 · 부모님 산책 최적", mapUrl: "https://www.google.com/maps/search/忍野八海" },
+    { name: "가와구치코 유람선", area: "가와구치코", note: "호수에서 후지산 조망 · 약 20분", mapUrl: "https://www.google.com/maps/search/河口湖遊覧船" },
+    { name: "오이시 공원 大石公園", area: "가와구치코", note: "라벤더+후지산 · 5월 꽃밭 시즌 · 무료입장", mapUrl: "https://www.google.com/maps/search/大石公園+河口湖" },
   ],
   시부야: [
-    { name: "시부야 스크램블 교차로", area: "시부야", note: "세계에서 가장 바쁜 횡단보도 · 맞은편 스타벅스 2층 뷰포인트", mapQ: "渋谷スクランブル交差点", mapUrl: "https://maps.google.com/?cid=10518167498657889568" },
-    { name: "시부야 스카이 Shibuya Sky", area: "시부야", note: "360° 옥상 전망대 · 사전예매 필수 · 화요일 휴무", mapQ: "渋谷スカイ", mapUrl: "https://maps.google.com/?cid=8019591697534218844" },
-    { name: "시부야 스크램블 스퀘어", area: "시부야", note: "시부야 스카이 입점 건물 · 쇼핑 · 레스토랑", mapQ: "渋谷スクランブルスクエア", mapUrl: "https://maps.google.com/?cid=13329726600088760943" },
+    { name: "시부야 스크램블 교차로", area: "시부야", note: "세계에서 가장 바쁜 횡단보도 · 맞은편 스타벅스 2층 뷰포인트", mapUrl: "https://maps.google.com/?cid=10518167498657889568" },
+    { name: "시부야 스카이 Shibuya Sky", area: "시부야", note: "360° 옥상 전망대 · 사전예매 필수 · 화요일 휴무", mapUrl: "https://maps.google.com/?cid=8019591697534218844" },
+    { name: "시부야 스크램블 스퀘어", area: "시부야", note: "시부야 스카이 입점 건물 · 쇼핑 · 레스토랑", mapUrl: "https://maps.google.com/?cid=13329726600088760943" },
   ],
   하라주쿠: [
-    { name: "다케시타도리 竹下通り", area: "하라주쿠", note: "일본 최고 크레이프 · 팝 패션 · 하라주쿠역 도보 1분", mapQ: "竹下通り 原宿", mapUrl: "https://maps.google.com/?cid=14534979862793551001" },
-    { name: "메이지 신궁 明治神宮", area: "하라주쿠", note: "도쿄 최대 신사 · 울창한 숲길 · 무료입장", mapQ: "明治神宮", mapUrl: "https://maps.google.com/?cid=10557131434248978590" },
-    { name: "오모테산도 表参道", area: "오모테산도", note: "명품 거리 · 카페 · 건축 감상", mapQ: "表参道 東京", mapUrl: "https://www.google.com/maps/search/表参道+東京" },
+    { name: "다케시타도리 竹下通り", area: "하라주쿠", note: "일본 최고 크레이프 · 팝 패션 · 하라주쿠역 도보 1분", mapUrl: "https://maps.google.com/?cid=14534979862793551001" },
+    { name: "메이지 신궁 明治神宮", area: "하라주쿠", note: "도쿄 최대 신사 · 울창한 숲길 · 무료입장", mapUrl: "https://maps.google.com/?cid=10557131434248978590" },
+    { name: "오모테산도 表参道", area: "오모테산도", note: "명품 거리 · 카페 · 건축 감상", mapUrl: "https://www.google.com/maps/search/表参道+東京" },
   ],
   신주쿠: [
-    { name: "오모이데 요코초 思い出横丁", area: "신주쿠", note: "추억의 골목 · 이자카야 야키토리 · 야경 감성", mapQ: "思い出横丁 新宿", mapUrl: "https://maps.google.com/?cid=11209413547498426191" },
-    { name: "신주쿠 교엔 新宿御苑", area: "신주쿠", note: "입장료 500엔 · 부모님 산책 최적 · 월요일 휴무", mapQ: "新宿御苑", mapUrl: "https://maps.google.com/?cid=14439497453018948607" },
-    { name: "도쿄 도청 전망대", area: "신주쿠", note: "무료 · 202m · 후지산 조망 가능", mapQ: "東京都庁展望台", mapUrl: "https://www.google.com/maps/search/東京都庁展望台" },
-    { name: "가부키초 歌舞伎町", area: "신주쿠", note: "네온사인 야경 · 가부키초 타워 · 저녁 추천", mapQ: "歌舞伎町 新宿", mapUrl: "https://www.google.com/maps/search/歌舞伎町+新宿" },
+    { name: "오모이데 요코초 思い出横丁", area: "신주쿠", note: "추억의 골목 · 이자카야 야키토리 · 야경 감성", mapUrl: "https://maps.google.com/?cid=11209413547498426191" },
+    { name: "신주쿠 교엔 新宿御苑", area: "신주쿠", note: "입장료 500엔 · 부모님 산책 최적 · 월요일 휴무", mapUrl: "https://maps.google.com/?cid=14439497453018948607" },
+    { name: "도쿄 도청 전망대", area: "신주쿠", note: "무료 · 202m · 후지산 조망 가능", mapUrl: "https://www.google.com/maps/search/東京都庁展望台" },
+    { name: "가부키초 歌舞伎町", area: "신주쿠", note: "네온사인 야경 · 가부키초 타워 · 저녁 추천", mapUrl: "https://www.google.com/maps/search/歌舞伎町+新宿" },
   ],
   관광지: [
-    { name: "센소지 浅草寺", area: "아사쿠사", note: "무료 입장 · 이른 아침 추천", mapQ: "浅草寺", mapUrl: "https://www.google.com/maps/search/浅草寺" },
-    { name: "시바 공원 芝公園", area: "다이몬", note: "잔디밭에 앉아 도쿄타워 포토스팟 · 무료 · 24시간", mapQ: "芝公園 東京タワー", mapUrl: "https://maps.google.com/?cid=11312766523862247942", photoUrl: "https://drive.google.com/file/d/1zgyczU96mPgF0PH1lM08CH1u9oZzpIfh/view?usp=drivesdk" },
-    { name: "조조지 절 増上寺", area: "다이몬", note: "도쿄타워+절 한 프레임 최고 포토스팟", mapQ: "増上寺 東京タワー", mapUrl: "https://maps.google.com/?cid=9846179875119807780" },
-    { name: "도쿄타워 외관", area: "다이몬", note: "해질녘~야경 추천 · 무료", mapQ: "東京タワー", mapUrl: "https://maps.google.com/?cid=5195627782660688349" },
-    { name: "아자부다이힐스 麻布台ヒルズ", area: "롯폰기", note: "2023년 오픈 · 도쿄타워 뷰 · 팀랩 보더리스", mapQ: "麻布台ヒルズ", mapUrl: "https://maps.google.com/?cid=4557431226793109441" },
-    { name: "롯폰기 힐즈 六本木ヒルズ", area: "롯폰기", note: "도쿄타워 야경 뷰포인트 · 거미 조형물 포토스팟", mapQ: "六本木ヒルズ", mapUrl: "https://maps.google.com/?cid=6628738211295053826" },
+    { name: "센소지 浅草寺", area: "아사쿠사", note: "무료 입장 · 이른 아침 추천", mapUrl: "https://maps.google.com/?cid=10715857298462072914" },
+    { name: "시바 공원 芝公園", area: "다이몬", note: "잔디밭에 앉아 도쿄타워 포토스팟 · 무료 · 24시간", mapUrl: "https://maps.google.com/?cid=11312766523862247942", photoUrl: "https://drive.google.com/file/d/1zgyczU96mPgF0PH1lM08CH1u9oZzpIfh/view?usp=drivesdk" },
+    { name: "조조지 절 増上寺", area: "다이몬", note: "도쿄타워+절 한 프레임 최고 포토스팟", mapUrl: "https://maps.google.com/?cid=9846179875119807780" },
+    { name: "도쿄타워 외관", area: "다이몬", note: "해질녘~야경 추천 · 무료", mapUrl: "https://maps.google.com/?cid=5195627782660688349" },
+    { name: "아자부다이힐스 麻布台ヒルズ", area: "롯폰기", note: "2023년 오픈 · 도쿄타워 뷰 · 팀랩 보더리스", mapUrl: "https://maps.google.com/?cid=4557431226793109441" },
+    { name: "롯폰기 힐즈 六本木ヒルズ", area: "롯폰기", note: "도쿄타워 야경 뷰포인트 · 거미 조형물 포토스팟", mapUrl: "https://maps.google.com/?cid=6628738211295053826" },
   ],
   쇼핑: [
-    { name: "알펜 도쿄 (온러닝 구매 추천)", area: "신주쿠", note: "온러닝 전 라인업 · 면세 10% + 쿠폰 할인 추가 · 발 분석 기계 보유", mapQ: "アルペン東京 新宿", mapUrl: "https://www.google.com/maps/search/アルペン東京+新宿3丁目23", couponUrl: "https://drive.google.com/file/d/1fyoHyl6447Qygq1W5QJGLYi9G7i1FPbp/view?usp=drivesdk" },
-    { name: "마츠모토키요시", area: "아사쿠사", note: "드럭스토어 · 면세 가능", mapQ: "マツモトキヨシ 浅草" },
-    { name: "돈키호테 ドン・キホーテ", area: "신주쿠", note: "24시간 · 기념품 저렴", mapQ: "ドン・キホーテ 新宿" },
-    { name: "아메요코 시장 アメ横", area: "우에노", note: "건어물 · 과자 · 화장품", mapQ: "アメ横" },
+    { name: "알펜 도쿄 (온러닝 구매 추천)", area: "신주쿠", note: "온러닝 전 라인업 · 면세 10% + 쿠폰 할인 추가 · 발 분석 기계 보유", mapUrl: "https://www.google.com/maps/search/アルペン東京+新宿3丁目", couponUrl: "https://drive.google.com/file/d/1fyoHyl6447Qygq1W5QJGLYi9G7i1FPbp/view?usp=drivesdk" },
+    { name: "마츠모토키요시", area: "아사쿠사", note: "드럭스토어 · 면세 가능", mapUrl: "https://www.google.com/maps/search/マツモトキヨシ+浅草" },
+    { name: "돈키호테 ドン・キホーテ", area: "신주쿠", note: "24시간 · 기념품 저렴", mapUrl: "https://www.google.com/maps/search/ドン・キホーテ+新宿" },
+    { name: "아메요코 시장 アメ横", area: "우에노", note: "건어물 · 과자 · 화장품", mapUrl: "https://www.google.com/maps/search/アメ横+上野" },
   ],
   가마쿠라: [
-    { name: "① 가마쿠라 대불 高徳院", area: "하세", note: "14:00 · 도착하자마자 바로! · 입장료 300엔 · ⚠ 17:00 마감", mapQ: "鎌倉大仏 高徳院", mapUrl: "https://www.google.com/maps/search/高徳院+鎌倉大仏" },
-    { name: "② 고마치도리 小町通り", area: "가마쿠라역", note: "14:45 · 기념품 · 길거리 음식 · ⚠ 17~18시 조기마감 주의", mapQ: "小町通り 鎌倉", mapUrl: "https://www.google.com/maps/search/小町通り+鎌倉" },
-    { name: "③ TANAKA Barber Shop", area: "하세", note: "16:00 · 이사랑통역되나요 촬영지 · ⚠ 사진 전 주인께 양해 필수", mapQ: "TANAKA Barber Shop Hase Kamakura", mapUrl: "https://maps.google.com/?cid=15869312336643053071", photoUrl: "https://drive.google.com/file/d/1S9M6abVDcxsRL6N8_tQLc2P8m0V_jN6w/view?usp=drivesdk" },
-    { name: "④ 고쿠라쿠지역 極楽寺駅", area: "고쿠라쿠지", note: "16:15 · 차로 5분 · 이사랑통역되나요 촬영지 · 고즈넉한 에노덴 역", mapQ: "極楽寺駅", mapUrl: "https://www.google.com/maps/search/極楽寺駅+鎌倉" },
-    { name: "⑤ 시치리가하마역 수로 포토스팟", area: "시치리가하마", note: "16:30 · 차로 5분 · 수로 끝으로 바다가 보이는 인스타 감성 스팟", mapQ: "七里ヶ浜駅 水路 鎌倉", mapUrl: "https://maps.google.com/?cid=12702870331904269387", photoUrl: "https://drive.google.com/file/d/1DFVxMk6rWIZRo9gHZepXx5YCATj0mqGu/view?usp=drivesdk" },
-    { name: "⑥ 시치리가하마 고등학교 앞 건널목", area: "시치리가하마", note: "16:45 · 바로 근처 · 에노덴+바다+하늘 포토스팟", mapQ: "七里ヶ浜高校 踏切 鎌倉", mapUrl: "https://maps.google.com/?cid=422530369093211191", photoUrl: "https://drive.google.com/file/d/17upNDDb2ZuUunVAZs5O6GHE5l-cfczz1/view?usp=drivesdk" },
-    { name: "⑦ 시치리가하마 해변 七里ヶ浜", area: "시치리가하마", note: "17:00 · 후지산+바다 조망 · 일몰 명소 · 산책 30분", mapQ: "七里ヶ浜海岸 鎌倉", mapUrl: "https://maps.google.com/?cid=11344940212826062752", photoUrl: "https://drive.google.com/file/d/1bJos7bdBh_JFvJ_xi4keOQ4eMQ_ZjuhK/view?usp=drivesdk" },
-    { name: "⑧ 가마쿠라코코마에역 건널목 🍽", area: "가마쿠라코코마에", note: "17:30 · 슬램덩크 배경지 · 사진 후 근처에서 저녁식사 · 후지카와구치코 출발", mapQ: "鎌倉高校前駅 踏切", mapUrl: "https://maps.google.com/?cid=1819797686801071229", photoUrl: "https://drive.google.com/file/d/1BkKHGece8qrkVxFF0-x6outDtpNSyxGz/view?usp=drivesdk" },
+    { name: "① 가마쿠라 대불 高徳院", area: "하세", note: "14:00 · 도착하자마자 바로! · 입장료 300엔 · ⚠ 17:00 마감", mapUrl: "https://maps.google.com/?cid=2216777826481991500" },
+    { name: "② 고마치도리 小町通り", area: "가마쿠라역", note: "14:45 · 기념품 · 길거리 음식 · ⚠ 17~18시 조기마감 주의", mapUrl: "https://www.google.com/maps/search/小町通り+鎌倉" },
+    { name: "③ TANAKA Barber Shop", area: "하세", note: "16:00 · 이사랑통역되나요 촬영지 · ⚠ 사진 전 주인께 양해 필수", mapUrl: "https://maps.google.com/?cid=15869312336643053071", photoUrl: "https://drive.google.com/file/d/1S9M6abVDcxsRL6N8_tQLc2P8m0V_jN6w/view?usp=drivesdk" },
+    { name: "④ 고쿠라쿠지역 極楽寺駅", area: "고쿠라쿠지", note: "16:15 · 차로 5분 · 이사랑통역되나요 촬영지 · 고즈넉한 에노덴 역", mapUrl: "https://www.google.com/maps/search/極楽寺駅+鎌倉" },
+    { name: "⑤ 시치리가하마역 수로 포토스팟", area: "시치리가하마", note: "16:30 · 차로 5분 · 수로 끝으로 바다가 보이는 인스타 감성 스팟", mapUrl: "https://maps.google.com/?cid=12702870331904269387", photoUrl: "https://drive.google.com/file/d/1DFVxMk6rWIZRo9gHZepXx5YCATj0mqGu/view?usp=drivesdk" },
+    { name: "⑥ 시치리가하마 고등학교 앞 건널목", area: "시치리가하마", note: "16:45 · 바로 근처 · 에노덴+바다+하늘 포토스팟", mapUrl: "https://maps.google.com/?cid=422530369093211191", photoUrl: "https://drive.google.com/file/d/17upNDDb2ZuUunVAZs5O6GHE5l-cfczz1/view?usp=drivesdk" },
+    { name: "⑦ 시치리가하마 해변 七里ヶ浜", area: "시치리가하마", note: "17:00 · 후지산+바다 조망 · 일몰 명소 · 산책 30분", mapUrl: "https://maps.google.com/?cid=11344940212826062752", photoUrl: "https://drive.google.com/file/d/1bJos7bdBh_JFvJ_xi4keOQ4eMQ_ZjuhK/view?usp=drivesdk" },
+    { name: "⑧ 가마쿠라코코마에역 건널목 🍽", area: "가마쿠라코코마에", note: "17:30 · 슬램덩크 배경지 · 사진 후 근처에서 저녁식사", mapUrl: "https://maps.google.com/?cid=1819797686801071229", photoUrl: "https://drive.google.com/file/d/1BkKHGece8qrkVxFF0-x6outDtpNSyxGz/view?usp=drivesdk" },
   ],
 };
 
@@ -289,8 +289,9 @@ export default function TokyoApp() {
   const [tipsTab, setTipsTab] = useState(0);
   const [rentalTab, setRentalTab] = useState(0);
   const [checks, setChecks] = useState({});
-  const [placeTab, setPlaceTab] = useState("가마쿠라 식당");
+  const [placeTab, setPlaceTab] = useState("가마쿠라");
   const [phraseTab, setPhraseTab] = useState("기본 인사");
+  const [restaurantTab, setRestaurantTab] = useState("가마쿠라");
   const [weatherData, setWeatherData] = useState({});
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherCity, setWeatherCity] = useState("tokyo");
@@ -776,6 +777,32 @@ export default function TokyoApp() {
     );
   }
 
+  function renderRestaurant() {
+    const items = RESTAURANTS[restaurantTab] || [];
+    return (
+      <div>
+        <div className="section-title">지역별 식당</div>
+        <div className="place-tab-row">
+          {Object.keys(RESTAURANTS).map(k => (
+            <button key={k} className={"place-tab-btn" + (restaurantTab === k ? " active" : "")} onClick={() => setRestaurantTab(k)}>{k}</button>
+          ))}
+        </div>
+        <Card>
+          {items.map((p, i) => (
+            <div key={i} className="place-item" onClick={() => window.open(p.mapUrl, "_blank")}>
+              <div style={{ flex: 1 }}>
+                <div className="place-name">{p.name}</div>
+                <div style={{ fontSize: 10, color: "#3a6aaa", fontWeight: 600, marginTop: 2, marginBottom: 4 }}>{p.area}</div>
+                <div className="place-note">{p.note}</div>
+              </div>
+              <span style={{ fontSize: 11, color: "#c8855a", flexShrink: 0, marginLeft: 10 }}>📍→</span>
+            </div>
+          ))}
+        </Card>
+      </div>
+    );
+  }
+
   function renderWeather() {
     const city = WEATHER_CITIES.find(c => c.id === weatherCity);
     const data = weatherData[weatherCity];
@@ -1090,7 +1117,7 @@ export default function TokyoApp() {
     );
   }
 
-  const RENDERERS = { schedule: renderSchedule, hotel: renderHotel, checklist: renderChecklist, rental: renderRental, transport: renderTransport, weather: renderWeather, places: renderPlaces, phrase: renderPhrase, docs: renderDocs, tips: renderTips };
+  const RENDERERS = { schedule: renderSchedule, hotel: renderHotel, checklist: renderChecklist, rental: renderRental, transport: renderTransport, restaurant: renderRestaurant, places: renderPlaces, phrase: renderPhrase, docs: renderDocs, tips: renderTips };
 
   return (
     <div className="app">
